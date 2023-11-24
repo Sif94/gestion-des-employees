@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+import bcrypt from 'bcryptjs';
 const employeeSchema = new mongoose.Schema({
     nom: {
         type: String,
@@ -31,6 +31,10 @@ const employeeSchema = new mongoose.Schema({
         type: String,
         required: true,
         enum: ['Admin', 'Manager', 'Employee']
+    },
+    telephone: {
+        type: String,
+        unique: true
     },
     situation_marital: {
         type: String,
@@ -80,6 +84,16 @@ const employeeSchema = new mongoose.Schema({
     
 }, {timestamps: true})
 
+employeeSchema.pre('save', async function(next) {
+    if(!this.isModified('password')){
+        next()
+    }
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+})
 
+employeeSchema.methods.isCorrectPassword = async function(entredPassword){
+    return await bcrypt.compare(entredPassword, this.password);
+}
 const Employee = mongoose.model('Employee', employeeSchema);
 export default Employee
