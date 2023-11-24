@@ -1,7 +1,7 @@
 {
   "name": "gestion-des-employees",
   "version": "1.0.0",
-  "description": "",
+  "description": "Gestion des employés",
   "type": "module",
   "main": "index.js",
   "scripts": {
