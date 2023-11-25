@@ -61,7 +61,7 @@ const logoutEmployee = asyncHandler( async (req,res) => {
     try {
         res.cookie('token', '', {expires: new Date(Date.now()), httpOnly: true})
         return res.status(200).json({
-            message: "Logout User"
+            message: "logged out with successe"
         })
     } catch (error) {
         console.log(error.message)
