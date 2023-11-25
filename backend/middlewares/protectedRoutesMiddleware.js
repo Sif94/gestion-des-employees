@@ -21,7 +21,7 @@ const isAuth = asyncHandler( async (req, res, next) => {
         }
 })
 const isAdmin = asyncHandler( async(req,res,next) => {
-    if(req.employee.type === 'Admin'){
+    if(req.employee.type === 'Admin' || req.employee.type === 'Manager'){
         next()
     }else {
         res.status(403).json({
