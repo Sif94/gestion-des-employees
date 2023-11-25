@@ -46,7 +46,9 @@ const employeeSchema = new mongoose.Schema({
         required: true,
         enum: ['Male', 'Female']
     },
-    
+    adresse : {
+        type: String
+    },
     post: {
         type: String,
         required: true,

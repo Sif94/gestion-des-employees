@@ -69,9 +69,55 @@ const logoutEmployee = asyncHandler( async (req,res) => {
         throw new Error('Server error')
     }
 })
+// Modifier les informations d'un employé
+const updateEmployee = asyncHandler( async (req,res) => {
+    const employee = await Employee.findById(req.params.id)
+
+    if (employee) {
+        employee.nom = req.body.nom || employee.nom
+        employee.prenom = req.body.prenom || employee.prenom
+        employee.email = req.body.email || employee.email
+        employee.username = req.body.username || employee.username
+        employee.password = req.body.password || employee.password
+        employee.type = req.body.type || employee.type
+        employee.date_naiss = req.body.date_naiss || employee.date_naiss
+        employee.sexe = req.body.sexe || employee.sexe
+        employee.situation_marital = req.body.situation_marital || employee.situation_marital
+        employee.telephone = req.body.telephone || employee.telephone
+        employee.post = req.body.post || employee.post
+        employee.adresse = req.body.adresse || employee.adresse
+        employee.departement = req.body.departement || employee.departement
+        const updatedEmployee = await employee.save()
+        res.status(200).json({
+            _id: updatedEmployee._id,
+            username: updatedEmployee.username,
+            email: updatedEmployee.email,
+        })
+    } else {
+        res.status(404).json({
+            message: "Employee not found"
+        })
+        throw new Error("Employee not found")
+
+    }
+})
+
+const getEmployeeData = asyncHandler(async (req,res) => {
+    const employee = await Employee.findById(req.params.id)
+    if (employee) {
+        res.status(200).json(employee)
+    }else {
+        res.status(404).json({
+            message: "Employee not found"
+        })
+        throw new Error("Employee not found")
+    }
+})
 export {
     addEmployee,
     getEmployees,
     authEmployee,
-    logoutEmployee
+    logoutEmployee,
+    updateEmployee,
+    getEmployeeData
 }
