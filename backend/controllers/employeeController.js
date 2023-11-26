@@ -90,9 +90,7 @@ const updateEmployee = asyncHandler( async (req,res) => {
         employee.departement = req.body.departement || employee.departement
         const updatedEmployee = await employee.save()
         res.status(200).json({
-            _id: updatedEmployee._id,
-            username: updatedEmployee.username,
-            email: updatedEmployee.email,
+            updateEmployee: updatedEmployee
         })
     } else {
         res.status(404).json({

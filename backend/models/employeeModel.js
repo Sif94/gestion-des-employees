@@ -53,6 +53,12 @@ const employeeSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    EngagementSurvey: {
+        type: Number
+    },
+    EmpSatisfaction: {
+        type: Number
+    },
     contrats: [{type: mongoose.Schema.Types.ObjectId, ref: 'Contrat'}],
 
     contrats_redige: [{type: mongoose.Schema.Types.ObjectId, ref: 'Contrat'}],
