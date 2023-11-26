@@ -1,6 +1,7 @@
 import Employee from "../models/employeeModel.js";
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
+import EmployeeArchive from "../models/employeeArchiveModel.js";
 
 // récupérer la listes des employés
 const getEmployees = asyncHandler( async (req,res) => {
@@ -113,11 +114,60 @@ const getEmployeeData = asyncHandler(async (req,res) => {
         throw new Error("Employee not found")
     }
 })
+
+const deleteEmployee = asyncHandler(async (req,res) => {
+    const employee = await Employee.findById(req.params.id)
+    if (employee) {
+        const archivedEmployeeInfo = await EmployeeArchive.create({
+            _id: employee._id,
+            username: employee.username,
+            email: employee.email,
+            date_naiss: employee.date_naiss,
+            nom: employee.nom,
+            prenom: employee.prenom,
+            password: employee.password,
+            sexe: employee.sexe,
+            departement: employee.departement,
+            telephone: employee.telephone,
+            post: employee.post,
+            type: employee.type,
+            situation_marital: employee.situation_marital,
+            adresse: employee.adresse,
+            departement: employee.departement,
+            createdAt: employee.createdAt,
+            updatedAt: employee.updatedAt
+        })
+        
+        try {
+            const archivedEmpoyee = await EmployeeArchive.create(archivedEmployeeInfo)
+            const deletedEmployee = await Employee.findByIdAndDelete(req.params.id)
+            if(deletedEmployee){
+                res.status(200).json({
+                    message: "Employee deleted successfully"
+                }
+                )
+            } else {
+                res.status(500).json({
+                    message: "Employee not deleted"
+                })
+                throw new Error("Employee not deleted")
+            }
+        } catch(error) {
+           
+        }
+        
+    }else {
+        res.status(404).json({
+            message: "Employee not found"
+        })
+    }
+})
 export {
     addEmployee,
     getEmployees,
     authEmployee,
     logoutEmployee,
     updateEmployee,
-    getEmployeeData
+    getEmployeeData,
+    deleteEmployee
 }
