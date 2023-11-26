@@ -74,15 +74,57 @@ const getDepartementById = asyncHandler(async (req,res) => {
         res.status(500).json(error.message)
     }
 })
+// update departement
+const updateDepartement = asyncHandler(async (req,res) => {
+    try {
+        const departement = await Departement.findById(req.params.id)
+        if(departement){
+            departement.nom = req.body.nom || departement.nom
+            departement.description = req.body.description || departement.description
+            departement.chef_departement = req.body.chef_departement || departement.chef_departement
+            const updatedDepartement = await departement.save()
+            res.status(200).json({
+                success: true,
+                updatedDepartement: updatedDepartement
+            })
+        }else{
+            res.status(404).json({
+                success: false,
+                error: "departement not found"
+            })
+        }
+    } catch (error) {
+        res.status(500).json(error.message)
+        throw new Error('Server error')
+    }
+})
 
-
-
-
+const deleteDepartement = asyncHandler(async (req,res)=>{
+    try {
+        const departement = await Departement.findById(req.params.id)
+        if(departement){
+            const deletedDepartement = await Departement.findByIdAndDelete(req.params.id)
+            res.status(200).json({
+                success: true,
+                deletedDepartement: deletedDepartement
+            })
+        }else {
+            res.status(404).json({
+                success: false,
+                error: "departement not found"
+            })
+        }
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+})
 
 
 
 export {
     addDepartement,
     getDepartements,
-    getDepartementById
+    getDepartementById,
+    updateDepartement,
+    deleteDepartement
 }
