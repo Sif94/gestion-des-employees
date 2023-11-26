@@ -23,10 +23,6 @@ const employeeArchiveSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    password: {
-        type: String,
-        required: true,
-    },
     type: {
         type: String,
         required: true,

@@ -125,7 +125,6 @@ const deleteEmployee = asyncHandler(async (req,res) => {
             date_naiss: employee.date_naiss,
             nom: employee.nom,
             prenom: employee.prenom,
-            password: employee.password,
             sexe: employee.sexe,
             departement: employee.departement,
             telephone: employee.telephone,
