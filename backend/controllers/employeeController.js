@@ -102,7 +102,7 @@ const updateEmployee = asyncHandler( async (req,res) => {
 
     }
 })
-
+// 
 const getEmployeeData = asyncHandler(async (req,res) => {
     const employee = await Employee.findById(req.params.id)
     if (employee) {
@@ -114,7 +114,7 @@ const getEmployeeData = asyncHandler(async (req,res) => {
         throw new Error("Employee not found")
     }
 })
-
+// Supprression et l'archivage d'un employé
 const deleteEmployee = asyncHandler(async (req,res) => {
     const employee = await Employee.findById(req.params.id)
     if (employee) {
