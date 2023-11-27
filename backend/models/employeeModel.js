@@ -3,11 +3,15 @@ import bcrypt from 'bcryptjs';
 const employeeSchema = new mongoose.Schema({
     nom: {
         type: String,
-        required: true
+        required: true,
+        min: 3,
+        max: 20
     },
     prenom: {
         type: String,
-        required: true
+        required: true,
+        min: 3,
+        max: 20
     },
     date_naiss: {
         type: Date,
@@ -21,7 +25,9 @@ const employeeSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        min: 3,
+        max: 15
     },
     password: {
         type: String,
@@ -34,7 +40,9 @@ const employeeSchema = new mongoose.Schema({
     },
     telephone: {
         type: String,
-        unique: true
+        unique: true,
+        min: 14,
+        max: 14
     },
     situation_marital: {
         type: String,
@@ -47,11 +55,15 @@ const employeeSchema = new mongoose.Schema({
         enum: ['Male', 'Female']
     },
     adresse : {
-        type: String
+        type: String,
+        min: 10,
+        max: 60
     },
     post: {
         type: String,
         required: true,
+        min: 5,
+        max: 20
     },
     EngagementSurvey: {
         type: Number

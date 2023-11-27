@@ -5,19 +5,21 @@ import Employee from "../models/employeeModel.js";
 
 const isAuth = asyncHandler( async (req, res, next) => {
         let token;
-        token = req.cookies.token;
-        if (token) {
+
+        if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
             try {
-                const decode = jwt.verify(token, process.env.JWT_SECRET);
-                req.employee = await Employee.findById(decode.id).select('-password');
+                token = req.headers.authorization.split(' ')[1];
+                const decoded = jwt.verify(token, process.env.JWT_SECRET);
+                req.employee = await Employee.findById(decoded._id);
                 next()
             } catch (error) {
-                res.send(401)
-                throw new Error('Non autorisé: token invalide')
+                res.status(401).json({ message: `Token Invalide: ${error.message}` });
+                throw Error('Token Invalide')
             }
         } else {
-            res.send(401)
-            throw new Error('Non autorisé: pas de token')
+            res.status(401).json({ message: 'Token manquant' });
+            throw Error('Pas de token')
+            
         }
 })
 const isAdmin = asyncHandler( async(req,res,next) => {

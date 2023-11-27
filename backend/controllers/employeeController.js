@@ -2,7 +2,7 @@ import Employee from "../models/employeeModel.js";
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import EmployeeArchive from "../models/employeeArchiveModel.js";
-
+import validator from "validator";
 // récupérer la listes des employés
 const getEmployees = asyncHandler( async (req,res) => {
     try {
@@ -22,17 +22,29 @@ const getEmployees = asyncHandler( async (req,res) => {
 const addEmployee = asyncHandler( async (req, res) => {
     try {
         const {nom, prenom, email, username, password, sexe, date_naiss, type, post, situation_marital, telephone} = req.body
+        if(!nom || !prenom || !email || !username || !password || !sexe || !date_naiss || !type || !post || !situation_marital || !telephone){
+            throw Error('Tous les champs sont obligatoires')
+        }
+        if(!validator.isAlpha(req.body.nom) || !validator.isAlpha(req.body.prenom) || !validator.isAlpha(req.body.post)){
+            throw Error('Nom, prénom et poste ne doivent pas contenir de caractères spéciaux')
+        }
+        if(!validator.isEmail(email)){
+            throw Error('Email invalide')
+        }
+        if(!validator.isStrongPassword(password)){
+            throw Error('Mot de passe trop faible')
+        }
         const employee = await Employee.findOne({ $or: [{ email: email }, { username: username }, { telephone: telephone }] })
         if (employee) {
             res.status(400);
-            throw new Error("Employee already exist");
+            throw Error("Employee existe déja");
         } else {
             const savedEmployee = await Employee.create({nom, prenom, email, username, password, sexe, date_naiss, type, post, situation_marital, telephone})
             res.status(201).json(savedEmployee)
         }
     } catch (error) {
         console.log(error.message)
-        res.status(500).json({ message: "Server Error" })
+        res.status(400).json({ message: `Erreur: ${error.message}` })
     }
 });
 
@@ -40,19 +52,26 @@ const addEmployee = asyncHandler( async (req, res) => {
 const authEmployee = asyncHandler( async (req,res) => {
     try {
         const {username, password} = req.body
+        if(!username || !password){
+            throw Error('Tous les champs sont obligatoires')
+        }
+        if(!validator.isLength(username, {min: 3, max: 15})){
+            throw Error('Username invalide: entre 3 et 15 caractères')
+        }
+
         const employee = await Employee.findOne({username})
         console.log(employee)
         if(employee && (await employee.isCorrectPassword(password))){
-            generateToken(res, employee._id)
+            const jwt = generateToken(employee._id)
             res.status(200).json({
-                id: employee._id,
-                type: employee.type
+                token: jwt
             })
         }else {
             res.send(401)
             throw new Error("Invalid Credentials")
         }
     } catch (error) {
+        res.status(400).json({ message: `Erreur: ${error.message}` })
         console.log(error.message)
     }
 })
@@ -72,8 +91,23 @@ const logoutEmployee = asyncHandler( async (req,res) => {
 })
 // Modifier les informations d'un employé
 const updateEmployee = asyncHandler( async (req,res) => {
-    const employee = await Employee.findById(req.params.id)
+    try {
+        const employee = await Employee.findById(req.params.id)
+        if(!validator.isAlpha(req.body.nom) || !validator.isAlpha(req.body.prenom) || !validator.isAlpha(req.body.post)){
+            throw Error('Nom, prénom et poste ne doivent pas contenir de caractères spéciaux')
+        }
 
+        if(req.body.email){
+            if(!validator.isEmail(req.body.email)){
+                throw Error('Email invalide')
+            }
+        }
+        if(req.body.password){
+            if(!validator.isStrongPassword(req.body.password)){
+                throw Error('Mot de passe trop faible')
+            }
+        }
+        
     if (employee) {
         employee.nom = req.body.nom || employee.nom
         employee.prenom = req.body.prenom || employee.prenom
@@ -93,13 +127,16 @@ const updateEmployee = asyncHandler( async (req,res) => {
             updateEmployee: updatedEmployee
         })
     } else {
-        res.status(404).json({
-            message: "Employee not found"
-        })
-        throw new Error("Employee not found")
+        throw Error("Employee not found")        
 
     }
-})
+    } catch (error) {
+        console.log(error.message)
+        res.status(400).json({
+            error: error.message
+        })
+    }
+    })
 // 
 const getEmployeeData = asyncHandler(async (req,res) => {
     const employee = await Employee.findById(req.params.id)
