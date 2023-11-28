@@ -1,37 +1,36 @@
 import Departement from "../models/departementModel.js";
+import Employee from "../models/employeeModel.js";
 import asyncHandler from "express-async-handler";
-
+import validator from "validator"
 
 // ajouter un département
 
 const addDepartement = asyncHandler(async (req, res) => {
     try {
         const { nom, description, emplacement, chef_departement } = req.body;
+
+        if(!nom || !description || !emplacement || !chef_departement){
+            throw Error('Veuillez remplir tous les champs')
+        }
+        const savedChefDepartement = await Employee.findById(chef_departement);
+        if(!savedChefDepartement){
+            throw Error('Le chef du département n\'existe pas')
+        }
+        if(!validator.isLength(nom, { min: 2, max: 50 }) || !validator.isLength(description, { min: 10, max: 500 })){
+            throw Error('Le nom et la description doivent contenir entre 2 et 50 caractères')
+        }
         const departement = await Departement.create({
             nom, 
             description,
             emplacement,
             chef_departement
         })
-        if(departement){
-            res.status(201).json({
-                success: true,
-                departement: departement
-            }
-            )
-        }else {
-            res.status(400).json({
-                error: "departement not added"
-            })
-        }
-    } catch (error) {
-        res.status(500).json({
+        res.status(201).json({success: true,departement: departement})
+    }catch (error) {
+        res.status(400).json({
             error: error.message
         });
-        throw new Error(error.message)
     }
-    
-
 })
 // récupérer la liste des départements
 const getDepartements = asyncHandler(async (req,res) => {
@@ -94,8 +93,7 @@ const updateDepartement = asyncHandler(async (req,res) => {
             })
         }
     } catch (error) {
-        res.status(500).json(error.message)
-        throw new Error('Server error')
+        res.status(400).json(error.message)
     }
 })
 
@@ -115,7 +113,7 @@ const deleteDepartement = asyncHandler(async (req,res)=>{
             })
         }
     } catch (error) {
-        res.status(500).json(error.message)
+        res.status(400).json(error.message)
     }
 })
 
