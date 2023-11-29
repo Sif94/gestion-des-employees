@@ -62,9 +62,9 @@ const authEmployee = asyncHandler( async (req,res) => {
         const employee = await Employee.findOne({username})
         console.log(employee)
         if(employee && (await employee.isCorrectPassword(password))){
-            const jwt = generateToken(employee._id)
+            generateToken(res,employee._id)
             res.status(200).json({
-                token: jwt
+                success: true
             })
         }else {
             res.send(401)
