@@ -11,7 +11,7 @@ const absenceSchema = new mongoose.Schema({
         required: true,
     },
     justifiee: {
-        type: Boolean
+        type: Boolean,
     },
     employee: {
         type: mongoose.Schema.Types.ObjectId,
