@@ -16,7 +16,7 @@ const addDepartement = asyncHandler(async (req, res) => {
         if(!savedChefDepartement){
             throw Error('Le chef du département n\'existe pas')
         }
-        if(!validator.isLength(nom, { min: 2, max: 50 }) || !validator.isLength(description, { min: 10, max: 500 })){
+        if(!validator.isLength(nom, { min: 2, max: 50 }) || !validator.isLength(description, { min: 5, max: 500 })){
             throw Error('Le nom et la description doivent contenir entre 2 et 50 caractères')
         }
         const departement = await Departement.create({
@@ -25,6 +25,8 @@ const addDepartement = asyncHandler(async (req, res) => {
             emplacement,
             chef_departement
         })
+        departement.employees.push(chef_departement)
+        await departement.save()
         res.status(201).json({success: true,departement: departement})
     }catch (error) {
         res.status(400).json({

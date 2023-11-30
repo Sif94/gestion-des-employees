@@ -2,7 +2,10 @@ import Employee from "../models/employeeModel.js";
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import EmployeeArchive from "../models/employeeArchiveModel.js";
+import Departement from "../models/departementModel.js";
 import validator from "validator";
+import Retard from "../models/retardModel.js";
+import mongoose from "mongoose"
 // récupérer la listes des employés
 const getEmployees = asyncHandler( async (req,res) => {
     try {
@@ -17,30 +20,41 @@ const getEmployees = asyncHandler( async (req,res) => {
     }
 })
 
-
 // ajouter un employé
 const addEmployee = asyncHandler( async (req, res) => {
     try {
-        const {nom, prenom, email, username, password, sexe, date_naiss, type, post, situation_marital, telephone} = req.body
+        const {nom, prenom, email, username, password, sexe, date_naiss, type, post, situation_marital, telephone, departement} = req.body
         if(!nom || !prenom || !email || !username || !password || !sexe || !date_naiss || !type || !post || !situation_marital || !telephone){
             throw Error('Tous les champs sont obligatoires')
         }
-        if(!validator.isAlpha(req.body.nom) || !validator.isAlpha(req.body.prenom) || !validator.isAlpha(req.body.post)){
-            throw Error('Nom, prénom et poste ne doivent pas contenir de caractères spéciaux')
-        }
+
         if(!validator.isEmail(email)){
             throw Error('Email invalide')
         }
-        if(!validator.isStrongPassword(password)){
-            throw Error('Mot de passe trop faible')
+        // if(!validator.isStrongPassword(password)){
+        //     throw Error('Mot de passe trop faible')
+        // }
+        if(departement){
+            const savedDepartement = await Departement.findById(departement)
+
+            if(!savedDepartement){
+                throw Error('Departement non trouvé')
+            }
         }
+       
+
         const employee = await Employee.findOne({ $or: [{ email: email }, { username: username }, { telephone: telephone }] })
+
         if (employee) {
-            res.status(400);
             throw Error("Employee existe déja");
         } else {
-            const savedEmployee = await Employee.create({nom, prenom, email, username, password, sexe, date_naiss, type, post, situation_marital, telephone})
-            res.status(201).json(savedEmployee)
+            const savedEmployee = await Employee.create({nom, prenom, email, username, password, sexe, date_naiss, type, post, situation_marital, telephone, departement})
+
+            const savedEmployeeId = savedEmployee._id
+
+            const updatedDepartement = await Departement.findByIdAndUpdate(departement, { $push: { employees: savedEmployeeId } }, { new: true })
+
+            res.status(201).json({savedEmployee, updatedDepartement})
         }
     } catch (error) {
         console.log(error.message)
@@ -196,6 +210,19 @@ const deleteEmployee = asyncHandler(async (req,res) => {
         })
     }
 })
+
+
+const getProfile = asyncHandler(async(req,res)=>{
+    try {
+        const employee = await Employee.findById(req.employee._id)
+        res.status(200).json(employee)
+    } catch (error) {
+        res.status(400).json({
+            message: error.message
+        })
+    }
+})
+
 export {
     addEmployee,
     getEmployees,
@@ -203,5 +230,6 @@ export {
     logoutEmployee,
     updateEmployee,
     getEmployeeData,
-    deleteEmployee
+    deleteEmployee,
+    getProfile
 }

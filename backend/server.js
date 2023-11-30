@@ -4,6 +4,7 @@ import  connectDB  from "./config/db.js";
 import employeeRoutes from "./routes/employeeRoutes.js";
 import departementRoutes from "./routes/departementRoutes.js";
 import absenceRoutes from "./routes/absenceRoutes.js"
+import retardRoutes from "./routes/retardRoutes.js"
 import { notFound, errorHandler } from "./middlewares/errorMiddleware.js";
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
@@ -23,7 +24,7 @@ app.use(cookieParser())
 app.use('/api/employees', employeeRoutes)
 app.use('/api/departements', departementRoutes)
 app.use('/api/absences', absenceRoutes)
-
+app.use('/api/retards', retardRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
