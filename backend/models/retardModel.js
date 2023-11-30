@@ -23,6 +23,6 @@ const retardSchema = new mongoose.Schema({
     }
 })
 
-const Retard = mongoose.model("Retard", absenceSchema);
+const Retard = mongoose.model("Retard", retardSchema);
 
 export default Retard;

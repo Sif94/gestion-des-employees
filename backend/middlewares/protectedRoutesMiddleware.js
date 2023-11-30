@@ -12,13 +12,14 @@ const isAuth = asyncHandler( async (req, res, next) => {
                 }
                 const decoded = jwt.verify(token, process.env.JWT_SECRET);
                 req.employee = await Employee.findById(decoded._id);
+                // console.log(req.employee)
                 next()
             } catch (error) {
                 res.status(401).json({ message: `Token Invalide: ${error.message}` });
             }
         
 })
-const isAdmin = asyncHandler( async(req,res,next) => {
+const isAdmin = asyncHandler( async(req,res,next) => { 
     if(req.employee.type === 'Admin' || req.employee.type === 'Manager'){
         next()
     }else {

@@ -5,7 +5,7 @@ import { isAuth, isAdmin } from "../middlewares/protectedRoutesMiddleware.js";
 const router = express.Router();
 
 
-router.post('/', [isAuth, isAdmin], addDepartement)
+router.post('/', addDepartement)
 router.get('/', [isAuth, isAdmin], getDepartements)
 router.get('/:id', [isAuth, isAdmin], getDepartementById)
 router.put('/update/:id', [isAuth, isAdmin], updateDepartement)
