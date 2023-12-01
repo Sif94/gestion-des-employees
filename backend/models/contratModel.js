@@ -5,7 +5,7 @@ const contratSchema = new mongoose.Schema({
     type_contrat: {
         type: String,
         required: true,
-        enum: ['CDD', 'CDI']
+        enum: ['CDD', 'CDI', 'Stage']
     },
     date_debut: {
         type: Date,

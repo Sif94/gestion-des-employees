@@ -6,6 +6,7 @@ import departementRoutes from "./routes/departementRoutes.js";
 import absenceRoutes from "./routes/absenceRoutes.js"
 import retardRoutes from "./routes/retardRoutes.js"
 import congeRoutes from "./routes/congeRoutes.js"
+import contratRoutes from "./routes/contratRoutes.js"
 import { notFound, errorHandler } from "./middlewares/errorMiddleware.js";
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
@@ -27,6 +28,7 @@ app.use('/api/departements', departementRoutes)
 app.use('/api/absences', absenceRoutes)
 app.use('/api/retards', retardRoutes)
 app.use('/api/conges', congeRoutes)
+app.use('/api/contrats', contratRoutes)
 app.use(notFound)
 app.use(errorHandler)
 app.listen(port, () => {
