@@ -5,6 +5,16 @@ import { Button } from "../ui/button";
 import {useNavigate, useLocation} from 'react-router-dom'
 import { useContext } from "react";
 import AuthContext from "./AuthContext.tsx";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+  } from "@/components/ui/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar.tsx";
+  
 const Layout = ({ children }) => {
     const location = useLocation();
   const currentPath = location.pathname;
@@ -47,9 +57,47 @@ const Layout = ({ children }) => {
                  </li>
              </ul>
          </div>}
+         {(user && currentPath === '/dashboard') && <div>
+             <ul className="flex items-start p-2 gap-4 font-bold text-xl text-gray-800">
+                 <li>
+                     <Link to={'/employees'}>Employees</Link>
+                 </li>
+                 <li>
+                     <Link to={'/departements'}>Departements</Link>
+                 </li>
+                 <li>
+                     <Link to={'/projets'}>Projets</Link>
+                 </li>
+                 <li>
+                     <Link to={'/contrats'}>Contrats</Link>
+                 </li>
+             </ul>
+         </div>}
               
           {(user && currentPath === '/dashboard') && <div className="items-center p-2">
-                <Button className="flex gap-2" onClick={() => {logout()}}>Se Deconnecter <FaSignOutAlt size={20}/></Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+            <Avatar>
+        <Link to={'/profile'}>
+      <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+      <AvatarFallback>CN</AvatarFallback>
+      </Link>
+      </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+                <DropdownMenuLabel>{`${user.nom}, ${user.prenom}`}</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem><Link to={'/profile'}>Profile</Link></DropdownMenuItem>
+                <DropdownMenuItem>Billing</DropdownMenuItem>
+                <DropdownMenuItem>Team</DropdownMenuItem>
+                <DropdownMenuItem>
+                <Button className="flex gap-2" onClick={() => {logout()}}>Se Deconnecter <FaSignOutAlt size={20}/>
+                </Button>
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+            </DropdownMenu>
+
+                
             </div>}
             {(user && currentPath === '/') && <div className="items-center p-2">
                 <Button className="flex gap-2" onClick={() => navigate('/dashboard')}>Dashboard <MdDashboard size={20}/></Button>

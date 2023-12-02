@@ -1,6 +1,6 @@
 import Employee from "../models/employeeModel.js";
 import asyncHandler from "express-async-handler";
-import generateToken from "../utils/generateToken.js";
+import {generateToken} from "../utils/generateToken.js";
 import EmployeeArchive from "../models/employeeArchiveModel.js";
 import Departement from "../models/departementModel.js";
 import validator from "validator";
@@ -223,6 +223,12 @@ const getProfile = asyncHandler(async(req,res)=>{
     }
 })
 
+const generateRefreshToken = asyncHandler(async(req,res)=>{
+    const token = req.cookies.token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.employee = await Employee.findById(decoded._id);
+    generateRefreshToken(res, req.employee._id)
+})
 export {
     addEmployee,
     getEmployees,
@@ -231,5 +237,6 @@ export {
     updateEmployee,
     getEmployeeData,
     deleteEmployee,
-    getProfile
+    getProfile,
+    generateRefreshToken
 }
