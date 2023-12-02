@@ -10,6 +10,6 @@ router.post('/logout', isAuth, logoutEmployee)
 router.put('/update/:id', [isAuth, isAdmin], updateEmployee)
 router.get('/:id', [isAuth, isAdmin], getEmployeeData)
 router.delete('/delete/:id', [isAuth, isAdmin], deleteEmployee)
-router.get('/signaleur/profile', [isAuth,isAdmin], getProfile)
+router.get('/auth/profile', [isAuth,isAdmin], getProfile)
 
 export default router
