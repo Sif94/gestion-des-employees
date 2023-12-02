@@ -54,8 +54,6 @@ const Dashboard = () => {
       <Button onClick={() => navigate('/profile/update')}>Modifier mes informations</Button>
       </div>
       </div>
-
-       
     </section>
   )
 }
