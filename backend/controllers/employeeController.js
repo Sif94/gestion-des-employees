@@ -1,9 +1,10 @@
 import Employee from "../models/employeeModel.js";
 import asyncHandler from "express-async-handler";
-import {generateToken} from "../utils/generateToken.js";
+import {generateToken, generateRefreshToken} from "../utils/generateToken.js";
 import EmployeeArchive from "../models/employeeArchiveModel.js";
 import Departement from "../models/departementModel.js";
 import validator from "validator";
+import jwt from "jsonwebtoken";
 import Retard from "../models/retardModel.js";
 import mongoose from "mongoose"
 // récupérer la listes des employés
@@ -77,6 +78,7 @@ const authEmployee = asyncHandler( async (req,res) => {
         console.log(employee)
         if(employee && (await employee.isCorrectPassword(password))){
             generateToken(res,employee._id)
+            generateRefreshToken(res,employee._id)
             res.status(200).json({
                 success: true
             })
@@ -94,13 +96,12 @@ const authEmployee = asyncHandler( async (req,res) => {
 const logoutEmployee = asyncHandler( async (req,res) => {
     try {
         res.cookie('token', '', {expires: new Date(Date.now()), httpOnly: true})
+        res.cookie('refreshToken', '', {expires: new Date(Date.now()), httpOnly: true})
         return res.status(200).json({
             message: "logged out with successe"
         })
     } catch (error) {
-        console.log(error.message)
-        res.send(500)
-        throw new Error('Server error')
+        res.status(400).json({ message: `Erreur: ${error.message}` })
     }
 })
 // Modifier les informations d'un employé
@@ -223,11 +224,30 @@ const getProfile = asyncHandler(async(req,res)=>{
     }
 })
 
-const generateRefreshToken = asyncHandler(async(req,res)=>{
-    const token = req.cookies.token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.employee = await Employee.findById(decoded._id);
-    generateRefreshToken(res, req.employee._id)
+
+// Generate a function to generate a refresh token
+
+const generateEmployeeRefreshToken = asyncHandler(async(req,res)=>{
+    try {
+        const refreshToken = req.cookies.refreshToken
+        console.log(refreshToken)
+        if(!refreshToken){
+            throw new Error("No refresh token")
+        }
+        const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET)
+        if(!decoded){
+            throw new Error("Invalid refresh token")
+        }
+        generateToken(res,decoded._id)
+        res.status(200).json({
+            message: "Refresh token generated successfully"
+        })
+    } catch (error) {
+        console.log(error.message)
+        res.status(400).json({ message: `Erreur: ${error.message}` })
+    }
+
+   
 })
 export {
     addEmployee,
@@ -238,5 +258,5 @@ export {
     getEmployeeData,
     deleteEmployee,
     getProfile,
-    generateRefreshToken
+    generateEmployeeRefreshToken
 }

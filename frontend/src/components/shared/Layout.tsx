@@ -31,58 +31,16 @@ const Layout = ({ children }) => {
                     </Link>
                 </h1>
             </div>
-            {(!user && currentPath === '/') && <div>
-                <ul className="flex items-start p-2 gap-4 font-bold text-xl text-gray-800">
-                    <li>
-                        <Link to={'/'}>Home</Link>
-                    </li>
-                    <li>
-                        <Link to={'/help'}>Aide</Link>
-                    </li>
-                    <li>
-                        <Link to={'/Contact'}>Contact</Link>
-                    </li>
-                </ul>
-            </div>}
-            {(!user && currentPath !== '/login' && currentPath !== '/') && <div>
-             <ul className="flex items-start p-2 gap-4 font-bold text-xl text-gray-800">
-                 <li>
-                     <Link to={'/employees'}>Employees</Link>
-                 </li>
-                 <li>
-                     <Link to={'/departements'}>Departements</Link>
-                 </li>
-                 <li>
-                     <Link to={'/projets'}>Projets</Link>
-                 </li>
-             </ul>
-         </div>}
-         {(user && currentPath === '/dashboard') && <div>
-             <ul className="flex items-start p-2 gap-4 font-bold text-xl text-gray-800">
-                 <li>
-                     <Link to={'/employees'}>Employees</Link>
-                 </li>
-                 <li>
-                     <Link to={'/departements'}>Departements</Link>
-                 </li>
-                 <li>
-                     <Link to={'/projets'}>Projets</Link>
-                 </li>
-                 <li>
-                     <Link to={'/contrats'}>Contrats</Link>
-                 </li>
-             </ul>
-         </div>}
               
           {(user && currentPath === '/dashboard') && <div className="items-center p-2">
           <DropdownMenu>
             <DropdownMenuTrigger>
             <Avatar>
-        <Link to={'/profile'}>
-      <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-      <AvatarFallback>CN</AvatarFallback>
-      </Link>
-      </Avatar>
+                <Link to={'/profile'}>
+            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <AvatarFallback>CN</AvatarFallback>
+            </Link>
+            </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuLabel>{`${user.nom}, ${user.prenom}`}</DropdownMenuLabel>
