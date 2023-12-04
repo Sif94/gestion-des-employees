@@ -8,14 +8,14 @@ import jwt from "jsonwebtoken"
 
 const generateToken = (res, _id) => {
     // Generate the token
-    const token = jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: '1m' });
+    const token = jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: '2h' });
   
     // Set the token as a cookie in the response
     res.cookie('token', token, {
       httpOnly: true,
       sameSite: 'strict',
       secure: process.env.NODE_ENV !== 'development',
-      maxAge: 1 * 60 * 1000,
+      maxAge: 2 * 60 * 60 * 1000,
     });
   };/**
    * Generates a refresh token and sets it as a cookie in the response object.

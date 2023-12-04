@@ -27,7 +27,7 @@ const Layout = ({ children }) => {
             <div>
                 <h1 className="font-bold text-2xl">
                     <Link to="/" className="flex gap-2 items-center text-gray-800">
-                        <FaUsers size={35} /> Gestion Des Employés
+                        <FaUsers size={45} /> Gestion Des Employés
                     </Link>
                 </h1>
             </div>
