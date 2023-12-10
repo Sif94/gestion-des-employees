@@ -1,8 +1,5 @@
 import mongoose from "mongoose";
 
-
-
-
 const projetSchema = new mongoose.Schema({
     titre: {
         type: String,

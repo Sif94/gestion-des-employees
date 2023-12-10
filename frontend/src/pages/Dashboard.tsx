@@ -18,7 +18,7 @@ const Dashboard = () => {
       <div className="p-2">
         <ul className="flex flex-col gap-3">
           <li>
-            <Link className="flex gap-2 font-bold" to={'/employees'}><FaUsers size={30}/> Employees</Link>
+            <Link className="flex gap-2 font-bold" to={'/dashboard/employees'}><FaUsers size={30}/> Employees</Link>
           </li>
           <li>
             <Link to={'/departements'}>2</Link>

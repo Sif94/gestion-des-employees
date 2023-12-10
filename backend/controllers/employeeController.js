@@ -10,28 +10,43 @@ import mongoose from "mongoose"
 // récupérer la listes des employés
 const getEmployees = asyncHandler( async (req,res) => {
     try {
-        const employees = await Employee.find().select('-password')
-        if (employees.length === 0) {
-            res.status(200).json({message: "0 employées", employees})
-        } else {
-            res.status(200).json({count: employees.length, employees})
-        }
+        const employees = await Employee.find({}).select('-password')
+            res.status(200).json(employees)
     } catch (error) {
         console.log(error.message)
+        res.json({message: error.message})
     }
 })
 
 // ajouter un employé
 const addEmployee = asyncHandler( async (req, res) => {
     try {
-        const {nom, prenom, email, username, password, sexe, date_naiss, type, post, situation_marital, telephone, departement} = req.body
-        if(!nom || !prenom || !email || !username || !password || !sexe || !date_naiss || !type || !post || !situation_marital || !telephone){
-            throw Error('Tous les champs sont obligatoires')
+        const {nom, prenom, email, username, password, sexe, date_naiss, type, post, situation_marital, telephone, departement, adresse} = req.body
+        if(
+            !nom || 
+            !prenom || 
+            !email || 
+            !username || 
+            !password || 
+            !sexe || 
+            !date_naiss || 
+            !type || 
+            !post || 
+            !situation_marital || 
+            !telephone ||
+            !adresse ||
+            !validator.isAlpha(nom, 'fr-FR', {ignore: ' -'}) || 
+            !validator.isAlpha(prenom, 'fr-FR', {ignore: ' -'}) || 
+            !validator.isAlpha(post, 'fr-FR', {ignore: ' -'}) || 
+            !validator.isDate(date_naiss, {format: 'YYYY-MM-DD'}) || 
+            !validator.isIn(situation_marital,['Married', 'Divorced', 'Single', 'Separated', 'Widowed']) || 
+            !validator.isIn(type, ['Admin', 'Chef_De_Projet', 'Employee', 'RH', 'Chef_De_Departement']) || 
+            !validator.isEmail(email)
+            ){
+            throw Error('Veuillez saisir des champs valides')
         }
+            
 
-        if(!validator.isEmail(email)){
-            throw Error('Email invalide')
-        }
         // if(!validator.isStrongPassword(password)){
         //     throw Error('Mot de passe trop faible')
         // }
@@ -49,13 +64,13 @@ const addEmployee = asyncHandler( async (req, res) => {
         if (employee) {
             throw Error("Employee existe déja");
         } else {
-            const savedEmployee = await Employee.create({nom, prenom, email, username, password, sexe, date_naiss, type, post, situation_marital, telephone, departement})
+            const savedEmployee = await Employee.create({nom, prenom, email, username, password, sexe, date_naiss, type, post, situation_marital, telephone, departement, adresse})
 
             const savedEmployeeId = savedEmployee._id
 
-            const updatedDepartement = await Departement.findByIdAndUpdate(departement, { $push: { employees: savedEmployeeId } }, { new: true })
+            await Departement.findByIdAndUpdate(departement, { $push: { employees: savedEmployeeId } }, { new: true })
 
-            res.status(201).json({savedEmployee, updatedDepartement})
+            res.status(201).json({savedEmployee})
         }
     } catch (error) {
         console.log(error.message)
@@ -103,12 +118,15 @@ const logoutEmployee = asyncHandler( async (req,res) => {
     } catch (error) {
         res.status(400).json({ message: `Erreur: ${error.message}` })
     }
-})
+}) 
 // Modifier les informations d'un employé
 const updateEmployee = asyncHandler( async (req,res) => {
     try {
         const employee = await Employee.findById(req.params.id)
-        if(!validator.isAlpha(req.body.nom) || !validator.isAlpha(req.body.prenom) || !validator.isAlpha(req.body.post)){
+        if(
+            !validator.isAlpha(req.body.nom, 'fr-FR', {ignore: ' -'}) ||
+             !validator.isAlpha(req.body.prenom, 'fr-FR', {ignore: ' -'}) || 
+             !validator.isAlpha(req.body.post, 'fr-FR', {ignore: ' -'})){
             throw Error('Nom, prénom et poste ne doivent pas contenir de caractères spéciaux')
         }
 
@@ -161,7 +179,7 @@ const getEmployeeData = asyncHandler(async (req,res) => {
         res.status(404).json({
             message: "Employee not found"
         })
-        throw new Error("Employee not found")
+        throw new Error("Employee not found") 
     }
 })
 // Supprression et l'archivage d'un employé
@@ -188,21 +206,21 @@ const deleteEmployee = asyncHandler(async (req,res) => {
         })
         
         try {
-            const archivedEmpoyee = await EmployeeArchive.create(archivedEmployeeInfo)
-            const deletedEmployee = await Employee.findByIdAndDelete(req.params.id)
+            
+            const deletedEmployee = await Employee.findByIdAndDelete(employee._id)
             if(deletedEmployee){
                 res.status(200).json({
-                    message: "Employee deleted successfully"
+                    message: "Employee deleted successfully",
+                    deleteEmployee
                 }
                 )
             } else {
-                res.status(500).json({
-                    message: "Employee not deleted"
-                })
+                res.status(400)
                 throw new Error("Employee not deleted")
             }
         } catch(error) {
-           
+            cosole.log(error.message)
+           res.json({ message: `Erreur: ${error.message}` })
         }
         
     }else {
@@ -232,10 +250,12 @@ const generateEmployeeRefreshToken = asyncHandler(async(req,res)=>{
         const refreshToken = req.cookies.refreshToken
         console.log(refreshToken)
         if(!refreshToken){
+            res.status(400)
             throw new Error("No refresh token")
         }
         const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET)
         if(!decoded){
+            res.status(400)
             throw new Error("Invalid refresh token")
         }
         generateToken(res,decoded._id)
@@ -244,7 +264,7 @@ const generateEmployeeRefreshToken = asyncHandler(async(req,res)=>{
         })
     } catch (error) {
         console.log(error.message)
-        res.status(400).json({ message: `Erreur: ${error.message}` })
+        res.json({ message: `Erreur: ${error.message}` })
     }
 
    

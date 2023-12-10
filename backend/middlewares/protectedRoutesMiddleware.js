@@ -20,7 +20,47 @@ const isAuth = asyncHandler( async (req, res, next) => {
         
 })
 const isAdmin = asyncHandler( async(req,res,next) => { 
-    if(req.employee.type === 'Admin' || req.employee.type === 'Manager'){
+    if(req.employee.type === 'Admin'){
+        next()
+    }else {
+        res.status(403).json({
+            message:'Non autorisé: pas de droit'
+        })
+        throw new Error('Non autorisé: pas de droit')
+    }
+})
+const isChefDeDepartement = asyncHandler( async(req,res,next) => { 
+    if(req.employee.type === 'Chef_De_Departement'){
+        next()
+    }else {
+        res.status(403).json({
+            message:'Non autorisé: pas de droit'
+        })
+        throw new Error('Non autorisé: pas de droit')
+    }
+})
+const isChefDeProjet = asyncHandler( async(req,res,next) => { 
+    if(req.employee.type === 'Chef_De_Projet'){
+        next()
+    }else {
+        res.status(403).json({
+            message:'Non autorisé: pas de droit'
+        })
+        throw new Error('Non autorisé: pas de droit')
+    }
+})
+const isRH = asyncHandler( async(req,res,next) => { 
+    if(req.employee.type === 'RH'){
+        next()
+    }else {
+        res.status(403).json({
+            message:'Non autorisé: pas de droit'
+        })
+        throw new Error('Non autorisé: pas de droit')
+    }
+})
+const isEmployee = asyncHandler( async(req,res,next) => { 
+    if(req.employee.type === 'Employee'){
         next()
     }else {
         res.status(403).json({
@@ -31,5 +71,8 @@ const isAdmin = asyncHandler( async(req,res,next) => {
 })
 export {
     isAuth,
-    isAdmin
+    isAdmin,
+    isChefDeDepartement,
+    isChefDeProjet,
+    isRH
 }

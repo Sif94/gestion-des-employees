@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/register', [isAuth, isAdmin], addEmployee)
 router.post('/auth', authEmployee)
 router.get('/', [isAuth, isAdmin], getEmployees)
-router.post('/logout', isAuth, logoutEmployee)
+router.post('/logout', logoutEmployee)
 router.put('/update/:id', [isAuth, isAdmin], updateEmployee)
 router.get('/:id', [isAuth, isAdmin], getEmployeeData)
 router.delete('/delete/:id', [isAuth, isAdmin], deleteEmployee)

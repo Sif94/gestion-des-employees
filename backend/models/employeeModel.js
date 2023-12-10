@@ -36,7 +36,7 @@ const employeeSchema = new mongoose.Schema({
     type: {
         type: String,
         required: true,
-        enum: ['Admin', 'Manager', 'Employee']
+        enum: ['Admin', 'Chef_De_Projet', 'Employee', 'RH', 'Chef_De_Departement']
     },
     telephone: {
         type: String,
