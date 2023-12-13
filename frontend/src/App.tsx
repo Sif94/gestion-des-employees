@@ -6,11 +6,11 @@ import  { AuthContextProvider } from "./components/shared/AuthContext.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import ProtectedRoute from "./components/shared/ProtectedRoute.tsx";
 import axios from "axios";
-import Employees from "./pages/Employees.tsx";
-import EmployeeDetails from "./pages/EmployeeDetails.tsx";
-import EmployeeDelete from "./pages/EmployeeDelete.tsx";
-import EmployeeCreate from "./pages/EmployeeCreate.tsx";
-import EmployeeEdit from "./pages/EmployeeEdit.tsx";
+import Employees from "./pages/employees/Employees.tsx";
+import EmployeeDetails from "./pages/employees/EmployeeDetails.tsx";
+import EmployeeDelete from "./pages/employees/EmployeeDelete.tsx";
+import EmployeeCreate from "./pages/employees/EmployeeCreate.tsx";
+import EmployeeEdit from "./pages/employees/EmployeeEdit.tsx"; 
 
 
 // Add a response interceptor

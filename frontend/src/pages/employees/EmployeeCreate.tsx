@@ -91,7 +91,7 @@ const EmployeeCreate = () => {
       function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
         createEmployee(values)
-      }
+      } 
   return (
     <div className="w-2/4 my-16 mx-auto">
     <Form {...form}>

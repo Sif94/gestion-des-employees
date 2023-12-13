@@ -94,18 +94,18 @@ const EmployeeEdit = () => {
         try {
           axios.get(`http://localhost:5000/api/employees/${id}`, {withCredentials: true}).then((response) => {
           console.log(response.data._id)
-        const date = new Date(response.data.date_naiss); 
+          const date = new Date(response.data.date_naiss); 
 
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, '0');
+          const day = String(date.getDate()).padStart(2, '0');
 
-        const formattedDate = `${year}-${month}-${day}`;
-        console.log(formattedDate);
-        
-        setEmployee(response.data)
+          const formattedDate = `${year}-${month}-${day}`;
+          console.log(formattedDate);
+          
+          setEmployee(response.data)
 
-        setEmployee((prevDate) => ({
+          setEmployee((prevDate) => ({
           ...prevDate,
           date_naiss: formattedDate 
         }))
@@ -113,14 +113,14 @@ const EmployeeEdit = () => {
         console.log(response.data)
         form.reset(response.data)
         })
-        axios.get("http://localhost:5000/api/departements", {withCredentials: true}).then((response) => {
+        axios.get("http://localhost:5000/api/departements/", {withCredentials: true}).then((response) => {
           console.log(response.data.departements)
           setDepartements(response.data.departements)
         })
           
         } catch (error) {
           console.log(error)
-        }
+        } 
         
       },[])
   return (

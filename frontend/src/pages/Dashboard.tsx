@@ -50,6 +50,10 @@ const Dashboard = () => {
       <Label className="text-2xl">Post: </Label>
       <Label className="text-2xl font-bold">{`${user.post}`}</Label>
       </div>
+      <div className="flex-col gap-2">
+      <Label className="text-2xl">Type: </Label>
+      <Label className="text-2xl font-bold">{`${user.type}`}</Label>
+      </div>
       <div className="flex py-2">
       <Button onClick={() => navigate('/profile/update')}>Modifier mes informations</Button>
       </div>
