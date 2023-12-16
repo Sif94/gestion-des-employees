@@ -1,7 +1,9 @@
 import AuthContext from "@/components/shared/AuthContext.tsx"
 import { useContext } from "react"
 import { Link } from "react-router-dom"
-import { FaUsers } from "react-icons/fa";
+import { FaUsers,FaBuilding } from "react-icons/fa";
+
+
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -18,10 +20,10 @@ const Dashboard = () => {
       <div className="p-2">
         <ul className="flex flex-col gap-3">
           <li>
-            <Link className="flex gap-2 font-bold" to={'/employees'}><FaUsers size={30}/> Employees</Link>
+            <Link className="flex gap-2 font-bold" to={'/dashboard/employees'}><FaUsers size={30}/> Employees</Link>
           </li>
           <li>
-            <Link to={'/departements'}>2</Link>
+            <Link className="flex gap-2 font-bold" to={'/dashboard/departements'}><FaBuilding size={30}/>Départements</Link>
           </li>
           <li>
             <Link to={'/projets'}>3</Link>
@@ -49,6 +51,10 @@ const Dashboard = () => {
       <div className="flex-col gap-2">
       <Label className="text-2xl">Post: </Label>
       <Label className="text-2xl font-bold">{`${user.post}`}</Label>
+      </div>
+      <div className="flex-col gap-2">
+      <Label className="text-2xl">Type: </Label>
+      <Label className="text-2xl font-bold">{`${user.type}`}</Label>
       </div>
       <div className="flex py-2">
       <Button onClick={() => navigate('/profile/update')}>Modifier mes informations</Button>

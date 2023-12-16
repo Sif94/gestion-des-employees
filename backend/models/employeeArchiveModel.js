@@ -26,9 +26,9 @@ const employeeArchiveSchema = new mongoose.Schema({
     type: {
         type: String,
         required: true,
-        enum: ['Admin', 'Manager', 'Employee']
+        enum: ['Admin', 'Chef_De8projet','Chef_De_Departement', 'RH', 'Employee']
     },
-    telephone: {
+    telephone: { 
         type: String,
         unique: true
     },

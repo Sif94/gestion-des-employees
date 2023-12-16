@@ -1,15 +1,16 @@
 import express from "express";
-import { isAuth, isAdmin } from "../middlewares/protectedRoutesMiddleware.js";
-import { addEmployee, authEmployee, deleteEmployee, generateEmployeeRefreshToken, getEmployeeData, getEmployees, getProfile, logoutEmployee, updateEmployee } from "../controllers/employeeController.js";
+import { isAuth, isAuthorized } from "../middlewares/protectedRoutesMiddleware.js";
+import { addEmployee, authEmployee, deleteEmployee, generateEmployeeRefreshToken, getEmployeeData, getEmployees, getEmployeesByDepartement, getProfile, logoutEmployee, updateEmployee } from "../controllers/employeeController.js";
 const router = express.Router();
 
-router.post('/register', [isAuth, isAdmin], addEmployee)
+router.post('/register', [isAuth, isAuthorized("Admin", "RH")], addEmployee)
 router.post('/auth', authEmployee)
-router.get('/', [isAuth, isAdmin], getEmployees)
-router.post('/logout', isAuth, logoutEmployee)
-router.put('/update/:id', [isAuth, isAdmin], updateEmployee)
-router.get('/:id', [isAuth, isAdmin], getEmployeeData)
-router.delete('/delete/:id', [isAuth, isAdmin], deleteEmployee)
-router.get('/auth/profile', [isAuth,isAdmin], getProfile)
+router.get('/', [isAuth, isAuthorized("Admin", "RH")], getEmployees)
+router.post('/logout', logoutEmployee)
+router.put('/update/:id', [isAuth, isAuthorized("Admin", "RH")], updateEmployee)
+router.get('/:id', [isAuth, isAuthorized("Admin", "RH")], getEmployeeData)
+router.delete('/delete/:id', [isAuth, isAuthorized("Admin", "RH")], deleteEmployee)
+router.get('/auth/profile', [isAuth,isAuthorized("Admin", "RH")], getProfile)
 router.get('/employees/refresh/token', generateEmployeeRefreshToken) 
+router.get('/departements/:id/employees', [isAuth, isAuthorized("Admin", "RH", "Chef_De_Departement")], getEmployeesByDepartement)
 export default router

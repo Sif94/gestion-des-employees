@@ -17,12 +17,20 @@ export const AuthContextProvider = ({ children }) => {
     await axios.post("http://localhost:5000/api/employees/auth", payload, {
       withCredentials: true,
     });
-    let apiResponse = await axios.get("http://localhost:5000/api/employees/auth/profile", {
+    await axios.get("http://localhost:5000/api/employees/auth/profile", {
       withCredentials: true,
+    }).then((res) => {
+      localStorage.setItem("userProfile", JSON.stringify(res.data));
+      setUser(res.data);
+      navigate("/dashboard");
+    }).catch((err) => {
+      console.log(err.message);
+      setUser(null);
+      localStorage.removeItem("userProfile");
+      navigate("/login");
     });
-    localStorage.setItem("userProfile", JSON.stringify(apiResponse.data));
-    setUser(apiResponse.data);
-    navigate("/dashboard");
+    
+    
   };
   const logout = async () => {
     await axios.post("http://localhost:5000/api/employees/logout", {} ,{ withCredentials: true });

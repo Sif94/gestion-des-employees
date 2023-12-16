@@ -19,17 +19,15 @@ const isAuth = asyncHandler( async (req, res, next) => {
             }
         
 })
-const isAdmin = asyncHandler( async(req,res,next) => { 
-    if(req.employee.type === 'Admin' || req.employee.type === 'Manager'){
-        next()
-    }else {
-        res.status(403).json({
-            message:'Non autorisé: pas de droit'
-        })
-        throw new Error('Non autorisé: pas de droit')
+function isAuthorized(...roles) {
+    return (req, res, next) => {
+        if (!roles.includes(req.employee.type)) {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+        next();
     }
-})
+}
 export {
     isAuth,
-    isAdmin
+    isAuthorized
 }

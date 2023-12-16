@@ -1,16 +1,16 @@
 import express from 'express'
-import { isAuth, isAdmin } from '../middlewares/protectedRoutesMiddleware.js'
+import { isAuth, isAuthorized} from '../middlewares/protectedRoutesMiddleware.js'
 import { addConge, deleteCongeById, getAllConges, getCongeById, getCongesByEmployeeId, getCongesRediges, updateCongeById } from '../controllers/congeController.js'
 
 
 
 const router = express.Router()
 
-router.get('/', [isAuth, isAdmin], getAllConges)
-router.post('/', [isAuth, isAdmin], addConge)
-router.get('/:id', [isAuth, isAdmin], getCongeById)
-router.put('/update/:id', [isAuth, isAdmin], updateCongeById)
-router.delete('/delete/:id', [isAuth, isAdmin], deleteCongeById)
-router.get('/employee/conges/:id', [isAuth, isAdmin], getCongesByEmployeeId)
-router.get('/conges/rediges/', [isAuth, isAdmin], getCongesRediges)
+router.get('/', [isAuth, isAuthorized("Admin", "RH")], getAllConges)
+router.post('/', [isAuth, isAuthorized("Admin", "RH")], addConge)
+router.get('/:id', [isAuth, isAuthorized("Admin", "RH")], getCongeById)
+router.put('/update/:id', [isAuth, isAuthorized("Admin", "RH")], updateCongeById)
+router.delete('/delete/:id', [isAuth, isAuthorized("Admin", "RH")], deleteCongeById)
+router.get('/employee/conges/:id', [isAuth, isAuthorized("Admin", "RH")], getCongesByEmployeeId)
+router.get('/conges/rediges/', [isAuth, isAuthorized("Admin", "RH")], getCongesRediges)
 export default router
