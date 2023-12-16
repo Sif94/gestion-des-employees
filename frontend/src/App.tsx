@@ -11,6 +11,11 @@ import EmployeeDetails from "./pages/employees/EmployeeDetails.tsx";
 import EmployeeDelete from "./pages/employees/EmployeeDelete.tsx";
 import EmployeeCreate from "./pages/employees/EmployeeCreate.tsx";
 import EmployeeEdit from "./pages/employees/EmployeeEdit.tsx"; 
+import Departements from "./pages/departements/Departements.tsx";
+import DepartementDetails from "./pages/departements/DepartementDetails.tsx";
+import DepartementCreate from "./pages/departements/DepartementCreate.tsx";
+import DepartementEdit from "./pages/departements/DepartementEdit.tsx";
+import DepartementDelete from "./pages/departements/DepartementDelete.tsx";
 
 
 // Add a response interceptor
@@ -78,7 +83,31 @@ function App() {
               <EmployeeEdit/>
             </ProtectedRoute>
           } />
-          
+          <Route path="/dashboard/departements" element={
+            <ProtectedRoute accessBy="authenticated">
+              <Departements/>
+            </ProtectedRoute>
+          } />
+          <Route path="/dashboard/departements/create" element={
+            <ProtectedRoute accessBy="authenticated">
+              <DepartementCreate/>
+            </ProtectedRoute>
+          } />
+          <Route path="/dashboard/departements/edit/:id" element={
+            <ProtectedRoute accessBy="authenticated">
+              <DepartementEdit/>
+            </ProtectedRoute>
+          } />
+          <Route path="/dashboard/departements/delete/:id" element={
+            <ProtectedRoute accessBy="authenticated">
+              <DepartementDelete/>
+            </ProtectedRoute>
+          } />
+          <Route path="/dashboard/departements/details/:id" element={
+            <ProtectedRoute accessBy="authenticated">
+              <DepartementDetails/>
+            </ProtectedRoute>
+          } />
         </Routes>
       </Layout>
       </AuthContextProvider>

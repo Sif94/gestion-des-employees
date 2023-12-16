@@ -1,7 +1,9 @@
 import AuthContext from "@/components/shared/AuthContext.tsx"
 import { useContext } from "react"
 import { Link } from "react-router-dom"
-import { FaUsers } from "react-icons/fa";
+import { FaUsers,FaBuilding } from "react-icons/fa";
+
+
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -21,7 +23,7 @@ const Dashboard = () => {
             <Link className="flex gap-2 font-bold" to={'/dashboard/employees'}><FaUsers size={30}/> Employees</Link>
           </li>
           <li>
-            <Link to={'/departements'}>2</Link>
+            <Link className="flex gap-2 font-bold" to={'/dashboard/departements'}><FaBuilding size={30}/>Départements</Link>
           </li>
           <li>
             <Link to={'/projets'}>3</Link>

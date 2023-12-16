@@ -84,9 +84,17 @@ const EmployeeEdit = () => {
       }
     })
  
+    const updateEmployee = async (payload: z.infer<typeof formSchema>) => {
+        await axios.put(`http://localhost:5000/api/employees/update/${id}`, payload, {withCredentials: true}).then((res) => {
+            console.log(res.data)
+            navigate('/dashboard/employees')
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        // createEmployee(values)
+        updateEmployee(values)
         console.log(values)
       }
   

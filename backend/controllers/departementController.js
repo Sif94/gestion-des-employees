@@ -59,7 +59,7 @@ const getDepartements = asyncHandler(async (req,res) => {
 // récupérer un departement avec son id
 const getDepartementById = asyncHandler(async (req,res) => {
     try {
-        const departement = await Departement.findById(req.params.id);
+        const departement = await Departement.findById(req.params.id).populate('chef_departement employees');
         if (departement) {
             res.status(200).json({
                 success: true,
@@ -82,6 +82,7 @@ const updateDepartement = asyncHandler(async (req,res) => {
         if(departement){
             departement.nom = req.body.nom || departement.nom
             departement.description = req.body.description || departement.description
+            departement.emplacement = req.body.emplacement || departement.emplacement
             departement.chef_departement = req.body.chef_departement || departement.chef_departement
             const updatedDepartement = await departement.save()
             res.status(200).json({

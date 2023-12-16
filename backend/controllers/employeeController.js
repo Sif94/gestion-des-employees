@@ -230,6 +230,16 @@ const deleteEmployee = asyncHandler(async (req,res) => {
     }
 })
 
+const getEmployeesByDepartement = asyncHandler(async(req,res)=>{
+    try {
+        const employees = await Employee.find({departement: req.params.id})
+        res.status(200).json(employees)
+    } catch (error) {
+        res.status(400).json({
+            message: error.message
+        })
+    }
+})
 
 const getProfile = asyncHandler(async(req,res)=>{
     try {
@@ -278,5 +288,6 @@ export {
     getEmployeeData,
     deleteEmployee,
     getProfile,
-    generateEmployeeRefreshToken
+    generateEmployeeRefreshToken,
+    getEmployeesByDepartement
 }

@@ -46,6 +46,7 @@ const formSchema = z.object({
 })
 const EmployeeCreate = () => {
     const [departements, setDepartements] = useState([])
+    const [error, setError] = useState('')
     const navigate = useNavigate()
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -86,6 +87,7 @@ const EmployeeCreate = () => {
             navigate('/dashboard/employees')
         }).catch((err) => {
             console.log(err)
+            setError(err.response.data.message)
         })
      }
       function onSubmit(values: z.infer<typeof formSchema>) {
@@ -96,6 +98,7 @@ const EmployeeCreate = () => {
     <div className="w-2/4 my-16 mx-auto">
     <Form {...form}>
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+    {error && <p className="text-red-500">{error}</p>}
       <FormField
         control={form.control}
         name="username"
