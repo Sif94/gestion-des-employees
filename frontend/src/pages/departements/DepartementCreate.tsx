@@ -21,7 +21,7 @@ const formSchema = z.object({
     nom : z.string().regex(new RegExp("^[a-zA-Z ]+$")).min(3).max(20),
     description : z.string(),
     emplacement : z.string().regex(new RegExp("^[a-zA-Z0-9_+ ]+$")).min(3).max(20),
-    chef_departement : z.string()
+    chef_departement : z.string(),
   })
 const DepartementCreate = () => {
     const navigate = useNavigate()
