@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 
 
-const heuresSuppSchema = new mongoose.Schema({
+const heureSuppSchema = new mongoose.Schema({
     date_h_supp: {
         type: Date,
         required: true,
     },
     duree: {
-        type: number,
+        type: Number,
         required: true,
     },
     description: {
@@ -30,6 +30,6 @@ const heuresSuppSchema = new mongoose.Schema({
     }
 })
 
-const HeuresSupplementaire = mongoose.model("HeuresSupplementaire", heuresSuppSchema);
+const HeureSupplementaire = mongoose.model("HeureSupplementaire", heureSuppSchema);
 
-export default HeuresSupplementaire;
+export default HeureSupplementaire;
