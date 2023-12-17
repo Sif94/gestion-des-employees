@@ -22,7 +22,7 @@ const Departements = () => {
     <div className='w-4/5 my-16 mx-auto'>
       <Button className='mb-4' onClick={() => navigate('/dashboard/departements/create')} >Ajouter un départements</Button>
     <Table>
-  <TableCaption>La list des Employées</TableCaption>
+  <TableCaption>La liste des Employées</TableCaption>
   <TableHeader>
     <TableRow>
       <TableHead className="w-[100px]">N°</TableHead>
