@@ -20,9 +20,6 @@ const tacheSchema = new mongoose.Schema({
         type: Date,
         required: true,
     },
-    retard: {
-        type: Number,
-    },
     employees: [{type: mongoose.Schema.Types.ObjectId, ref: "Employee"}],
     redacteur: {
         type: mongoose.Schema.Types.ObjectId,

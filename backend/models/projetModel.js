@@ -17,9 +17,6 @@ const projetSchema = new mongoose.Schema({
         type: Date,
         required: true,
     },
-    retard: {
-        type: Number,
-    },
     duree: {
         type: Number,
     },
