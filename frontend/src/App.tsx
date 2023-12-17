@@ -108,6 +108,7 @@ function App() {
               <DepartementDetails/>
             </ProtectedRoute>
           } />
+          
         </Routes>
       </Layout>
       </AuthContextProvider>

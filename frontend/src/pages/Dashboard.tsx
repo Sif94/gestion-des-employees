@@ -25,6 +25,7 @@ const Dashboard = () => {
           <li>
             <Link className="flex gap-2 font-bold" to={'/dashboard/departements'}><FaBuilding size={30}/>Départements</Link>
           </li>
+          
           <li>
             <Link to={'/projets'}>3</Link>
           </li>
