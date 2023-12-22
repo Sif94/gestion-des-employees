@@ -19,8 +19,9 @@ import DepartementDelete from "./pages/departements/DepartementDelete.tsx";
 import AbsenceCreate from "./pages/absences/AbsenceCreate.tsx";
 import EmployeeAbsences from "./pages/employees/EmployeeAbsences.tsx";
 import AbsenceEdit from "./pages/absences/AbsenceEdit.tsx";
-
-
+import RetardCreate from "./pages/Retards/RetardCreate.tsx";
+import RetardEdit from "./pages/Retards/RetardEdit.tsx";
+import EmployeeRetards from "./pages/employees/EmployeeRetards.tsx";
 // Add a response interceptor
 axios.interceptors.response.use(
   (response) => {
@@ -91,6 +92,11 @@ function App() {
               <EmployeeAbsences/>
             </ProtectedRoute>
           } />
+                    <Route path="/dashboard/employees/:id/retards" element={
+            <ProtectedRoute accessBy="authenticated">
+              <EmployeeRetards/>
+            </ProtectedRoute>
+          } />
           <Route path="/dashboard/departements" element={
             <ProtectedRoute accessBy="authenticated">
               <Departements/>
@@ -124,6 +130,16 @@ function App() {
           <Route path="/dashboard/absences/:id/edit" element={
             <ProtectedRoute accessBy="authenticated">
               <AbsenceEdit/>
+            </ProtectedRoute>
+          } />
+          <Route path="/dashboard/retards/create" element={
+            <ProtectedRoute accessBy="authenticated">
+              <RetardCreate/>
+            </ProtectedRoute>
+          } />
+          <Route path="/dashboard/retards/:id/edit" element={
+            <ProtectedRoute accessBy="authenticated">
+              <RetardEdit/>
             </ProtectedRoute>
           } />
         </Routes>

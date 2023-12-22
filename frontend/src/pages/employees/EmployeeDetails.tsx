@@ -64,6 +64,9 @@ const EmployeeDetails = () => {
           <div className='flex gap-2 justify-between'>
           <Button><Link to={`/dashboard/employees/${id}/absences`}>Absences</Link></Button>
           </div>
+          <div className='flex gap-2 justify-between'>
+          <Button><Link to={`/dashboard/employees/${id}/retards`}>Retards</Link></Button>
+          </div>
         </CardFooter>
       </Card>
     </div>

@@ -9,7 +9,7 @@ const createRetard = asyncHandler(async (req, res) => {
     try {
         const signaleur = req.employee._id
         const {date_retard, motif, justifiee, employee} = req.body
-        if(!date_retard || !motif || !justifiee || !employee || !validator.isLength(motif, {min: 5, max: 100}), !validator.isDate(date_retard)){
+        if(!date_retard || !motif || !justifiee || !employee ){
             throw Error('Veuillez remplir tous les champs correctement')
         }
         const savedEmployee = await Employee.findById(employee)

@@ -3,7 +3,7 @@ import { useContext } from "react"
 import { Link } from "react-router-dom"
 import { FaUsers,FaBuilding } from "react-icons/fa";
 
-import { FaUserAltSlash } from "react-icons/fa";
+import { FaBusinessTime ,FaUserAltSlash } from "react-icons/fa";
 
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
@@ -28,6 +28,9 @@ const Dashboard = () => {
           </li>
           <li>
             <Link className="flex gap-2 font-bold" to={'/dashboard/absences/create'}><FaUserAltSlash size={30}/>Absences</Link>
+          </li>
+          <li>
+            <Link className="flex gap-2 font-bold" to={'/dashboard/retards/create'}><FaBusinessTime  size={30}/>Retards</Link>
           </li>
           <li>
             <Link to={'/projets'}>3</Link>
