@@ -15,8 +15,8 @@ const getAllHeureSupplementaires = asyncHandler(async (req, res) => {
 })
 const getHeureSupplementaireById = asyncHandler(async (req, res) => {
     try {
-        const HeureSupplementaire = await HeureSupplementaire.findById(req.params.id)
-        res.status(200).json(HeureSupplementaire)
+        const heureSupplementaire = await HeureSupplementaire.findById(req.params.id)
+        res.status(200).json(heureSupplementaire)
     } catch (error) {
         res.status(400).json({
             message: error.message
@@ -61,14 +61,24 @@ const updateHeureSupplementaireById = asyncHandler(async (req, res) => {
 const deleteHeureSupplementaireById = asyncHandler(async (req, res) => {
     try {
         const deletedHeureSupplementaire = await HeureSupplementaire.findByIdAndDelete(req.params.id)
-        if (!deletedHeureSupplementaire) {
+        if (deletedHeureSupplementaire) {
+            res.status(200).json( {message: 'HeureSupplementaire supprimé'})
+            
+        } else {
             res.status(404)
             throw Error('HeureSupplementaire not found')
-        } else {
-            res.status(200).json(deletedHeureSupplementaire, {message: 'HeureSupplementaire supprimé'})
         }
     } catch (error) {
         res.json({message: error.message})
+    }
+})
+
+const getHeuresSuppsByEmployeeId = asyncHandler(async(req,res)=>{
+    try {
+        const heuresSupps = await HeureSupplementaire.find({employee: req.params.id})
+        res.status(200).json(heuresSupps)
+    } catch (error) {
+        res.status(400).json({message: error.message})
     }
 })
 export {
@@ -76,5 +86,6 @@ export {
     getHeureSupplementaireById,
     createHeureSupplementaire,
     updateHeureSupplementaireById,
-    deleteHeureSupplementaireById
+    deleteHeureSupplementaireById,
+    getHeuresSuppsByEmployeeId
 }

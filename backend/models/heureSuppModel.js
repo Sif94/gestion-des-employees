@@ -28,7 +28,7 @@ const heureSuppSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Employee",
     }
-})
+},{timestamps: true})
 
 const HeureSupplementaire = mongoose.model("HeureSupplementaire", heureSuppSchema);
 

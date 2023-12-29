@@ -8,7 +8,7 @@ router.post("/", [isAuth, isAuthorized("Admin", "RH")], createAbsence);
 router.get('/', [isAuth, isAuthorized("Admin", "RH")], getAllAbsence)
 router.get('/:id', [isAuth, isAuthorized("Admin", "RH")], getAbsence)
 router.put('/:id', [isAuth, isAuthorized("Admin", "RH")], updateAbsence)
-router.delete('/:id', [isAuth, isAuthorized("Admin", "RH")], deleteAbsence)
+router.delete('/delete/:id', [isAuth, isAuthorized("Admin", "RH")], deleteAbsence)
 router.get('/absences_rediges/signaleur', [isAuth, isAuthorized("Admin", "RH")], getAllAbsencesRediges)
 router.get('/employee/:id/absences', [isAuth, isAuthorized("Admin", "RH")], getAbsencesByEmployeeId)
 export default router 

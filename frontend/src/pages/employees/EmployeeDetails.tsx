@@ -62,6 +62,7 @@ const EmployeeDetails = () => {
         <CardFooter className='flex flex-col items-start gap-2'>
           <h1>Date d'embauche : {new Date(employee.createdAt).toLocaleDateString("fr")}</h1>
           <div className='flex gap-2 justify-between'>
+          <div className='flex gap-2 justify-between'>
           <Button><Link to={`/dashboard/employees/${id}/absences`}>Absences</Link></Button>
           </div>
           <div className='flex gap-2 justify-between'>
@@ -78,6 +79,10 @@ const EmployeeDetails = () => {
           </div>
           <div className='flex gap-2 justify-between'>
           <Button><Link to={`/dashboard/employees/${id}/taches`}>Taches</Link></Button>
+          </div>
+          <div className='flex gap-2 justify-between'>
+          <Button><Link to={`/dashboard/employees/${id}/heuressupps`}>Heures Supplimentaires</Link></Button>
+          </div>
           </div>
         </CardFooter>
       </Card>

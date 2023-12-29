@@ -35,7 +35,7 @@ const EmployeeRetards = () => {
         <div className='text-xl'>
           <h1>Date Retard : {new Date(retard.date_retard).toLocaleDateString("fr")}</h1>
           <h1>Motif: {retard.motif}</h1>
-          <h1>Justifié : {retard.justifiee === 'true' ? 'Oui' : 'Non'}</h1>
+          <h1>Justifié : {retard.justifiee.toString() === 'true' ? 'Oui' : 'Non'}</h1>
         </div>
       </CardContent>
       <CardFooter className='flex flex-col items-start gap-2'>

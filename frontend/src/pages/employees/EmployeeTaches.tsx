@@ -6,14 +6,23 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-
+import { useNavigate } from 'react-router-dom'
 const EmployeeTaches = () => {
     const {id} = useParams()
     const [taches, setTaches] = useState([])
+    const navigate = useNavigate()
     
+    const deleteTache = async (id: string) => {
+      try {
+        await axios.delete(`http://localhost:5000/api/taches/delete/${id}`, {withCredentials: true})
+        navigate('/dashboard/employees')
+      } catch (error) {
+        console.log(error)
+      }
+    }
     useEffect(() => {
        try {
-        axios.get(`http://localhost:5000/api/taches/${id}`, {withCredentials: true}).then((response) => {
+        axios.get(`http://localhost:5000/api/taches/employee/${id}/taches`, {withCredentials: true}).then((response) => {
           console.log(response.data)
           setTaches(response.data)
         })
@@ -46,7 +55,7 @@ const EmployeeTaches = () => {
         <h1>Date de signalisation : {new Date(tache.createdAt).toLocaleDateString("fr")}</h1>
         <div className='flex gap-2 justify-between'>
         <Link className='text-blue-500' to={`/dashboard/taches/${tache._id}/edit`}><FaEdit size={30}/></Link>
-        <Link className='text-red-500' to={`/dashboard/taches/${tache._id}/delete`}><MdDelete size={30}/></Link>
+        <Link className='text-red-500' to={`/dashboard/taches/${tache._id}/delete`}><MdDelete size={30} /></Link>
         </div>
       </CardFooter>
     </Card>

@@ -13,16 +13,23 @@ import { useNavigate } from "react-router-dom"
 import * as z from "zod"
 import { GrValidate } from "react-icons/gr";
 import { IoMdCloseCircleOutline } from "react-icons/io";
+import { Checkbox } from '@/components/ui/checkbox'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 const formSchema = z.object({
     titre: z.string(),
     description: z.string(),
     date_debut: z.string(),
     date_fin: z.string(),
-    duree: z.string(),
-    employee : z.string(),
+    duree: z.preprocess((a) => parseInt(z.string().parse(a),10),
+    z.number().positive()),
+    employees : z.array(z.string()).refine((value) => value.some((employee) => employee), {
+      message: "Vous devez selectionner au miimum un employe.",
+    }),
     chef_projet: z.string(),
-    departements: z.string(),
+    departements: z.array(z.string()).refine((value) => value.some((departement) => departement), {
+      message: "Vous devez selectionner au miimum un departement.",
+    }),
   })
 
 const ProjetCreate = () => {
@@ -37,13 +44,13 @@ const ProjetCreate = () => {
             description: "",
             date_debut: "",
             date_fin:"",
-            duree: "",
-            employee : "",
+            duree: 0,
+            employees : [],
             chef_projet: "",
-            departements: "",
+            departements: [],
         },
       })
-      const createContrat = async (payload: z.infer<typeof formSchema>) => {
+      const createProjet = async (payload: z.infer<typeof formSchema>) => {
         try {
           const response = await axios.post("http://localhost:5000/api/projets/",payload, {withCredentials: true})
           console.log(response.data)
@@ -56,8 +63,9 @@ const ProjetCreate = () => {
       }
             
         function onSubmit(values: z.infer<typeof formSchema>) {
-            console.log(values)
-            createContrat(values)
+          console.log(values)
+            
+            createProjet(values)
             
         } 
 
@@ -152,31 +160,7 @@ const ProjetCreate = () => {
             </FormItem>
           )}
         />
-      
-        
-         <FormField
-          control={form.control}
-          name="employee"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Employé</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selectioner un employé..." />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                    {employees.map((employee: any) => (
-                        <SelectItem key={employee._id} value={employee._id}>{`${employee.nom} ${employee.prenom}`}</SelectItem>
-                    ))}
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-                 <FormField
+          <FormField
           control={form.control}
           name="chef_projet"
           render={({ field }) => (
@@ -198,28 +182,107 @@ const ProjetCreate = () => {
             </FormItem>
           )}
         />
-        <FormField
+      
+      <ScrollArea className="h-72 w-full rounded-md border">
+      <div className="p-4">
+      <FormField
           control={form.control}
-          name="departements"
-          render={({ field }) => (
+          name="employees"
+          render={() => (
             <FormItem>
-              <FormLabel>Département</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selectioner un département..." />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                    {departements.map((departement:any) => (
-                        <SelectItem key={departement._id} value={departement._id}>{departement.nom}</SelectItem>
-                    ))}
-                </SelectContent>
-              </Select>
+              <div className="mb-4">
+                <FormLabel className="text-base">Employees</FormLabel>
+              </div>
+              {employees.map((employee) => (
+                <FormField
+                  key={employee._id}
+                  control={form.control}
+                  name="employees"
+                  render={({ field }) => {
+                    return (
+                      <FormItem
+                        key={employee._id}
+                        className="flex flex-row items-start space-x-3 space-y-0"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value?.includes(employee._id)}
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? field.onChange([...field.value, employee._id])
+                                : field.onChange(
+                                    field.value?.filter(
+                                      (value) => value !== employee._id
+                                    )
+                                  )
+                            }}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal">
+                          {`${employee.nom} ${employee.prenom}`}
+                        </FormLabel>
+                      </FormItem>
+                    )
+                  }}
+                />
+              ))}
               <FormMessage />
             </FormItem>
           )}
         />
+        </div>
+        </ScrollArea>
+           
+        
+        <ScrollArea className="h-72 w-full rounded-md border">
+        <div className="p-4">
+        <FormField
+          control={form.control}
+          name="departements"
+          render={() => (
+            <FormItem>
+              <div className="mb-4">
+                <FormLabel className="text-base">Départements</FormLabel>
+              </div>
+              {departements.map((departement) => (
+                <FormField
+                  key={departement._id}
+                  control={form.control}
+                  name="departements"
+                  render={({ field }) => {
+                    return (
+                      <FormItem
+                        key={departement._id}
+                        className="flex flex-row items-start space-x-3 space-y-0"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value?.includes(departement._id)}
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? field.onChange([...field.value, departement._id])
+                                : field.onChange(
+                                    field.value?.filter(
+                                      (value) => value !== departement._id
+                                    )
+                                  )
+                            }}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal">
+                          {departement.nom}
+                        </FormLabel>
+                      </FormItem>
+                    )
+                  }}
+                />
+              ))}
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        </div>
+        </ScrollArea>
       <Button type="submit">Submit</Button>
     </form>
   </Form>

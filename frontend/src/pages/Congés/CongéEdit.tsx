@@ -47,6 +47,27 @@ const CongéEdit = () => {
         setError(error.response.data.message)
       }
     }
+    const getConge = async () => {
+      axios.get(`http://localhost:5000/api/conges/${id}`, {withCredentials: true}).then((response) => {
+            console.log(response.data)
+              const dated = new Date(response.data.date_debut); 
+
+              const year = dated.getFullYear();
+              const month = String(dated.getMonth() + 1).padStart(2, '0');
+              const day = String(dated.getDate()).padStart(2, '0');
+
+             
+
+        const formattedDate = `${year}-${month}-${day}`;
+            form.reset({
+              date_debut: formattedDate,
+              date_fin: formattedDate,
+              motif: response.data.motif,
+              type_conge: response.data.type_conge,
+              employee: response.data.employee,
+            })
+          })
+    }
       
       function onSubmit(values: z.infer<typeof formSchema>) {
           console.log(values)
@@ -59,44 +80,9 @@ const CongéEdit = () => {
           axios.get("http://localhost:5000/api/employees/", {withCredentials: true}).then((response) => {
             console.log(response.data)
             setEmployees(response.data)
+            getConge()
           })
-           axios.get(`http://localhost:5000/api/conges/${id}`, {withCredentials: true}).then((response) => {
-            console.log(response.data)
-              const dated = new Date(response.data.conge.date_debut); 
-
-              const year = dated.getFullYear();
-              const month = String(dated.getMonth() + 1).padStart(2, '0');
-              const day = String(dated.getDate()).padStart(2, '0');
-
-             
-
-        const formattedDate = `${year}-${month}-${day}`;
-            form.reset({
-              date_debut: formattedDate,
-              date_fin: formattedDate,
-              motif: response.data.conge.motif,
-              type_conge: response.data.conge.type_conge,
-              employee: response.data.conge.employee,
-            })
-          })
-
-          axios.get(`http://localhost:5000/api/conges/${id}`, {withCredentials: true}).then((response) => {
-          console.log(response.data)
-          const datef = new Date(response.data.conge.date_fin); 
-
-          const yearr = datef.getFullYear();
-          const monthh = String(datef.getMonth() + 1).padStart(2, '0');
-          const dayy = String(datef.getDate()).padStart(2, '0');
-
-          const formattedDate = `${yearr}-${monthh}-${dayy}`;
-            form.reset({
-              date_debut: formattedDate,
-              date_fin: formattedDate,
-              motif: response.data.conge.motif,
-              type_conge: response.data.conge.type_conge,
-              employee: response.data.conge.employee,
-            })
-          })
+           
         } catch (error) {
           console.log(error)
         }
@@ -144,6 +130,7 @@ return (
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
+                  value={field.value}
                   className="flex flex-col space-y-1"
                 >
                   <FormItem className="flex items-center space-x-3 space-y-0">
@@ -193,7 +180,7 @@ return (
           render={({ field }) => (
             <FormItem>
               <FormLabel>Employé</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select onValueChange={field.onChange} defaultValue={field.value} value={field.value}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Selectioner un employé..." />

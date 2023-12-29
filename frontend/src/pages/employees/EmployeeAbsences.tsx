@@ -34,7 +34,7 @@ const EmployeeAbsences = () => {
         <div className='text-xl'>
           <h1>Date Absence : {new Date(absence.date_absence).toLocaleDateString("fr")}</h1>
           <h1>Motif: {absence.motif}</h1>
-          <h1>Justifié : {absence.justifiee === 'true' ? 'Oui' : 'Non'}</h1>
+          <h1>Justifié : {absence.justifiee.toString() === 'true' ? 'Oui' : 'Non'}</h1>
         </div>
       </CardContent>
       <CardFooter className='flex flex-col items-start gap-2'>

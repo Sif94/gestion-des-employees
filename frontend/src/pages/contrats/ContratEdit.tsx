@@ -3,7 +3,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
 import { useEffect, useState } from "react"
@@ -17,7 +16,8 @@ const formSchema = z.object({
     type_contrat: z.enum(['CDD', 'CDI', 'Stage']),
     date_debut: z.string(),
     date_fin: z.string(),
-    salaire_convenu: z.string(),
+    salaire_convenu: z.preprocess((a) => parseInt(z.string().parse(a),10),
+    z.number().positive()),
     employee : z.string(),
    
   })
@@ -33,7 +33,7 @@ const ContratEdit = () => {
             type_contrat: "CDD",
             date_debut: "" ,
             date_fin: "",
-            salaire_convenu:"",
+            salaire_convenu: 0,
             employee: "",
         },
       })
@@ -48,7 +48,25 @@ const ContratEdit = () => {
           setError(error.response.data.message)
         }
       }
-        
+        const getContrat = async () => {
+          axios.get(`http://localhost:5000/api/contrats/${id}`, {withCredentials: true}).then((response) => {
+              console.log(response.data)
+                const date = new Date(response.data.date_debut); 
+
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');    
+                
+              const formattedDate = `${year}-${month}-${day}`;
+              form.reset({
+                type_contrat: response.data.type_contrat,
+                date_debut: formattedDate,
+                date_fin: formattedDate,
+                salaire_convenu: response.data.salaire_convenu,
+                employee: response.data.employee,
+              })
+            })
+        }
         function onSubmit(values: z.infer<typeof formSchema>) {
             console.log(values)
             updateContrat(values)
@@ -60,43 +78,8 @@ const ContratEdit = () => {
             axios.get("http://localhost:5000/api/employees/", {withCredentials: true}).then((response) => {
               console.log(response.data)
               setEmployees(response.data)
+              getContrat()
             })
-             axios.get(`http://localhost:5000/api/contrats/${id}`, {withCredentials: true}).then((response) => {
-              console.log(response.data)
-                const date = new Date(response.data.contrat.date_debut); 
-
-                const year = date.getFullYear();
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const day = String(date.getDate()).padStart(2, '0');    
-                
-          const formattedDate = `${year}-${month}-${day}`;
-              form.reset({
-                type_contrat: response.data.contrat.type_contrat,
-                date_debut: formattedDate,
-                date_fin: formattedDate,
-                salaire_convenu: response.data.contrat.salaire_convenu,
-                employee: response.data.contrat.employee,
-                
-              })
-            })
-            axios.get(`http://localhost:5000/api/contrats/${id}`, {withCredentials: true}).then((response) => {
-              console.log(response.data)
-  
-            const date1 = new Date(response.data.contrat.date_fin); 
-            const year1 = date1.getFullYear();
-            const month1 = String(date1.getMonth() + 1).padStart(2, '0');
-            const day1 = String(date1.getDate()).padStart(2, '0');
-            const formattedDate = `${year1}-${month1}-${day1}`;
-              form.reset({
-                type_contrat: response.data.contrat.type_contrat,
-                date_debut: formattedDate,
-                date_fin: formattedDate,
-                salaire_convenu: response.data.contrat.salaire_convenu,
-                employee: response.data.contrat.employee,
-                
-              })
-            })
-
           } catch (error) {
             console.log(error)
           }
@@ -116,6 +99,7 @@ const ContratEdit = () => {
               <RadioGroup
                 onValueChange={field.onChange}
                 defaultValue={field.value}
+                value={field.value}
                 className="flex flex-col space-y-1"
               >
                 <FormItem className="flex items-center space-x-3 space-y-0">

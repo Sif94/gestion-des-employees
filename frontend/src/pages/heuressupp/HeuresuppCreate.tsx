@@ -19,7 +19,8 @@ const formSchema = z.object({
     duree: z.string(),
     description: z.string(),
     supp_perm: z.enum(['Heure_Supplimentaire', 'Permanence']),
-    tarif: z.string(),
+    tarif: z.preprocess((a) => parseInt(z.string().parse(a),10),
+    z.number().positive()),
     employee : z.string(),
   })
 const HeuresuppCreate = () => {
@@ -33,13 +34,13 @@ const HeuresuppCreate = () => {
         duree: "",
         description:"",
         supp_perm: "Heure_Supplimentaire",
-        tarif:"",
+        tarif: 0,
         employee : "",
       },
     })
     const createHeuresupp = async (payload: z.infer<typeof formSchema>) => {
       try {
-        const response = await axios.post("http://localhost:5000/api/heuressupp/",payload, {withCredentials: true})
+        const response = await axios.post("http://localhost:5000/api/heuresupps/",payload, {withCredentials: true})
         console.log(response.data)
         form.reset()
         navigate('/dashboard')

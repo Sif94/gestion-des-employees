@@ -83,6 +83,36 @@ const EmployeeEdit = () => {
         departement: "",
       }
     })
+
+    const getEmployee = async () => {
+       axios.get(`http://localhost:5000/api/employees/${id}`, {withCredentials: true}).then((response) => {
+        console.log(response.data._id)
+        const date = new Date(response.data.date_naiss); 
+
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+
+        const formattedDate = `${year}-${month}-${day}`;
+        console.log(formattedDate);
+        
+        console.log(response.data)
+        form.reset({
+          username: response.data.username,
+          nom: response.data.nom,
+          prenom: response.data.prenom,
+          email: response.data.email,
+          adresse: response.data.adresse,
+          post: response.data.post,
+          telephone: response.data.telephone,
+          date_naiss: formattedDate,
+          sexe: response.data.sexe,
+          type: response.data.type,
+          situation_marital: response.data.situation_marital,
+          departement: response.data.departement,
+        })
+      })
+    }
  
     const updateEmployee = async (payload: z.infer<typeof formSchema>) => {
         await axios.put(`http://localhost:5000/api/employees/update/${id}`, payload, {withCredentials: true}).then((res) => {
@@ -100,32 +130,14 @@ const EmployeeEdit = () => {
   
       useEffect(() => {
         try {
-          axios.get(`http://localhost:5000/api/employees/${id}`, {withCredentials: true}).then((response) => {
-          console.log(response.data._id)
-          const date = new Date(response.data.date_naiss); 
-
-          const year = date.getFullYear();
-          const month = String(date.getMonth() + 1).padStart(2, '0');
-          const day = String(date.getDate()).padStart(2, '0');
-
-          const formattedDate = `${year}-${month}-${day}`;
-          console.log(formattedDate);
-          
-          setEmployee(response.data)
-
-          setEmployee((prevDate) => ({
-          ...prevDate,
-          date_naiss: formattedDate 
-        }))
-        response.data.date_naiss = formattedDate 
-        console.log(response.data)
-        form.reset(response.data)
-        })
+        
         axios.get("http://localhost:5000/api/departements/", {withCredentials: true}).then((response) => {
           console.log(response.data.departements)
           setDepartements(response.data.departements)
+          getEmployee()
         })
-          
+        
+        
         } catch (error) {
           console.log(error)
         } 
@@ -163,7 +175,7 @@ const EmployeeEdit = () => {
         )}
       />
        <FormField
-        control={form.control}
+        control={form.control} 
         name="prenom"
         render={({ field }) => (
           <FormItem>

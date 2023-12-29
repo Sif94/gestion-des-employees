@@ -70,7 +70,7 @@ const RetardEdit = () => {
               form.reset({
                 date_retard: formattedDate,
                 motif: response.data.retard.motif,
-                justifiee: response.data.retard.justifiee,
+                justifiee: response.data.retard.justifiee.toString(),
                 employee: response.data.retard.employee,
               })
             })

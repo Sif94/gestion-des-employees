@@ -13,4 +13,4 @@ router.put('/update/:id', [isAuth, isAuthorized("Admin", "RH")], updateCongeById
 router.delete('/delete/:id', [isAuth, isAuthorized("Admin", "RH")], deleteCongeById)
 router.get('/employee/conges/:id', [isAuth, isAuthorized("Admin", "RH")], getCongesByEmployeeId)
 router.get('/conges/rediges/', [isAuth, isAuthorized("Admin", "RH")], getCongesRediges)
-export default router
+export default router 

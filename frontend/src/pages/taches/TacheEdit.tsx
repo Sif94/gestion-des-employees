@@ -1,8 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
@@ -10,15 +8,17 @@ import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate, useParams } from "react-router-dom"
 import * as z from "zod"
-import { GrValidate } from "react-icons/gr";
-import { IoMdCloseCircleOutline } from "react-icons/io";
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Checkbox } from "@/components/ui/checkbox"
 
 const formSchema = z.object({
     titre: z.string(),
     description: z.string(),
     date_debut: z.string(),
     date_fin: z.string(),
-    employee : z.string(),
+    employees : z.array(z.string()).refine((value) => value.some((employee) => employee), {
+      message: "Vous devez selectionner au miimum un employe.",
+    }),
    
   })
 
@@ -34,9 +34,29 @@ const TacheEdit = () => {
             description: "",
             date_debut: "" ,
             date_fin: "",
-            employee: "",
+            employees: [],
         },
       })
+      const getTache = async () => {
+        axios.get(`http://localhost:5000/api/taches/${id}`, {withCredentials: true}).then((response) => {
+          console.log(response.data)
+            const date = new Date(response.data.date_debut); 
+
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');    
+            
+          const formattedDate = `${year}-${month}-${day}`;
+          form.reset({
+            titre: response.data.titre,
+            description: response.data.description,
+            date_debut: formattedDate,
+            date_fin: formattedDate,
+            employees: response.data.employees,
+            
+          })
+        })
+      }
       const updateTache = async (payload: z.infer<typeof formSchema>) => {
         try {
           const response = await axios.put(`http://localhost:5000/api/taches/update/${id}`,payload, {withCredentials: true})
@@ -60,43 +80,9 @@ const TacheEdit = () => {
             axios.get("http://localhost:5000/api/employees/", {withCredentials: true}).then((response) => {
               console.log(response.data)
               setEmployees(response.data)
+              getTache()
             })
-             axios.get(`http://localhost:5000/api/taches/${id}`, {withCredentials: true}).then((response) => {
-              console.log(response.data)
-                const date = new Date(response.data.tache.date_debut); 
-
-                const year = date.getFullYear();
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const day = String(date.getDate()).padStart(2, '0');    
-                
-          const formattedDate = `${year}-${month}-${day}`;
-              form.reset({
-                titre: response.data.tache.titre,
-                description: response.data.tache.description,
-                date_debut: formattedDate,
-                date_fin: formattedDate,
-                employee: response.data.tache.employee,
-                
-              })
-            })
-            axios.get(`http://localhost:5000/api/taches/${id}`, {withCredentials: true}).then((response) => {
-              console.log(response.data)
-  
-            const date1 = new Date(response.data.tache.date_fin); 
-            const year1 = date1.getFullYear();
-            const month1 = String(date1.getMonth() + 1).padStart(2, '0');
-            const day1 = String(date1.getDate()).padStart(2, '0');
-            const formattedDate = `${year1}-${month1}-${day1}`;
-              form.reset({
-                titre: response.data.tache.titre,
-                description: response.data.tache.description,
-                date_debut: formattedDate,
-                date_fin: formattedDate,
-                employee: response.data.tache.employee,
-                
-              })
-            })
-
+            
           } catch (error) {
             console.log(error)
           }
@@ -163,28 +149,55 @@ const TacheEdit = () => {
         )}
       />
       
-       <FormField
-        control={form.control}
-        name="employee"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Employé</FormLabel>
-            <Select onValueChange={field.onChange} defaultValue={field.value}>
-              <FormControl>
-                <SelectTrigger>
-                  <SelectValue placeholder="Selectioner un employé..." />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                  {employees.map((employee: any) => (
-                      <SelectItem key={employee._id} value={employee._id}>{`${employee.nom} ${employee.prenom}`}</SelectItem>
-                  ))}
-              </SelectContent>
-            </Select>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      <ScrollArea className="h-72 w-full rounded-md border">
+      <div className="p-4">
+      <FormField
+          control={form.control}
+          name="employees"
+          render={() => (
+            <FormItem>
+              <div className="mb-4">
+                <FormLabel className="text-base">Employees</FormLabel>
+              </div>
+              {employees.map((employee) => (
+                <FormField
+                  key={employee._id}
+                  control={form.control}
+                  name="employees"
+                  render={({ field }) => {
+                    return (
+                      <FormItem
+                        key={employee._id}
+                        className="flex flex-row items-start space-x-3 space-y-0"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value?.includes(employee._id)}
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? field.onChange([...field.value, employee._id])
+                                : field.onChange(
+                                    field.value?.filter(
+                                      (value) => value !== employee._id
+                                    )
+                                  )
+                            }}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal">
+                        {`${employee.nom} ${employee.prenom}`}
+                        </FormLabel>
+                      </FormItem>
+                    )
+                  }}
+                />
+              ))}
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        </div>
+        </ScrollArea>
     <Button type="submit">Submit</Button>
   </form>
 </Form>

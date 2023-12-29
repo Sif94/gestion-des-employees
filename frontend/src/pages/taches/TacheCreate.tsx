@@ -13,13 +13,17 @@ import { useNavigate } from "react-router-dom"
 import * as z from "zod"
 import { GrValidate } from "react-icons/gr";
 import { IoMdCloseCircleOutline } from "react-icons/io";
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { Checkbox } from '@/components/ui/checkbox'
 
 const formSchema = z.object({
     titre: z.string(),
     description: z.string(),
     date_debut: z.string(),
     date_fin: z.string(),
-    employee : z.string(),
+    employees : z.array(z.string()).refine((value) => value.some((employee) => employee), {
+      message: "Vous devez selectionner au miimum un employe.",
+    }),
   })
 
 
@@ -35,7 +39,7 @@ const TacheCreate = () => {
           description: "",
           date_debut: "" ,
           date_fin: "",
-          employee: "",
+          employees: [],
       },
     })
     const createTache = async (payload: z.infer<typeof formSchema>) => {
@@ -127,28 +131,56 @@ return (
         )}
       />
       
-       <FormField
-        control={form.control}
-        name="employee"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Employé</FormLabel>
-            <Select onValueChange={field.onChange} defaultValue={field.value}>
-              <FormControl>
-                <SelectTrigger>
-                  <SelectValue placeholder="Selectioner un employé..." />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                  {employees.map((employee: any) => (
-                      <SelectItem key={employee._id} value={employee._id}>{`${employee.nom} ${employee.prenom}`}</SelectItem>
-                  ))}
-              </SelectContent>
-            </Select>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      <ScrollArea className="h-72 w-full rounded-md border">
+      <div className="p-4">
+      <FormField
+          control={form.control}
+          name="employees"
+          render={() => (
+            <FormItem>
+              <div className="mb-4">
+                <FormLabel className="text-base">Employees</FormLabel>
+              </div>
+              {employees.map((employee) => (
+                <FormField
+                  key={employee._id}
+                  control={form.control}
+                  name="employees"
+                  render={({ field }) => {
+                    return (
+                      <FormItem
+                        key={employee._id}
+                        className="flex flex-row items-start space-x-3 space-y-0"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value?.includes(employee._id)}
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? field.onChange([...field.value, employee._id])
+                                : field.onChange(
+                                    field.value?.filter(
+                                      (value) => value !== employee._id
+                                    )
+                                  )
+                            }}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal">
+                        {`${employee.nom} ${employee.prenom}`}
+                        </FormLabel>
+                      </FormItem>
+                    )
+                  }}
+                />
+              ))}
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        </div>
+        </ScrollArea>
+           
     <Button type="submit">Submit</Button>
   </form>
 </Form>

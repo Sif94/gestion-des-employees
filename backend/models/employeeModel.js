@@ -81,7 +81,8 @@ const employeeSchema = new mongoose.Schema({
 
     departement: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Departement"
+        ref: 'Departement',
+        required: true
     },
 
     absences: [{type: mongoose.Schema.Types.ObjectId, ref: 'Absence'}],

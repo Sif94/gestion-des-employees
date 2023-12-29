@@ -12,7 +12,7 @@ const EmployeeProjets = () => {
     
     useEffect(() => {
        try {
-        axios.get(`http://localhost:5000/api/projets/${id}`, {withCredentials: true}).then((response) => {
+        axios.get(`http://localhost:5000/api/projets/employee/${id}/projets`, {withCredentials: true}).then((response) => {
           console.log(response.data)
           setProjet(response.data)
         })
@@ -33,12 +33,14 @@ const EmployeeProjets = () => {
       </CardHeader>
       <CardContent>
         <div className='text-xl'>
-          <h1>description: {projet.titre}</h1>
-          <h1>date debut du contrat : {new Date(projet.date_debut).toLocaleDateString("fr")}</h1>
-          <h1>date fin du contrat : {new Date(projet.date_fin).toLocaleDateString("fr")}</h1>
-          <h1>Durée: {projet.duree}</h1>
-          <h1>Chef du projet: {projet.chef_projet}</h1>
-          <h1>Departement {projet.departements}</h1>
+          <h1 className='text-xl font-bold'>Titre: {projet.titre}</h1>
+          <h1 className='text-xl font-bold'>Date debut du projet : {new Date(projet.date_debut).toLocaleDateString("fr")}</h1>
+          <h1 className='text-xl font-bold'>Date fin du projet : {new Date(projet.date_fin).toLocaleDateString("fr")}</h1>
+          <h1 className='text-xl font-bold'>Durée estimée: {projet.duree}</h1>
+          <h1 className='text-xl font-bold'>Chef de projet: {`${projet.chef_projet.prenom} ${projet.chef_projet.nom}`}</h1>
+          {projet.departements.map((departement: any) => (
+            <h1 className='text-xl font-bold'>Departement:  {departement.nom}</h1>
+          ))}
         </div>
       </CardContent>
       <CardFooter className='flex flex-col items-start gap-2'>

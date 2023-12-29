@@ -37,6 +37,13 @@ import EmployeeTaches from "./pages/employees/EmployeeTaches.tsx";
 import EmployeeHeuressupp from "./pages/employees/EmployeeHeuressupp.tsx";
 import HeuresuppCreate from "./pages/heuressupp/HeuresuppCreate.tsx";
 import HeuresuppEdit from "./pages/heuressupp/HeuresuppEdit.tsx";
+import TacheDelete from "./pages/taches/TacheDelete.tsx";
+import ProjetDelete from "./pages/projets/ProjetDelete.tsx";
+import ContratDelete from "./pages/contrats/ContratDelete.tsx";
+import CongeDelete from "./pages/Congés/CongeDelete.tsx";
+import RetardDelete from "./pages/Retards/RetardDelete.tsx";
+import AbsenceDelete from "./pages/absences/AbsenceDelete.tsx";
+import HeuresuppDelete from "./pages/heuressupp/HeuresuppDelete.tsx";
 // Add a response interceptor
 axios.interceptors.response.use(
   (response) => {
@@ -132,7 +139,7 @@ function App() {
               <EmployeeTaches/>
             </ProtectedRoute>
           } />
-            <Route path="/dashboard/employees/:id/heuressupp" element={
+            <Route path="/dashboard/employees/:id/heuressupps" element={
             <ProtectedRoute accessBy="authenticated">
               <EmployeeHeuressupp/>
             </ProtectedRoute>
@@ -172,6 +179,11 @@ function App() {
               <AbsenceEdit/>
             </ProtectedRoute>
           } />
+          <Route path="/dashboard/absences/:id/delete" element={
+            <ProtectedRoute accessBy="authenticated">
+              <AbsenceDelete/>
+            </ProtectedRoute>
+          } />
           <Route path="/dashboard/retards/create" element={
             <ProtectedRoute accessBy="authenticated">
               <RetardCreate/>
@@ -182,7 +194,12 @@ function App() {
               <RetardEdit/>
             </ProtectedRoute>
           } />
-                    <Route path="/dashboard/conges/create" element={
+          <Route path="/dashboard/retards/:id/delete" element={
+            <ProtectedRoute accessBy="authenticated">
+              <RetardDelete/>
+            </ProtectedRoute>
+          } />
+            <Route path="/dashboard/conges/create" element={
             <ProtectedRoute accessBy="authenticated">
               <CongéCreate/>
             </ProtectedRoute>
@@ -190,6 +207,11 @@ function App() {
           <Route path="/dashboard/conges/:id/edit" element={
             <ProtectedRoute accessBy="authenticated">
               <CongéEdit/>
+            </ProtectedRoute>
+          } />
+          <Route path="/dashboard/conges/:id/delete" element={
+            <ProtectedRoute accessBy="authenticated">
+              <CongeDelete/>
             </ProtectedRoute>
           } />
           <Route path="/dashboard/contrats/create" element={
@@ -202,6 +224,11 @@ function App() {
               <ContratEdit/>
             </ProtectedRoute>
           } />
+          <Route path="/dashboard/contrats/:id/delete" element={
+            <ProtectedRoute accessBy="authenticated">
+              <ContratDelete/>
+            </ProtectedRoute>
+          } />
            <Route path="/dashboard/projets/create" element={
             <ProtectedRoute accessBy="authenticated">
               <ProjetCreate/>
@@ -210,6 +237,11 @@ function App() {
           <Route path="/dashboard/projets/:id/edit" element={
             <ProtectedRoute accessBy="authenticated">
               <ProjetEdit/>
+            </ProtectedRoute>
+          } />
+          <Route path="/dashboard/projets/:id/delete" element={
+            <ProtectedRoute accessBy="authenticated">
+              <ProjetDelete/>
             </ProtectedRoute>
           } />
             <Route path="/dashboard/taches/create" element={
@@ -222,6 +254,11 @@ function App() {
               <TacheEdit/>
             </ProtectedRoute>
           } />
+          <Route path="/dashboard/taches/:id/delete" element={
+            <ProtectedRoute accessBy="authenticated">
+              <TacheDelete/>
+            </ProtectedRoute>
+          } />
             <Route path="/dashboard/heuressupp/create" element={
             <ProtectedRoute accessBy="authenticated">
               <HeuresuppCreate/>
@@ -230,6 +267,11 @@ function App() {
           <Route path="/dashboard/heuressupp/:id/edit" element={
             <ProtectedRoute accessBy="authenticated">
               <HeuresuppEdit/>
+            </ProtectedRoute>
+          } />
+          <Route path="/dashboard/heuressupp/:id/delete" element={
+            <ProtectedRoute accessBy="authenticated">
+              <HeuresuppDelete/>
             </ProtectedRoute>
           } />
         </Routes>

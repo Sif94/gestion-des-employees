@@ -16,7 +16,7 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 const formSchema = z.object({
     date_absence: z.string(),
     motif : z.string().regex(new RegExp("^[a-zA-Z ]+$")).min(3).max(20),
-    justifiee : z.enum(["true", "false"]),
+    justifiee : z.enum(["false", "true"]),
     employee : z.string(),
   })
 
@@ -34,6 +34,25 @@ const AbsenceEdit = () => {
             employee: "",
         },
       })
+
+      const getAbsence = async () => {
+        axios.get(`http://localhost:5000/api/absences/${id}`, {withCredentials: true}).then((response) => {
+              console.log(response.data)
+                const date = new Date(response.data.absence.date_absence); 
+
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+
+          const formattedDate = `${year}-${month}-${day}`;
+              form.reset({
+                date_absence: formattedDate,
+                motif: response.data.absence.motif,
+                justifiee: response.data.absence.justifiee.toString(),
+                employee: response.data.absence.employee,
+              })
+            })
+      }
       const updateAbsence = async (payload: z.infer<typeof formSchema>) => {
         try {
           const response = await axios.put(`http://localhost:5000/api/absences/${id}`,payload, {withCredentials: true})
@@ -57,23 +76,9 @@ const AbsenceEdit = () => {
             axios.get("http://localhost:5000/api/employees/", {withCredentials: true}).then((response) => {
               console.log(response.data)
               setEmployees(response.data)
+              getAbsence()
             })
-             axios.get(`http://localhost:5000/api/absences/${id}`, {withCredentials: true}).then((response) => {
-              console.log(response.data)
-                const date = new Date(response.data.absence.date_absence); 
-
-                const year = date.getFullYear();
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const day = String(date.getDate()).padStart(2, '0');
-
-          const formattedDate = `${year}-${month}-${day}`;
-              form.reset({
-                date_absence: formattedDate,
-                motif: response.data.absence.motif,
-                justifiee: response.data.absence.justifiee,
-                employee: response.data.absence.employee,
-              })
-            })
+             
           } catch (error) {
             console.log(error)
           }
