@@ -3,7 +3,8 @@ import { useContext } from "react"
 import { Link } from "react-router-dom"
 import { FaUsers,FaBuilding } from "react-icons/fa";
 
-import { FaBusinessTime ,FaUserAltSlash } from "react-icons/fa";
+import { FaBusinessTime ,FaUserAltSlash,FaFileContract   } from "react-icons/fa";
+import { MdWorkOff } from "react-icons/md";
 
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
@@ -33,7 +34,19 @@ const Dashboard = () => {
             <Link className="flex gap-2 font-bold" to={'/dashboard/retards/create'}><FaBusinessTime  size={30}/>Retards</Link>
           </li>
           <li>
-            <Link to={'/projets'}>3</Link>
+            <Link className="flex gap-2 font-bold" to={'/dashboard/conges/create'}><MdWorkOff   size={30}/>Congés</Link>
+          </li>
+          <li>
+            <Link className="flex gap-2 font-bold" to={'/dashboard/contrats/create'}><FaFileContract   size={30}/>Contrats</Link>
+          </li>
+          <li>
+            <Link className="flex gap-2 font-bold" to={'/dashboard/projets/create'}><FaFileContract   size={30}/>Projets</Link>
+          </li>
+          <li>
+            <Link className="flex gap-2 font-bold" to={'/dashboard/taches/create'}><FaFileContract   size={30}/>Taches</Link>
+          </li>
+          <li>
+            <Link className="flex gap-2 font-bold" to={'/dashboard/heuressupp/create'}><FaFileContract   size={30}/>Heures Supplimentaires</Link>
           </li>
         </ul>
       </div>

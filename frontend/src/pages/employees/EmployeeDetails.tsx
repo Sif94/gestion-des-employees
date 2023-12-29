@@ -67,6 +67,18 @@ const EmployeeDetails = () => {
           <div className='flex gap-2 justify-between'>
           <Button><Link to={`/dashboard/employees/${id}/retards`}>Retards</Link></Button>
           </div>
+          <div className='flex gap-2 justify-between'>
+          <Button><Link to={`/dashboard/employees/${id}/conges`}>Congés</Link></Button>
+          </div>
+          <div className='flex gap-2 justify-between'>
+          <Button><Link to={`/dashboard/employees/${id}/contrats`}>Contrats</Link></Button>
+          </div>
+          <div className='flex gap-2 justify-between'>
+          <Button><Link to={`/dashboard/employees/${id}/projets`}>Projets</Link></Button>
+          </div>
+          <div className='flex gap-2 justify-between'>
+          <Button><Link to={`/dashboard/employees/${id}/taches`}>Taches</Link></Button>
+          </div>
         </CardFooter>
       </Card>
     </div>
