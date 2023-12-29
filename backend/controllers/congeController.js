@@ -36,8 +36,8 @@ const addConge = asyncHandler(async(req,res)=>{
     try {
         const redacteur = req.employee._id
         const {date_debut, date_fin, motif, employee, type_conge} = req.body
-        if(!validator.isDate(date_debut) || !validator.isDate(date_fin) || !validator.isLength(motif,{min:5,max:1000}) || !validator.isIn(type_conge,['Congé payé','Congé non payé'])){
-            throw Error('Veuillez vérifier vos paramètres')
+        if(!date_debut || !date_fin || !motif || !employee || !type_conge ){
+            throw Error('Veuillez remplir tous les champs correctement')
         }else{
             const conge = await Conge.create({date_debut, date_fin, motif, employee, type_conge, redacteur})
             res.status(201).json(conge)

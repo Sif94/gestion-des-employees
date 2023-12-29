@@ -25,7 +25,7 @@ const tacheSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Employee",
     }
-})
+}, {timestamps: true})
 
 const Tache = mongoose.model("Tache", tacheSchema);
 export default Tache;

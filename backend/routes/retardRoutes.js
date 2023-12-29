@@ -9,5 +9,5 @@ router.get('/:id', [isAuth, isAuthorized("Admin", "RH")], getRetardById)
 router.get('/:id/retards', [isAuth, isAuthorized("Admin", "RH")], getAllRetardsByEmployeeId)
 router.get('/retards_rediges/signaleur', [isAuth,isAuthorized("Admin", "RH")], getAllRetardsRediges)
 router.put('/:id', [isAuth, isAuthorized("Admin", "RH")], updateRetardById)
-router.delete('/:id', [isAuth, isAuthorized("Admin", "RH")], deleteRetardById)
+router.delete('/delete/:id', [isAuth, isAuthorized("Admin", "RH")], deleteRetardById)
 export default router

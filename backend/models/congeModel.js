@@ -29,7 +29,7 @@ const congeSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Employee",
     }
-})
+},{timestamps: true})
 
 const Conge = mongoose.model("Conge", congeSchema);
 export default Conge;

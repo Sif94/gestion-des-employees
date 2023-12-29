@@ -3,6 +3,12 @@ import { useContext } from "react"
 import { Link } from "react-router-dom"
 import { FaUsers,FaBuilding } from "react-icons/fa";
 
+import { FaBusinessTime ,FaUserAltSlash,   } from "react-icons/fa";
+import { MdWorkOff } from "react-icons/md";
+import { FaTasks } from "react-icons/fa";
+import { FaFileContract } from "react-icons/fa";
+import { FaProjectDiagram } from "react-icons/fa";
+import { FaClock } from "react-icons/fa";
 
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +32,25 @@ const Dashboard = () => {
             <Link className="flex gap-2 font-bold" to={'/dashboard/departements'}><FaBuilding size={30}/>Départements</Link>
           </li>
           <li>
-            <Link to={'/projets'}>3</Link>
+            <Link className="flex gap-2 font-bold" to={'/dashboard/absences/create'}><FaUserAltSlash size={30}/>Absences</Link>
+          </li>
+          <li>
+            <Link className="flex gap-2 font-bold" to={'/dashboard/retards/create'}><FaBusinessTime  size={30}/>Retards</Link>
+          </li>
+          <li>
+            <Link className="flex gap-2 font-bold" to={'/dashboard/conges/create'}><MdWorkOff   size={30}/>Congés</Link>
+          </li>
+          <li>
+            <Link className="flex gap-2 font-bold" to={'/dashboard/contrats/create'}><FaFileContract   size={30}/>Contrats</Link>
+          </li>
+          <li>
+            <Link className="flex gap-2 font-bold" to={'/dashboard/projets/create'}><FaProjectDiagram   size={30}/>Projets</Link>
+          </li>
+          <li>
+            <Link className="flex gap-2 font-bold" to={'/dashboard/taches/create'}><FaTasks   size={30}/>Taches</Link>
+          </li>
+          <li>
+            <Link className="flex gap-2 font-bold" to={'/dashboard/heuressupp/create'}><FaClock   size={30}/>Heures Supplimentaires</Link>
           </li>
         </ul>
       </div>
@@ -57,7 +81,7 @@ const Dashboard = () => {
       <Label className="text-2xl font-bold">{`${user.type}`}</Label>
       </div>
       <div className="flex py-2">
-      <Button onClick={() => navigate('/profile/update')}>Modifier mes informations</Button>
+      {/* <Button onClick={() => navigate('/profile/update')}>Modifier mes informations</Button> */}
       </div>
       </div>
     </section>

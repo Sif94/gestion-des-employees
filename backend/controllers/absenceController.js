@@ -51,9 +51,7 @@ const getAbsence = asyncHandler(async(req,res) => {
         if(!absence){
             throw Error('Cette absence n\'existe pas')
         } 
-        const signaleur = await Employee.findById(absence.signaleur).select('-password')
-        const employee = await Employee.findById(absence.employee).select('-password')
-        res.status(200).json({absence, signaleur, employee})
+        res.status(200).json({absence})
     }catch(error){
         res.status(400).json({
             message: `Une erreur survenue: ${error.message}`})
@@ -116,11 +114,26 @@ const getAllAbsencesRediges = asyncHandler(async(req,res)=>{
     }
 })
 
+const getAbsencesByEmployeeId = asyncHandler(async(req,res)=>{
+    try {
+        const savedEmployee = await Employee.findById(req.params.id)
+        if(!savedEmployee){
+            throw Error('Cet employé n\'existe pas')
+        }
+        const absences = await Absence.find({employee: savedEmployee._id })
+        res.status(200).json(absences)
+    } catch (error) {
+        res.status(400).json({
+            message: error.message
+        })
+    }
+})
 export {
     createAbsence,
     getAbsence,
     updateAbsence, 
     deleteAbsence,
     getAllAbsence,
-    getAllAbsencesRediges
+    getAllAbsencesRediges,
+    getAbsencesByEmployeeId
 }

@@ -17,15 +17,15 @@ const getAllProjets = asyncHandler(async(req,res)=>{
         })
     }
 })
-
+ 
 const addProjet = asyncHandler(async(req,res)=>{
     try {
-        const {titre, description, date_debut, date_fin, employees, chef_projet, departements} = req.body 
-        if(!titre || !description || !date_debut || !date_fin || !validator.isDate(date_debut) || !validator.isDate(date_fin) || !chef_projet){
+        const {titre, description, date_debut, date_fin, employees, chef_projet, departements, duree} = req.body 
+        if(!titre || !description || !date_debut || !date_fin || !duree || !validator.isDate(date_debut) || !validator.isDate(date_fin) || !chef_projet){
             res.status(400)
-            throw Error('Veuillez remplir tous les champs')
+            throw Error('Veuillez remplir tous les champs') 
         }
-        const projet = await Projet.create({titre, description, date_debut, date_fin, chef_projet})
+        const projet = await Projet.create({titre, description, date_debut, date_fin, chef_projet, duree})
         if(employees){
              employees.map(async (employee) => {
                 projet.employees.push(employee)
@@ -33,7 +33,7 @@ const addProjet = asyncHandler(async(req,res)=>{
         }
         if(departements){
              departements.map(async (departement) => {
-                projet.departements.push(departement)
+                projet.departements.push(departement) 
            })
         }
         
@@ -87,6 +87,7 @@ const updateProjetById = asyncHandler(async(req,res)=>{
         projet.description = req.body.description || projet.description
         projet.date_debut = req.body.date_debut || projet.date_debut
         projet.date_fin = req.body.date_fin || projet.date_fin
+        projet.duree = req.body.duree || projet.duree
         projet.chef_projet = req.body.chef_projet || projet.chef_projet
         projet.employees = req.body.employees || projet.employees
         projet.departements = req.body.departements || projet.departements
@@ -140,10 +141,22 @@ const deleteProjetById = asyncHandler(async(req,res)=>{
         })
     }
 })
+
+const getProjectByEmployeeId = asyncHandler(async(req,res)=>{
+    try {
+        const projects = await Projet.find({ employees: { $in: req.params.id } }).populate('chef_projet departements');
+        res.status(200).json(projects)
+    } catch (error) {
+        res.json({
+            message: error.message
+        })
+    }
+})
 export {
     getAllProjets,
     addProjet,
     getProjetById,
     updateProjetById,
-    deleteProjetById
+    deleteProjetById,
+    getProjectByEmployeeId
 }

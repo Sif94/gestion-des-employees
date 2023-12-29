@@ -3,7 +3,7 @@ import { isAuth, isAuthorized } from "../middlewares/protectedRoutesMiddleware.j
 import { addEmployee, authEmployee, deleteEmployee, generateEmployeeRefreshToken, getEmployeeData, getEmployees, getEmployeesByDepartement, getProfile, logoutEmployee, updateEmployee } from "../controllers/employeeController.js";
 const router = express.Router();
 
-router.post('/register', [isAuth, isAuthorized("Admin", "RH")], addEmployee)
+router.post('/register', addEmployee)
 router.post('/auth', authEmployee)
 router.get('/', [isAuth, isAuthorized("Admin", "RH")], getEmployees)
 router.post('/logout', logoutEmployee)
@@ -13,4 +13,4 @@ router.delete('/delete/:id', [isAuth, isAuthorized("Admin", "RH")], deleteEmploy
 router.get('/auth/profile', [isAuth,isAuthorized("Admin", "RH")], getProfile)
 router.get('/employees/refresh/token', generateEmployeeRefreshToken) 
 router.get('/departements/:id/employees', [isAuth, isAuthorized("Admin", "RH", "Chef_De_Departement")], getEmployeesByDepartement)
-export default router
+export default router 

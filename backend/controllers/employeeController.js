@@ -32,6 +32,7 @@ const addEmployee = asyncHandler( async (req, res) => {
             !date_naiss || 
             !type || 
             !post || 
+            !departement ||
             !situation_marital || 
             !telephone ||
             !adresse ||
@@ -98,7 +99,7 @@ const authEmployee = asyncHandler( async (req,res) => {
                 success: true
             })
         }else {
-            res.send(401)
+            res.status(401)
             throw new Error("Invalid Credentials")
         }
     } catch (error) {

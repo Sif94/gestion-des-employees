@@ -27,7 +27,7 @@ const projetSchema = new mongoose.Schema({
     },
     departements: [{type: mongoose.Schema.Types.ObjectId, ref: "Departement"}],
 
-})
+},{timestamps: true})
 
 const Projet = mongoose.model("Projet", projetSchema);
 export default Projet;

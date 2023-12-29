@@ -27,7 +27,7 @@ const contratSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Employee",
     }
-})
+},{timestamps: true})
 
 
 const Contrat = mongoose.model("Contrat", contratSchema);

@@ -21,7 +21,7 @@ const absenceSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Employee",
     }
-})
+}, {timestamps: true})
 
 const Absence = mongoose.model("Absence", absenceSchema);
 
