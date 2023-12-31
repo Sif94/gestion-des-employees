@@ -10,5 +10,5 @@ router.get('/:id', [isAuth, isAuthorized("Admin", "RH")], getHeureSupplementaire
 router.post('/', [isAuth, isAuthorized("Admin", "RH")], createHeureSupplementaire)
 router.put('/update/:id', [isAuth, isAuthorized("Admin", "RH")], updateHeureSupplementaireById)
 router.delete('/delete/:id', [isAuth, isAuthorized("Admin", "RH")], deleteHeureSupplementaireById)
-router.get('/employee/:id/heureSupp', [isAuth, isAuthorized("Admin", "RH")], getHeuresSuppsByEmployeeId)
+router.get('/employee/:id/heureSupp', [isAuth], getHeuresSuppsByEmployeeId)
 export default router

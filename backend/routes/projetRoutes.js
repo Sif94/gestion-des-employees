@@ -12,5 +12,5 @@ router.post('/', [isAuth, isAuthorized("Admin", "Chef_De_Departement")], addProj
 router.get('/:id',[ isAuth,isAuthorized("Admin", "Chef_De_Projet", "Chef_De_Departement")], getProjetById)
 router.put('/update/:id', [isAuth,isAuthorized("Admin", "Chef_De_Departement")], updateProjetById)
 router.delete('/delete/:id', [isAuth,isAuthorized("Admin","Chef_De_Departement")], deleteProjetById)
-router.get('/employee/:id/projets', [isAuth, isAuthorized("Admin", "Chef_De_Projet", "Chef_De_Departement")], getProjectByEmployeeId)
+router.get('/employee/:id/projets', [isAuth], getProjectByEmployeeId)
 export default router 

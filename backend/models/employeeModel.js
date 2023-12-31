@@ -65,6 +65,9 @@ const employeeSchema = new mongoose.Schema({
         min: 5,
         max: 20
     },
+    profileImage: {
+        type: String
+    },
     EngagementSurvey: {
         type: Number
     },

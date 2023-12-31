@@ -10,12 +10,24 @@ import { MdDelete } from "react-icons/md";
 const EmployeeRetards = () => {
     const {id} = useParams()
     const [retards, setRetards] = useState([])
+    const [employee, setEmployee] = useState({})
+    
+    const getEmployee = async () => {
+        try {
+            const response = await axios.get(`http://localhost:5000/api/employees/${id}`, {withCredentials: true})
+            console.log(response.data)
+            setEmployee(response.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
     
     useEffect(() => {
        try {
         axios.get(`http://localhost:5000/api/retards/${id}/retards`, {withCredentials: true}).then((response) => {
           console.log(response.data)
           setRetards(response.data)
+          getEmployee()
         })
        } catch (error) {
         console.log(error)
@@ -24,7 +36,7 @@ const EmployeeRetards = () => {
   return (
     <div className='w-4/5 my-16 mx-auto p-2'>
     <h1 className='text-2xl font-bold text-center mb-4'>Les Retards</h1>
-    <div className='flex gap-2'>
+    <div className='flex items-start justify-center flex-wrap'>
     {retards.map((retard: any) => (
       <Card className='w-1/3' key={retard._id}>
       <CardHeader>
@@ -40,10 +52,12 @@ const EmployeeRetards = () => {
       </CardContent>
       <CardFooter className='flex flex-col items-start gap-2'>
         <h1>Date de signalisation : {new Date(retard.createdAt).toLocaleDateString("fr")}</h1>
+        {employee.type === "Admin" || employee.type === "RH" ? (
         <div className='flex gap-2 justify-between'>
         <Link className='text-blue-500' to={`/dashboard/retards/${retard._id}/edit`}><FaEdit size={30}/></Link>
         <Link className='text-red-500' to={`/dashboard/retards/${retard._id}/delete`}><MdDelete size={30}/></Link>
         </div>
+        ):null}
       </CardFooter>
     </Card>
     ))}

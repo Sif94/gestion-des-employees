@@ -10,6 +10,6 @@ router.post('/', [isAuth, isAuthorized("Admin", "RH")], createTache)
 router.get('/:id', [isAuth, isAuthorized("Admin", "RH")], getTacheById)
 router.put('/update/:id', [isAuth, isAuthorized("Admin", "RH")], updateTacheById)
 router.delete('/delete/:id', [isAuth, isAuthorized("Admin", "RH")], deleteTacheById)
-router.get('/employee/:id/taches', [isAuth, isAuthorized("Admin", "RH")], getTachesByEmployeeId)
+router.get('/employee/:id/taches', [isAuth], getTachesByEmployeeId)
 
 export default router

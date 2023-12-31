@@ -15,6 +15,7 @@ import { GrValidate } from "react-icons/gr";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { Checkbox } from '@/components/ui/checkbox'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 const formSchema = z.object({
     titre: z.string(),
@@ -218,7 +219,11 @@ const ProjetCreate = () => {
                             }}
                           />
                         </FormControl>
-                        <FormLabel className="text-sm font-normal">
+                        <FormLabel className="flex text-sm font-normal items-center gap-2">
+                          <Avatar>
+                              <AvatarImage src={`http://localhost:5000/images/${employee.profileImage}`} alt="profile image" />
+                                <AvatarFallback>{`${employee.nom[0]} ${employee.prenom[0]}`}</AvatarFallback>
+                        </Avatar>
                           {`${employee.nom} ${employee.prenom}`}
                         </FormLabel>
                       </FormItem>

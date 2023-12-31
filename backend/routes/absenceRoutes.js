@@ -10,5 +10,5 @@ router.get('/:id', [isAuth, isAuthorized("Admin", "RH")], getAbsence)
 router.put('/:id', [isAuth, isAuthorized("Admin", "RH")], updateAbsence)
 router.delete('/delete/:id', [isAuth, isAuthorized("Admin", "RH")], deleteAbsence)
 router.get('/absences_rediges/signaleur', [isAuth, isAuthorized("Admin", "RH")], getAllAbsencesRediges)
-router.get('/employee/:id/absences', [isAuth, isAuthorized("Admin", "RH")], getAbsencesByEmployeeId)
+router.get('/employee/:id/absences', [isAuth], getAbsencesByEmployeeId)
 export default router 

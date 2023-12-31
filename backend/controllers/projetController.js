@@ -7,7 +7,7 @@ import { response } from "express";
 
 const getAllProjets = asyncHandler(async(req,res)=>{
     try {
-        const projets = await Projet.find()
+        const projets = await Projet.find() 
         res.status(200).json({
             projets: projets
         })

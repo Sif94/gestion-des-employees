@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 
 const EmployeeDetails = () => {
@@ -35,10 +36,17 @@ const EmployeeDetails = () => {
           <div className='text-xl'>
           <Accordion type="single" collapsible>
             <AccordionItem value="item-1">
-              <AccordionTrigger>Informations</AccordionTrigger>
+              <AccordionTrigger>Photo</AccordionTrigger>
               <AccordionContent>
                 
-                <h1>Email : {employee.email}</h1>
+              <div>
+                <Avatar className="w-40 h-40">
+                    <Link to={`/dashboard/employees/details/${employee._id}`}>
+                      <AvatarImage src={`http://localhost:5000/images/${employee.profileImage}`} alt="@shadcn" />
+                      <AvatarFallback>{`${employee.prenom} ${employee.nom}`}</AvatarFallback>
+                    </Link>
+                </Avatar>
+              </div>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -61,7 +69,7 @@ const EmployeeDetails = () => {
         </CardContent>
         <CardFooter className='flex flex-col items-start gap-2'>
           <h1>Date d'embauche : {new Date(employee.createdAt).toLocaleDateString("fr")}</h1>
-          <div className='flex gap-2 justify-between'>
+          <div className='flex gap-2 justify-between flex-wrap'>
           <div className='flex gap-2 justify-between'>
           <Button><Link to={`/dashboard/employees/${id}/absences`}>Absences</Link></Button>
           </div>

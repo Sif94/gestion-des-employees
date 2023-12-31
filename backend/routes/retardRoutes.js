@@ -6,7 +6,7 @@ const router = express.Router();
 router.post("/", [isAuth, isAuthorized("Admin", "RH")], createRetard);
 router.get("/", [isAuth, isAuthorized("Admin", "RH")], getAllRetards);
 router.get('/:id', [isAuth, isAuthorized("Admin", "RH")], getRetardById)
-router.get('/:id/retards', [isAuth, isAuthorized("Admin", "RH")], getAllRetardsByEmployeeId)
+router.get('/:id/retards', [isAuth], getAllRetardsByEmployeeId)
 router.get('/retards_rediges/signaleur', [isAuth,isAuthorized("Admin", "RH")], getAllRetardsRediges)
 router.put('/:id', [isAuth, isAuthorized("Admin", "RH")], updateRetardById)
 router.delete('/delete/:id', [isAuth, isAuthorized("Admin", "RH")], deleteRetardById)

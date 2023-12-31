@@ -25,6 +25,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
+
 const formSchema = z.object({
   username: z.string().regex(new RegExp("^[a-zA-Z0-9_]*$")).min(3).max(50),
   password: z.string().min(6, { message: "Password too short" }).max(50),
@@ -39,7 +40,8 @@ const formSchema = z.object({
   sexe: z.enum(["Male", "Female"]),
   type: z.enum(["Admin", "Employee", "RH", "Chef_De_Departement", "Chef_De_Projet"]),
   situation_marital: z.enum(["Married", "Single", "Divorced", "Widowed", 'Separated']),
-  departement: z.string(),
+  departement: z.string(), 
+  profileImage: z.any()
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords do not match",
   path: ["confirmPassword"],
@@ -65,9 +67,10 @@ const EmployeeCreate = () => {
           telephone: "",
           date_naiss: "",
           departement: "",
+          profileImage: "",
         },
       })
-      
+
       const getDepartements = async () => {
           try {
             const response = await axios.get("http://localhost:5000/api/departements/", {withCredentials: true})
@@ -81,7 +84,12 @@ const EmployeeCreate = () => {
         getDepartements() 
      },[])
      const createEmployee = async (payload: z.infer<typeof formSchema>) => {
-        await axios.post("http://localhost:5000/api/employees/register", payload, {withCredentials: true}).then((res) => {
+        await axios.post("http://localhost:5000/api/employees/register", payload , { 
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+        withCredentials: true
+        }).then((res) => {
             console.log(res.data)
             form.reset()
             navigate('/dashboard/employees')
@@ -91,13 +99,15 @@ const EmployeeCreate = () => {
         })
      }
       function onSubmit(values: z.infer<typeof formSchema>) {
+        
         console.log(values)
+        
         createEmployee(values)
       } 
   return (
     <div className="w-2/4 my-16 mx-auto">
     <Form {...form}>
-    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8" encType="multipart/form-data">
     {error && <p className="text-red-500">{error}</p>}
       <FormField
         control={form.control}
@@ -326,7 +336,7 @@ const EmployeeCreate = () => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                    {departements.map((departement) => (
+                    {departements.map((departement:any) => (
                         <SelectItem key={departement._id} value={departement._id}>{departement.nom}</SelectItem>
                     ))}
                 </SelectContent>
@@ -335,6 +345,19 @@ const EmployeeCreate = () => {
             </FormItem>
           )}
         />
+        <FormField
+        control={form.control}
+        name="profileImage"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Profile Image</FormLabel>
+            <FormControl>
+              <Input type="file" multiple={false} onChange={(e) => field.onChange(e.target.files![0])} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
       <Button type="submit">Submit</Button>
     </form>
   </Form>

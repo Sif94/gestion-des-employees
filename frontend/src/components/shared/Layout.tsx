@@ -36,18 +36,15 @@ const Layout = ({ children }) => {
           <DropdownMenu>
             <DropdownMenuTrigger>
             <Avatar>
-                <Link to={'/profile'}>
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
-            </Link>
+            
+            <AvatarImage src={`http://localhost:5000/images/${user.profileImage}`} alt="profile image" />
+            <AvatarFallback>{`${user.nom[0]} ${user.prenom[0]}`}</AvatarFallback>
             </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuLabel>{`${user.nom}, ${user.prenom}`}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem><Link to={'/profile'}>Profile</Link></DropdownMenuItem>
-                <DropdownMenuItem>Billing</DropdownMenuItem>
-                <DropdownMenuItem>Team</DropdownMenuItem>
+                <DropdownMenuItem><Link to={`/dashboard/employees/details/${user._id}`}>Profile</Link></DropdownMenuItem>
                 <DropdownMenuItem>
                 <Button className="flex gap-2" onClick={() => {logout()}}>Se Deconnecter <FaSignOutAlt size={20}/>
                 </Button>

@@ -23,7 +23,8 @@ import { FaFemale, FaMale } from "react-icons/fa"
 
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 
 
@@ -43,6 +44,7 @@ const formSchema = z.object({
     type: z.enum(["Admin", "Employee", "RH", "Chef_De_Departement", "Chef_De_Projet"]),
     situation_marital: z.enum(["Married", "Single", "Divorced", "Widowed", 'Separated']),
     departement: z.string(),
+    profileImage: z.any()
   })
 const EmployeeEdit = () => {
     const [departements, setDepartements] = useState([])
@@ -61,6 +63,7 @@ const EmployeeEdit = () => {
         type: "Employee",
         situation_marital: "Single",
         departement: "",
+        profileImage: "",
     })
     
     const navigate = useNavigate()
@@ -81,25 +84,30 @@ const EmployeeEdit = () => {
         type: "Employee",
         situation_marital: "Single",
         departement: "",
+        profileImage: "",
       }
     })
 
+    
+    
     const getEmployee = async () => {
        axios.get(`http://localhost:5000/api/employees/${id}`, {withCredentials: true}).then((response) => {
-        console.log(response.data._id)
+        console.log(employee)
+        setEmployee(response.data)
         const date = new Date(response.data.date_naiss); 
 
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
 
+        console.log(response.data)
         const formattedDate = `${year}-${month}-${day}`;
         console.log(formattedDate);
         
-        console.log(response.data)
+
         form.reset({
           username: response.data.username,
-          nom: response.data.nom,
+          nom: response.data.nom, 
           prenom: response.data.prenom,
           email: response.data.email,
           adresse: response.data.adresse,
@@ -111,11 +119,17 @@ const EmployeeEdit = () => {
           situation_marital: response.data.situation_marital,
           departement: response.data.departement,
         })
+
       })
     }
  
     const updateEmployee = async (payload: z.infer<typeof formSchema>) => {
-        await axios.put(`http://localhost:5000/api/employees/update/${id}`, payload, {withCredentials: true}).then((res) => {
+        await axios.put(`http://localhost:5000/api/employees/update/${id}`, payload, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },  
+        withCredentials: true
+        }).then((res) => {
             console.log(res.data)
             navigate('/dashboard/employees')
         }).catch((err) => {
@@ -359,6 +373,25 @@ const EmployeeEdit = () => {
             </FormItem>
           )}
         />
+        <div>
+        <Avatar className="w-40 h-40">
+              <AvatarImage src={`http://localhost:5000/images/${employee.profileImage}`} alt="@profile picture" />
+              <AvatarFallback>{`${employee.prenom[0]} ${employee.nom[0]}`}</AvatarFallback>
+        </Avatar>
+        <FormField
+        control={form.control}
+        name="profileImage"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Profile Image</FormLabel>
+            <FormControl>
+              <Input type="file"  multiple={false} onChange={(e) => field.onChange(e.target.files![0])} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      </div>
       <Button type="submit">Submit</Button>
     </form>
   </Form>

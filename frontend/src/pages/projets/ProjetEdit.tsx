@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -10,10 +9,9 @@ import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate, useParams } from "react-router-dom"
 import * as z from "zod"
-import { GrValidate } from "react-icons/gr";
-import { IoMdCloseCircleOutline } from "react-icons/io";
 import { Checkbox } from "@/components/ui/checkbox"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const formSchema = z.object({
   titre: z.string(),
@@ -61,22 +59,11 @@ const ProjetEdit = () => {
         setError(error.response.data.message)
       }
     }
-      
-      function onSubmit(values: z.infer<typeof formSchema>) {
-          console.log(values)
-          updateProjet(values)
-          
-      } 
-    useEffect(() => {
-        
-          axios.get("http://localhost:5000/api/employees/", {withCredentials: true}).then((response) => {
-            console.log(response.data)
-            setEmployees(response.data)
-          })
-          axios.get("http://localhost:5000/api/departements/", {withCredentials: true}).then((response) => {
-            console.log(response.data.departements)
-            setDepartements(response.data.departements)
-          })
+      const getEmployeesAndDepartements= async () => {
+        const remployees = await axios.get("http://localhost:5000/api/employees/", {withCredentials: true})
+        setEmployees(remployees.data)
+          const response = await axios.get("http://localhost:5000/api/departements/", {withCredentials: true})
+          setDepartements(response.data.departements)
           axios.get(`http://localhost:5000/api/projets/${id}`, {withCredentials: true}).then((response) => {
             console.log(response.data)
               const date = new Date(response.data.date_debut); 
@@ -85,7 +72,7 @@ const ProjetEdit = () => {
               const month = String(date.getMonth() + 1).padStart(2, '0');
               const day = String(date.getDate()).padStart(2, '0');    
               
-        const formattedDate = `${year}-${month}-${day}`;
+            const formattedDate = `${year}-${month}-${day}`;
             form.reset({
               titre: response.data.titre,
               description: response.data.description,
@@ -97,7 +84,16 @@ const ProjetEdit = () => {
               departements: response.data.departements,
               
             })
+            
           })
+      }
+      function onSubmit(values: z.infer<typeof formSchema>) {
+          console.log(values)
+          updateProjet(values)
+          
+      } 
+    useEffect(() => {
+          getEmployeesAndDepartements()
         },[])
            
 return (
@@ -118,7 +114,7 @@ return (
         </FormItem>
       )}
     />
-           <FormField
+    <FormField
       control={form.control}
       name="description"
       render={({ field }) => (
@@ -186,7 +182,7 @@ return (
               <SelectContent>
                   {employees.map((employee: any) => (
                       <SelectItem key={employee._id} value={employee._id}>{`${employee.nom} ${employee.prenom}`}</SelectItem>
-                  ))}
+                  ))} 
               </SelectContent>
             </Select>
             <FormMessage />
@@ -228,8 +224,12 @@ return (
                             }}
                           />
                         </FormControl>
-                        <FormLabel className="text-sm font-normal">
-                          {employee.nom}
+                        <FormLabel className="flex text-sm font-normal items-center gap-2">
+                        <Avatar>
+                              <AvatarImage src={`http://localhost:5000/images/${employee.profileImage}`} alt="profile image" />
+                                <AvatarFallback>{`${employee.nom[0]} ${employee.prenom[0]}`}</AvatarFallback>
+                        </Avatar>
+                          {`${employee.nom} ${employee.prenom}`}
                         </FormLabel>
                       </FormItem>
                     )

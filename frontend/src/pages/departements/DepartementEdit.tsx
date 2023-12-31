@@ -15,6 +15,7 @@ import {
   } from "@/components/ui/select"
 import axios from "axios"
 import { useNavigate, useParams } from "react-router-dom"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 
 const formSchema = z.object({
@@ -128,7 +129,7 @@ const DepartementEdit = () => {
           name="chef_departement"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Employés</FormLabel>
+              <FormLabel>Chef de département</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value} value={field.value}>
                 <FormControl>
                   <SelectTrigger>
@@ -137,7 +138,13 @@ const DepartementEdit = () => {
                 </FormControl>
                 <SelectContent>
                     {employees.map((employee) => (
+                        <div className="flex gap-2 items-center justify-center p-2">
+                        <Avatar>
+                              <AvatarImage src={`http://localhost:5000/images/${employee.profileImage}`} alt="profile image" />
+                                <AvatarFallback>{`${employee.nom[0]} ${employee.prenom[0]}`}</AvatarFallback>
+                        </Avatar>
                         <SelectItem key={employee._id} value={employee._id}>{`${employee.nom} ${employee.prenom}`}</SelectItem>
+                      </div>
                     ))}
                 </SelectContent>
               </Select>

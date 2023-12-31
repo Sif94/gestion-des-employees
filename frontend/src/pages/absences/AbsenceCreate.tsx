@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom"
 import * as z from "zod"
 import { GrValidate } from "react-icons/gr";
 import { IoMdCloseCircleOutline } from "react-icons/io";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const formSchema = z.object({
     date_absence: z.string(),
@@ -146,7 +147,13 @@ const AbsenceCreate = () => {
                 </FormControl>
                 <SelectContent>
                     {employees.map((employee: any) => (
+                      <div className="flex gap-2 items-center justify-center p-2">
+                        <Avatar>
+                              <AvatarImage src={`http://localhost:5000/images/${employee.profileImage}`} alt="profile image" />
+                                <AvatarFallback>{`${employee.nom[0]} ${employee.prenom[0]}`}</AvatarFallback>
+                        </Avatar>
                         <SelectItem key={employee._id} value={employee._id}>{`${employee.nom} ${employee.prenom}`}</SelectItem>
+                      </div>
                     ))}
                 </SelectContent>
               </Select>

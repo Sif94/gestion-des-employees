@@ -10,6 +10,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import * as z from "zod"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Checkbox } from "@/components/ui/checkbox"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const formSchema = z.object({
     titre: z.string(),
@@ -184,8 +185,14 @@ const TacheEdit = () => {
                             }}
                           />
                         </FormControl>
-                        <FormLabel className="text-sm font-normal">
+                        <FormLabel className="flex text-sm font-normal items-center gap-2">
+                        <Avatar>
+                              <AvatarImage src={`http://localhost:5000/images/${employee.profileImage}`} alt="profile image" />
+                                <AvatarFallback>{`${employee.nom[0]} ${employee.prenom[0]}`}</AvatarFallback>
+                        </Avatar>
+                        <div>
                         {`${employee.nom} ${employee.prenom}`}
+                        </div>
                         </FormLabel>
                       </FormItem>
                     )

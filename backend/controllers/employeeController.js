@@ -5,8 +5,7 @@ import EmployeeArchive from "../models/employeeArchiveModel.js";
 import Departement from "../models/departementModel.js";
 import validator from "validator";
 import jwt from "jsonwebtoken";
-import Retard from "../models/retardModel.js";
-import mongoose from "mongoose"
+import upload from "../config/multerConfig.js";
 // récupérer la listes des employés
 const getEmployees = asyncHandler( async (req,res) => {
     try {
@@ -22,6 +21,8 @@ const getEmployees = asyncHandler( async (req,res) => {
 const addEmployee = asyncHandler( async (req, res) => {
     try {
         const {nom, prenom, email, username, password, sexe, date_naiss, type, post, situation_marital, telephone, departement, adresse} = req.body
+        console.log(req.file.filename)
+        const profileImage = req.file ? req.file.filename : null;
         if(
             !nom || 
             !prenom || 
@@ -65,7 +66,7 @@ const addEmployee = asyncHandler( async (req, res) => {
         if (employee) {
             throw Error("Employee existe déja");
         } else {
-            const savedEmployee = await Employee.create({nom, prenom, email, username, password, sexe, date_naiss, type, post, situation_marital, telephone, departement, adresse})
+            const savedEmployee = await Employee.create({nom, prenom, email, username, password, sexe, date_naiss, type, post, situation_marital, telephone, departement, adresse, profileImage})
 
             const savedEmployeeId = savedEmployee._id
 
@@ -124,6 +125,8 @@ const logoutEmployee = asyncHandler( async (req,res) => {
 const updateEmployee = asyncHandler( async (req,res) => {
     try {
         const employee = await Employee.findById(req.params.id)
+        console.log(req.file)
+        const profileImage = req.file ? req.file.filename : null;
         if(
             !validator.isAlpha(req.body.nom, 'fr-FR', {ignore: ' -'}) ||
              !validator.isAlpha(req.body.prenom, 'fr-FR', {ignore: ' -'}) || 
@@ -156,6 +159,7 @@ const updateEmployee = asyncHandler( async (req,res) => {
         employee.post = req.body.post || employee.post
         employee.adresse = req.body.adresse || employee.adresse
         employee.departement = req.body.departement || employee.departement
+        employee.profileImage = profileImage || employee.profileImage
         const updatedEmployee = await employee.save()
         res.status(200).json({
             updateEmployee: updatedEmployee
@@ -244,7 +248,8 @@ const getEmployeesByDepartement = asyncHandler(async(req,res)=>{
 
 const getProfile = asyncHandler(async(req,res)=>{
     try {
-        const employee = await Employee.findById(req.employee._id)
+        const employee = await Employee.findById(req.employee._id).populate('departement')
+        console.log(employee)
         res.status(200).json(employee)
     } catch (error) {
         res.status(400).json({
