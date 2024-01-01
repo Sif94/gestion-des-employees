@@ -16,6 +16,10 @@ export const AuthContextProvider = ({ children }) => {
   const login = async (payload) => {
     await axios.post("http://localhost:5000/api/employees/auth", payload, {
       withCredentials: true,
+    }).then((res) => {
+      console.log(res.data);
+    }).catch((err) => {
+      console.log(err.message);
     });
     await axios.get("http://localhost:5000/api/employees/auth/profile", {
       withCredentials: true,

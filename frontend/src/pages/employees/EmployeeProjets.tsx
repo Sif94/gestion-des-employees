@@ -49,7 +49,7 @@ const EmployeeProjets = () => {
           <h1 className='text-xl font-bold'>Date debut du projet : {new Date(projet.date_debut).toLocaleDateString("fr")}</h1>
           <h1 className='text-xl font-bold'>Date fin du projet : {new Date(projet.date_fin).toLocaleDateString("fr")}</h1>
           <h1 className='text-xl font-bold'>Durée estimée: {projet.duree}</h1>
-          <h1 className='text-xl font-bold'>Chef de projet: {`${projet.chef_projet.prenom} ${projet.chef_projet.nom}`}</h1>
+          <h1 className='text-xl font-bold'>Chef de projet: {`${projet.chef_projet?.prenom} ${projet.chef_projet?.nom}`}</h1>
           {projet.departements.map((departement: any) => (
             <h1 className='text-xl font-bold' key={departement._id}>Departement:  {departement.nom}</h1>
           ))}

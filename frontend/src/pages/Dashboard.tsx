@@ -12,7 +12,6 @@ import { FaClock } from "react-icons/fa";
 
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import {
   Avatar,
   AvatarFallback,
@@ -21,7 +20,13 @@ import {
 import axios from "axios";
 const Dashboard = () => {
     const {user} = useContext(AuthContext)
+    const [profileImage, setProfileImage] = useState("")
     const navigate = useNavigate()
+    useEffect(() => {
+      axios.get(`http://localhost:5000/api/employees/${user._id}`, {withCredentials: true}).then((res) => {
+        setProfileImage(res.data.profileImage)
+      })
+    },[])
   return (
     <section className="flex justify-between mt-16 border-4 border-black w-full mx-auto px-20 py-10">
       {user.type === "Admin" && (
@@ -269,7 +274,7 @@ const Dashboard = () => {
       <div>
         <Avatar className="w-40 h-40">
             <Link to={`/dashboard/employees/details/${user._id}`}>
-              <AvatarImage src={`http://localhost:5000/images/${user.profileImage}`} alt="@shadcn" />
+              <AvatarImage src={`http://localhost:5000/images/${profileImage}`} alt="@shadcn" />
               <AvatarFallback>{`${user.prenom[0]} ${user.nom[0]}`}</AvatarFallback>
             </Link>
         </Avatar>

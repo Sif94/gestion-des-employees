@@ -41,6 +41,7 @@ const LoginPage = () => {
   return (
     <div className="flex flex-col w-1/2 mt-28 mx-auto p-3 border-4 rounded-lg border-gray-500">
         <h1 className="text-2xl font-bold text-center mb-4">Formulaire de connexion</h1>
+        
     <Form {...form}>
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 px-3 mb-4">
       <FormField

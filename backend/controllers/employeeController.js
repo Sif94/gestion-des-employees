@@ -207,7 +207,7 @@ const deleteEmployee = asyncHandler(async (req,res) => {
             adresse: employee.adresse,
             departement: employee.departement,
             createdAt: employee.createdAt,
-            updatedAt: employee.updatedAt
+            updatedAt: employee.updatedA,            
         })
         
         try {
