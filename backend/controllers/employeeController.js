@@ -272,7 +272,7 @@ const getEmployeesByDepartement = asyncHandler(async(req,res)=>{
 
 const getProfile = asyncHandler(async(req,res)=>{
     try {
-        const employee = await Employee.findById(req.employee._id).populate('departement')
+        const employee = await Employee.findById(req.employee._id).select('-password').populate('departement')
         console.log(employee)
         res.status(200).json(employee)
     } catch (error) {
