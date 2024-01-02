@@ -4,18 +4,13 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaInfo } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useReactToPrint } from "react-to-print";
 const EmployeeContrats = () => {
     const {id} = useParams()
     const [contrats, setContrats] = useState([])
     const [employee, setEmployee] = useState({})
-    const componentRef = useRef();
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-  });
-
  
 
     const getEmployee = async () => {
@@ -45,8 +40,7 @@ const EmployeeContrats = () => {
     <div className='flex items-start justify-center flex-wrap'>
       
     {contrats.map((contrat: any, index:any) => (
-      <Card className='w-1/3 p-3' key={index} ref={componentRef}>
-        <Button onClick={handlePrint}>Imprimer</Button>
+      <Card className='w-1/3 p-3' key={index}>
         
       <CardHeader>
         <CardDescription>{contrat.type_contrat}</CardDescription>
@@ -70,7 +64,15 @@ const EmployeeContrats = () => {
         <Link className='text-red-500' to={`/dashboard/contrats/${contrat._id}/delete`}><MdDelete size={30}/></Link>
         </div>
         ):null}
-        
+         {/* <Button onClick={async () => {
+          await axios.get(`http://localhost:5000/api/contrats/print/contrats/${contrat._id}`, {withCredentials: true}).then((response) => {
+            console.log(response.data)
+          })
+         }}>
+          Imprimer</Button> */}
+          <Button onClick={() => {
+            window.open(`http://localhost:5000/api/contrats/print/contrats/${contrat._id}`)
+          }}>Imprimer</Button>
       </CardFooter>
     </Card>
     ))}

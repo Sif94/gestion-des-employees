@@ -44,6 +44,7 @@ import CongeDelete from "./pages/Congés/CongeDelete.tsx";
 import RetardDelete from "./pages/Retards/RetardDelete.tsx";
 import AbsenceDelete from "./pages/absences/AbsenceDelete.tsx";
 import HeuresuppDelete from "./pages/heuressupp/HeuresuppDelete.tsx";
+import ContratDetails from "./pages/contrats/ContratDetails.tsx";
 // Add a response interceptor
 axios.interceptors.response.use(
   (response) => {
@@ -227,6 +228,11 @@ function App() {
           <Route path="/dashboard/contrats/:id/delete" element={
             <ProtectedRoute accessBy="authenticated">
               <ContratDelete/>
+            </ProtectedRoute>
+          } />
+          <Route path="/dashboard/contrats/:id/details" element={
+            <ProtectedRoute accessBy="authenticated">
+              <ContratDetails/>
             </ProtectedRoute>
           } />
            <Route path="/dashboard/projets/create" element={

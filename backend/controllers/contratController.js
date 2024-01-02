@@ -1,7 +1,8 @@
 import asyncHandler from 'express-async-handler'
 import Contrat from '../models/contratModel.js'
 import validator from 'validator'
-
+import puppeteer from 'puppeteer'
+import path from 'path'
 
 
 const getAllContrats = asyncHandler(async (req, res) => {
@@ -75,6 +76,33 @@ const getEmployeeContratsRediges = asyncHandler(async (req,res) => {
     const contrats = await Contrat.find({redacteur: req.employee._id})
     res.status(200).json(contrats)
 })
+
+
+const printContrat = asyncHandler(async (req, res) => {
+    console.log(req.params)
+    const {id} = req.params
+    const browser = await puppeteer.launch({
+        headless: 'new'
+    });
+    const page = await browser.newPage();
+    await page.goto(`http://localhost:3000/login`);
+    await page.type('#username', 'admin');
+    await page.type('#password', 'password');
+    await page.click('[type=submit]');
+
+
+    await page.waitForTimeout(15000)
+    await page.goto(`http://localhost:3000/dashboard/contrats/${id}/details`,{ waitUntil: 'networkidle2' });
+    
+
+    const now = Date.now()
+    await page.pdf({path: `documents/contrat-${id}-${now}.pdf`, format: 'A4'});
+    res.download(`./documents/contrat-${id}-${now}.pdf`);
+    await browser.close();
+    // res.contentType("application/pdf");
+      
+
+})
 export {
     getAllContrats,
     getContratByID,
@@ -82,5 +110,6 @@ export {
     updateContratById,
     deleteContratById,
     getEmployeeContrats,
-    getEmployeeContratsRediges
+    getEmployeeContratsRediges,
+    printContrat
 }
