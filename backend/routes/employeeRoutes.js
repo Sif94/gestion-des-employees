@@ -7,6 +7,7 @@ const router = express.Router();
 router.post('/register',[isAuth, isAuthorized("Admin", "RH")],upload.single('profileImage'), addEmployee)
 router.post('/auth', authEmployee)
 router.get('/', [isAuth, isAuthorized("Admin", "RH", "Chef_De_Departement", "Chef_De_Projet")], getAllUsers)
+router.get('/all', [isAuth, isAuthorized("Admin", "RH", "Chef_De_Departement", "Chef_De_Projet")], getEmployees)
 router.post('/logout', logoutEmployee)
 router.put('/update/:id', [isAuth, isAuthorized("Admin", "RH")],upload.single('profileImage'), updateEmployee)
 router.get('/:id', [isAuth], getEmployeeData)

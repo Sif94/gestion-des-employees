@@ -72,7 +72,7 @@ const ProjetCreate = () => {
 
         useEffect(() => {
             try {
-                axios.get("http://localhost:5000/api/employees/", {withCredentials: true}).then((response) => {
+                axios.get("http://localhost:5000/api/employees/all", {withCredentials: true}).then((response) => {
                   console.log(response.data)
                   setEmployees(response.data)
                 })
@@ -175,7 +175,13 @@ const ProjetCreate = () => {
                 </FormControl>
                 <SelectContent>
                     {employees.map((employee: any) => (
+                        <div className="flex gap-2 items-center justify-center p-2">
+                        <Avatar>
+                              <AvatarImage src={`http://localhost:5000/images/${employee.profileImage}`} alt="profile image" />
+                                <AvatarFallback>{`${employee.nom[0]} ${employee.prenom[0]}`}</AvatarFallback>
+                        </Avatar>
                         <SelectItem key={employee._id} value={employee._id}>{`${employee.nom} ${employee.prenom}`}</SelectItem>
+                      </div>
                     ))}
                 </SelectContent>
               </Select>

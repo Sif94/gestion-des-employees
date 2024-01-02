@@ -60,7 +60,7 @@ const ProjetEdit = () => {
       }
     }
       const getEmployeesAndDepartements= async () => {
-        const remployees = await axios.get("http://localhost:5000/api/employees/", {withCredentials: true})
+        const remployees = await axios.get("http://localhost:5000/api/employees/all", {withCredentials: true})
         setEmployees(remployees.data)
           const response = await axios.get("http://localhost:5000/api/departements/", {withCredentials: true})
           setDepartements(response.data.departements)
@@ -181,7 +181,13 @@ return (
               </FormControl>
               <SelectContent>
                   {employees.map((employee: any) => (
-                      <SelectItem key={employee._id} value={employee._id}>{`${employee.nom} ${employee.prenom}`}</SelectItem>
+                       <div className="flex gap-2 items-center justify-center p-2">
+                       <Avatar>
+                             <AvatarImage src={`http://localhost:5000/images/${employee.profileImage}`} alt="profile image" />
+                               <AvatarFallback>{`${employee.nom[0]} ${employee.prenom[0]}`}</AvatarFallback>
+                       </Avatar>
+                       <SelectItem key={employee._id} value={employee._id}>{`${employee.nom} ${employee.prenom}`}</SelectItem>
+                     </div>
                   ))} 
               </SelectContent>
             </Select>

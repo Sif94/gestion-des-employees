@@ -54,7 +54,7 @@ const DepartementCreate = () => {
       } 
       useEffect(() => {
           try {
-            axios.get("http://localhost:5000/api/employees/", {withCredentials: true}).then((response) => {
+            axios.get("http://localhost:5000/api/employees/all", {withCredentials: true}).then((response) => {
               console.log(response.data)
               setEmployees(response.data)
             })

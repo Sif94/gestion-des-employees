@@ -16,6 +16,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const DepartementDetails = () => {
     const { id } = useParams();
@@ -61,7 +62,7 @@ const DepartementDetails = () => {
           <Accordion type="single" collapsible>
             <AccordionItem value="item-1">
               <AccordionTrigger>Chef de département: { `${chef_departement.nom} ${chef_departement.prenom}`}</AccordionTrigger>
-              <AccordionContent>
+              <AccordionContent className='flex text-xl justify-between'>
               <div className='text-xl'>
                 <h1>Téléphone : {chef_departement.telephone}</h1>
                 <h1>Adresse : {chef_departement.adresse}</h1>
@@ -69,6 +70,10 @@ const DepartementDetails = () => {
                 <h1>Post : {chef_departement.post}</h1>
                 <h1>Type Employé(e): {chef_departement.type}</h1>
               </div>
+              <Avatar className="w-40 h-40">
+                  <AvatarImage src={`http://localhost:5000/images/${chef_departement.profileImage}`} alt="@shadcn" />
+                  <AvatarFallback>{`${chef_departement.prenom} ${chef_departement.nom}`}</AvatarFallback>
+            </Avatar>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -79,11 +84,19 @@ const DepartementDetails = () => {
         </CardFooter>
       </Card>
       <h1 className='text-2xl font-bold text-center mb-4'>La liste des employés</h1>
-      <div className='flex gap-2'>
+      <div className='flex flex-wrap'>
       {employees.map((employee: any) => (
-        <Card className='w-1/3' key={employee._id}>
+        <Card  key={employee._id}>
         <CardHeader>
-          <CardTitle>{`${employee.nom} ${employee.prenom}`}</CardTitle>
+          <CardTitle className='flex justify-between items-center'>
+            {`${employee.nom} ${employee.prenom}`}
+            <Avatar>
+            
+              <AvatarImage src={`http://localhost:5000/images/${employee.profileImage}`} alt="@shadcn" />
+              <AvatarFallback>{`${employee.prenom[0]} ${employee.nom[0]}`}</AvatarFallback>
+            
+            </Avatar>
+          </CardTitle>
           <CardDescription>{employee.email}</CardDescription>
         </CardHeader>
         <CardContent>
