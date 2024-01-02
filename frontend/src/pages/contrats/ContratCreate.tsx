@@ -14,6 +14,7 @@ import * as z from "zod"
 import { GrValidate } from "react-icons/gr";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { FaFileContract } from 'react-icons/fa'
 
 const formSchema = z.object({
     type_contrat: z.enum(['CDD', 'CDI', 'Stage']),
@@ -90,7 +91,7 @@ return (
                   <FormLabel className="font-normal">
                     CDD
                   </FormLabel>
-                  <GrValidate size={20}/>
+                  <FaFileContract size={20}/>
                 </FormItem>
                 <FormItem className="flex items-center space-x-3 space-y-0">
                   <FormControl>
@@ -99,7 +100,7 @@ return (
                   <FormLabel className="font-normal">
                   CDI
                   </FormLabel>
-                  <IoMdCloseCircleOutline size={20}/>
+                  <FaFileContract size={20}/>
                 </FormItem>
                 <FormItem className="flex items-center space-x-3 space-y-0">
                   <FormControl>
@@ -108,7 +109,7 @@ return (
                   <FormLabel className="font-normal">
                     Stage
                   </FormLabel>
-                  <IoMdCloseCircleOutline size={20}/>
+                  <FaFileContract size={20}/>
                 </FormItem>
               </RadioGroup>
             </FormControl>
