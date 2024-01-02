@@ -53,7 +53,8 @@ const EmployeeHeuressupp = () => {
         {employee.type === "Admin" || employee.type === "RH" ? (
         <div className='flex gap-2 justify-between'>
         <Link className='text-blue-500' to={`/dashboard/heuressupp/${heureSupp._id}/edit`}><FaEdit size={30}/></Link>
-        <Link className='text-red-500' to={`/dashboard/heuressupp/${heureSupp._id}/delete`}><MdDelete size={30}/></Link>
+        <Link className='text-red-500' to={`/dashboard/heuressupp/${heureSupp._id}/delete`}><MdDelete size={30}/></Link>o
+        
         </div>
         ): null}
       </CardFooter>

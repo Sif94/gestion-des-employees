@@ -23,7 +23,7 @@ const Layout = ({ children }) => {
     const [profileImage, setProfileImage] = useState("")
     const navigate = useNavigate();
     useEffect(() => {
-      axios.get(`http://localhost:5000/api/employees/${user._id}`, {withCredentials: true}).then((res) => {
+      axios.get(`http://localhost:5000/api/employees/${user?._id}`, {withCredentials: true}).then((res) => {
         setProfileImage(res.data.profileImage)
       })
     },[])

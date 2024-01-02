@@ -6,6 +6,30 @@ import Departement from "../models/departementModel.js";
 import validator from "validator";
 import jwt from "jsonwebtoken";
 import upload from "../config/multerConfig.js";
+const getUsersPaginated = async (page) => {
+    let resultsPerPage = 6
+  
+    const employees = await Employee.find({})
+      .sort({ createdAt: 'asc' })
+      .lean()
+      .limit(resultsPerPage)
+      .skip(page * resultsPerPage)
+    const totalEmployees = await Employee.countDocuments({})
+    const totalPages = Math.ceil(totalEmployees / resultsPerPage)
+    return {
+      employees,
+      totalPages
+    }
+  }
+ const getAllUsers = asyncHandler(async (req, res) => {
+    let page = req.query.page || 0 //starts from 0
+    let {employees, totalPages} =  await getUsersPaginated(page)
+    if (employees && employees.length > 0) {
+      res.json({employees, totalPages})
+    } else {
+      res.json("users not found")
+    }
+  })
 // récupérer la listes des employés
 const getEmployees = asyncHandler( async (req,res) => {
     try {
@@ -295,5 +319,6 @@ export {
     deleteEmployee,
     getProfile,
     generateEmployeeRefreshToken,
-    getEmployeesByDepartement
+    getEmployeesByDepartement,
+    getAllUsers
 }
