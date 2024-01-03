@@ -168,7 +168,7 @@ const ContratEdit = () => {
         name="salaire_convenu"
         render={({ field }) => (
           <FormItem className="flex flex-col">
-            <FormLabel>salaire </FormLabel>
+            <FormLabel>Salaire (DA) </FormLabel>
             <FormControl>
             <Input type="Number" placeholder="salaire..." {...field} />
           </FormControl>

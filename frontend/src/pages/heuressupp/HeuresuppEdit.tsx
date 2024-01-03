@@ -183,7 +183,7 @@ return (
         name="tarif"
         render={({ field }) => (
           <FormItem className="flex flex-col">
-            <FormLabel>Tarif </FormLabel>
+            <FormLabel>Tarif (DA) </FormLabel>
             <FormControl>
             <Input type="number" placeholder="tarif..." {...field} />
           </FormControl>

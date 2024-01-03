@@ -49,30 +49,33 @@ const EmployeeContrats = () => {
       </CardHeader>
       <CardContent>
         <div className='text-xl'>
-        <h1>type contrat: {contrat.type_contrat}</h1>
-          <h1>date debut du contrat : {new Date(contrat.date_debut).toLocaleDateString("fr")}</h1>
-          <h1>date fin du contrat : {new Date(contrat.date_fin).toLocaleDateString("fr")}</h1>
-          <h1>salaire convenu: {contrat.salaire_convenu}</h1>
+        <h1>Type du contrat: {contrat.type_contrat}</h1>
+          <h1>Date de debut du contrat : {new Date(contrat.date_debut).toLocaleDateString("fr")}</h1>
+          <h1>Date de fin du contrat : {new Date(contrat.date_fin).toLocaleDateString("fr")}</h1>
+          <h1>Salaire convenu (DA): {contrat.salaire_convenu}</h1>
         
         </div>
       </CardContent>
       <CardFooter className='flex flex-col items-start gap-2'>
         <h1>Date de signalisation : {new Date(contrat.createdAt).toLocaleDateString("fr")}</h1>
+        <div className=' w-full flex gap-2 justify-between items-center flex-wrap'>
         {employee.type === "Admin" || employee.type === "RH" ? (
         <div className='flex gap-2 justify-between'>
         <Link className='text-blue-500' to={`/dashboard/contrats/${contrat._id}/edit`}><FaEdit size={30}/></Link>
         <Link className='text-red-500' to={`/dashboard/contrats/${contrat._id}/delete`}><MdDelete size={30}/></Link>
         </div>
         ):null}
+        <Button onClick={() => {
+            window.open(`http://localhost:5000/api/contrats/print/contrats/${contrat._id}`)
+          }}>Télécharger</Button>
+        </div>
          {/* <Button onClick={async () => {
           await axios.get(`http://localhost:5000/api/contrats/print/contrats/${contrat._id}`, {withCredentials: true}).then((response) => {
             console.log(response.data)
           })
          }}>
           Imprimer</Button> */}
-          <Button onClick={() => {
-            window.open(`http://localhost:5000/api/contrats/print/contrats/${contrat._id}`)
-          }}>Imprimer</Button>
+          
       </CardFooter>
     </Card>
     ))}
