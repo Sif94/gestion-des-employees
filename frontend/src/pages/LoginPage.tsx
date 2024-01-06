@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form"
 import { useContext } from "react"
 import * as z from "zod"
 import AuthContext from "../components/shared/AuthContext.tsx";
+import { toast } from 'react-toastify';
 
 const formSchema = z.object({
   username: z.string().min(3, {message: 'Le nom d\'utilisateur doit contenir au minimum 3 caractères'}).max(50),
@@ -36,7 +37,7 @@ const LoginPage = () => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
-     await login(values)
+      await login(values)
   }
   return (
     <div className="flex flex-col w-1/2 mt-28 mx-auto p-3 border-4 rounded-lg border-gray-500">

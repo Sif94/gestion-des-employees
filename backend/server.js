@@ -10,6 +10,7 @@ import contratRoutes from "./routes/contratRoutes.js"
 import projetRoutes from "./routes/projetRoutes.js"
 import tacheRoutes from "./routes/tacheRoutes.js"
 import heureSuppRoutes from "./routes/heureSuppRoutes.js"
+import decisionMLRoutes from "./routes/decisionMLRoutes.js"
 import { notFound, errorHandler } from "./middlewares/errorMiddleware.js";
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
@@ -21,7 +22,7 @@ const app = express();
 connectDB();
 
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "http://localhost:4200",
     credentials: true,
 }))
 app.use(express.json())
@@ -39,6 +40,7 @@ app.use('/api/contrats', contratRoutes)
 app.use('/api/projets', projetRoutes)
 app.use('/api/taches', tacheRoutes)
 app.use('/api/heuresupps', heureSuppRoutes)
+app.use('/api/aide', decisionMLRoutes)
 app.use(notFound)
 app.use(errorHandler)
 app.listen(port, () => {

@@ -1,7 +1,9 @@
 /* eslint-disable prefer-const */
 import axios from "axios";
+import { error } from "console";
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const AuthContext = createContext(null);
  
 export const AuthContextProvider = ({ children }) => {
@@ -18,8 +20,10 @@ export const AuthContextProvider = ({ children }) => {
       withCredentials: true,
     }).then((res) => {
       console.log(res.data);
+      toast.success("Login avec success");
     }).catch((err) => {
       console.log(err.message);
+      toast.error("Invalid Username or Password");
     });
     await axios.get("http://localhost:5000/api/employees/auth/profile", {
       withCredentials: true,

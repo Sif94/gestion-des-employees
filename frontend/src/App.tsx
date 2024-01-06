@@ -45,6 +45,10 @@ import RetardDelete from "./pages/Retards/RetardDelete.tsx";
 import AbsenceDelete from "./pages/absences/AbsenceDelete.tsx";
 import HeuresuppDelete from "./pages/heuressupp/HeuresuppDelete.tsx";
 import ContratDetails from "./pages/contrats/ContratDetails.tsx";
+import AideDecision from "./pages/aideDecision/AideDecision.tsx";
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // Add a response interceptor
 axios.interceptors.response.use(
   (response) => {
@@ -74,6 +78,7 @@ function App() {
   return (
     <>
     <AuthContextProvider>
+      <ToastContainer/>
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -278,6 +283,11 @@ function App() {
           <Route path="/dashboard/heuressupp/:id/delete" element={
             <ProtectedRoute accessBy="authenticated">
               <HeuresuppDelete/>
+            </ProtectedRoute>
+          } />
+          <Route path="/dashboard/aideDecision" element={
+            <ProtectedRoute accessBy="authenticated">
+              <AideDecision/>
             </ProtectedRoute>
           } />
         </Routes>

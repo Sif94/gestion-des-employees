@@ -9,6 +9,7 @@ import { FaTasks } from "react-icons/fa";
 import { FaFileContract } from "react-icons/fa";
 import { FaProjectDiagram } from "react-icons/fa";
 import { FaClock } from "react-icons/fa";
+import { GiArtificialIntelligence } from "react-icons/gi";
 
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
@@ -59,6 +60,9 @@ const Dashboard = () => {
                 </li>
                 <li>
                   <Link className="flex gap-2 font-bold" to={'/dashboard/heuressupp/create'}><FaClock   size={30}/>Heures Supplimentaires</Link>
+                </li>
+                <li>
+                  <Link className="flex gap-2 font-bold" to={'/dashboard/aideDecision'}><GiArtificialIntelligence size={35}/>Aide à la décision</Link>
                 </li>
               </ul>
               </div>

@@ -89,7 +89,7 @@ const printContrat = asyncHandler(async (req, res) => {
     await page.click('[type=submit]');
 
 
-    await page.waitForTimeout(15000)
+    await page.waitForTimeout(15000) 
     await page.goto(`http://localhost:3000/dashboard/contrats/${id}/details`,{ waitUntil: 'networkidle2' });
     
 
