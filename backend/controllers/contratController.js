@@ -83,19 +83,19 @@ const printContrat = asyncHandler(async (req, res) => {
         headless: 'new'
     });
     const page = await browser.newPage();
-    await page.goto(`http://localhost:3000/login`);
+    await page.goto(`http://localhost:4200/login`);
     await page.type('#username', 'admin');
     await page.type('#password', 'password');
     await page.click('[type=submit]');
 
 
     await page.waitForTimeout(15000) 
-    await page.goto(`http://localhost:3000/dashboard/contrats/${id}/details`,{ waitUntil: 'networkidle2' });
+    await page.goto(`http://localhost:4200/dashboard/contrats/${id}/details`,{ waitUntil: 'networkidle2' });
     
 
     const now = Date.now()
     await page.pdf({path: `documents/contrat-${id}-${now}.pdf`, format: 'A4'});
-    res.download(`./documents/contrat-${id}-${now}.pdf`);
+    res.download(`./documents/contrat-${id}-${now}.pdf`); 
 
     
     await browser.close();
