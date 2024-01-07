@@ -45,7 +45,7 @@ const getEmployees = asyncHandler( async (req,res) => {
 const addEmployee = asyncHandler( async (req, res) => {
     try {
         const {nom, prenom, email, username, password, sexe, date_naiss, type, post, situation_marital, telephone, departement, adresse} = req.body
-        console.log(req.file.filename)
+        
         const profileImage = req.file ? req.file.filename : null;
         if(
             !nom || 
@@ -124,7 +124,7 @@ const authEmployee = asyncHandler( async (req,res) => {
                 success: true
             })
         }else {
-            res.status(400)
+            res.status(400) 
             throw new Error("Invalid Credentials")
         }
     } catch (error) {
