@@ -14,7 +14,7 @@ import * as z from "zod"
 import { GrValidate } from "react-icons/gr";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-
+import { Card } from "@/components/ui/card"
 const formSchema = z.object({
     date_retard: z.string(),
     motif : z.string().regex(new RegExp("^[a-zA-Z ]+$")).min(3).max(20),
@@ -65,9 +65,11 @@ const RetardCreate = () => {
         }
     },[])
 return (
-  <div className="w-2/4 my-16 mx-auto">
-  <Form {...form}>
-  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+  <div className="w-2/4 my-16 mx-auto  p-4 m-8">
+      <h1 className="text-2xl text-fuchsia-300 font-bold text-center mb-4"> Ajouter un retard</h1>
+    <Card className="bg-stone-100"> 
+    <Form  {...form}>
+    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-4 m-4" encType="multipart/form-data">
   {error && <p className="text-red-500">{error}</p>}
   <FormField
         control={form.control}
@@ -167,6 +169,7 @@ return (
     <Button type="submit">Submit</Button>
   </form>
 </Form>
+</Card>
 </div>
 )
 }

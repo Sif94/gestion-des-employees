@@ -29,11 +29,11 @@ const Layout = ({ children }) => {
     },[])
     return (
       <>
-        <header className="flex justify-between p-2 items-center">
+        <header className="bg-indigo-950 flex justify-between p-2 items-center">
             <div>
                 <h1 className="font-bold text-2xl">
-                    <Link to="/" className="flex gap-2 items-center text-gray-800">
-                        <FaUsers size={45} /> Gestion Des Employés
+                    <Link to="/" className="flex gap-2 items-center text-fuchsia-300">
+                        <FaUsers size={45} /> <span className="text-white" > Gestion </span>Des Employés
                     </Link>
                 </h1>
             </div>
@@ -41,8 +41,7 @@ const Layout = ({ children }) => {
           {(user && currentPath === '/dashboard') && <div className="items-center p-2">
           <DropdownMenu>
             <DropdownMenuTrigger>
-            <Avatar>
-            
+            <Avatar >
             <AvatarImage src={`http://localhost:5000/images/${profileImage}`} alt="profile image" />
             <AvatarFallback>{`${user.nom[0]} ${user.prenom[0]}`}</AvatarFallback>
             </Avatar>
@@ -67,7 +66,7 @@ const Layout = ({ children }) => {
                 <Button className="flex gap-2" onClick={() => navigate('/login')}>Se Connecter <FaSignInAlt size={20}/></Button>
             </div>}
         </header>
-        <main className="mx-auto w-full ">{children}</main>
+        <main className=" bg-indigo-950 mx-auto w-full ">{children}</main>
       </>
     );
   };

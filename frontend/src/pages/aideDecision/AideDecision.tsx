@@ -26,7 +26,7 @@ import { FaFemale, FaMale } from "react-icons/fa"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-
+import { Card } from "@/components/ui/card"
 
 
 const formSchema = z.object({
@@ -87,9 +87,10 @@ const AideDecision = () => {
 
   return (
         <div className="w-2/4 my-16 mx-auto">
+       <h1 className="text-2xl text-fuchsia-300 font-bold text-center mb-4">Formulaire d'aide au décision</h1>
+      <Card className="bg-stone-100">
     <Form {...form}>
-    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8" encType="multipart/form-data">
-    <h1 className="text-2xl font-bold text-center mb-4">Formulaire d'aide au décision</h1>
+    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-4 m-4" encType="multipart/form-data">
     {classe && <p className="text-4XL font-bold text-green-500">{classe}</p>}
     {error && <p className="text-red-500">{error}</p>}
         <FormField
@@ -234,6 +235,7 @@ const AideDecision = () => {
       <Button type="submit">Submit</Button>
     </form>
   </Form>
+  </Card>
   </div>
   )
 }

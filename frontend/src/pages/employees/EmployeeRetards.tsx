@@ -35,7 +35,7 @@ const EmployeeRetards = () => {
     },[])
   return (
     <div className='w-4/5 my-16 mx-auto p-2'>
-    <h1 className='text-2xl font-bold text-center mb-4'>Les Retards</h1>
+    <h1 className='text-2xl text-violet-300 font-bold text-center mb-4'>Les Retards</h1>
     <div className='flex items-start justify-center flex-wrap'>
     {retards.map((retard: any) => (
       <Card className='w-1/3' key={retard._id}>

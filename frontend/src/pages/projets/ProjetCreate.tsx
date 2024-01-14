@@ -16,7 +16,7 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 import { Checkbox } from '@/components/ui/checkbox'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-
+import { Card } from "@/components/ui/card"
 const formSchema = z.object({
     titre: z.string(),
     description: z.string(),
@@ -92,9 +92,11 @@ const ProjetCreate = () => {
           },[])
 
   return (
-    <div className="w-2/4 my-16 mx-auto">
-    <Form {...form}>
-    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+    <div className="w-2/4 my-16 mx-auto  p-4 m-8">
+    <h1 className="text-2xl text-fuchsia-300 font-bold text-center mb-4"> Ajouter un projet</h1>
+  <Card className="bg-stone-100"> 
+  <Form  {...form}>
+  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-4 m-4" encType="multipart/form-data">
     {error && <p className="text-red-500">{error}</p>}
     <FormField
         control={form.control}
@@ -297,6 +299,7 @@ const ProjetCreate = () => {
       <Button type="submit">Submit</Button>
     </form>
   </Form>
+  </Card>
   </div>
   )
   }

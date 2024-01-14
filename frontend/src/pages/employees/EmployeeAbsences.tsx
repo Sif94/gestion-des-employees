@@ -33,7 +33,7 @@ const EmployeeAbsences = () => {
     },[])
   return (
     <div className='w-4/5 my-16 mx-auto p-2'>
-    <h1 className='text-2xl font-bold text-center mb-4'>Les Absences</h1>
+    <h1 className='text-2xl font-bold text-violet-300 text-center mb-4'>Les Absences</h1>
     <div className='flex items-start justify-center flex-wrap'>
     {absences.map((absence: any) => (
       <Card className='w-1/3' key={absence._id}>
