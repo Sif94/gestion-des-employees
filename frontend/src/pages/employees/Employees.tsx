@@ -59,9 +59,9 @@ const Employees = () => {
   };
 
   return (
-<div className='w-4/5 my-16 mx-auto'>
+<div className='w-4/5 my-16 mx-auto text-white'>
 <div style={{ overflow: "auto" }} id="scrollableDiv" >
-<Button className='mb-4' onClick={() => navigate('/dashboard/employees/create')} >Ajouter un employé</Button>
+<Button className='bg-fuchsia-500 mb-4' onClick={() => navigate('/dashboard/employees/create')} >Ajouter un employé</Button>
   <InfiniteScroll
     dataLength={
       employees && employees.length > 0 ? employees.length : 6
@@ -112,6 +112,7 @@ const Employees = () => {
     </Table>
   </InfiniteScroll>
         <Button
+          className="bg-fuchsia-500"
           onClick={() => setIndex((prevIndex) => prevIndex + 1)}
           disabled={index === totalPages - 1}
         >

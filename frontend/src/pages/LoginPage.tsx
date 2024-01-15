@@ -40,7 +40,7 @@ const LoginPage = () => {
       await login(values)
   }
   return (
-    <div className="flex flex-col w-1/2 mt-28 mx-auto p-3 border-4 rounded-lg border-gray-500">
+    <div className="flex flex-col w-1/2 mt-28 mx-auto p-3 border-4 rounded-lg border-gray-500 text-white">
         <h1 className="text-2xl font-bold text-center mb-4">Formulaire de connexion</h1>
         
     <Form {...form}>
@@ -52,7 +52,7 @@ const LoginPage = () => {
           <FormItem>
             <FormLabel>Username</FormLabel>
             <FormControl>
-              <Input placeholder="Votre username..." {...field} id="username" />
+              <Input className="text-black" placeholder="Votre username..." {...field} id="username" />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -65,7 +65,7 @@ const LoginPage = () => {
           <FormItem>
             <FormLabel>Password</FormLabel>
             <FormControl>
-              <Input  type="password" placeholder="Votre mot de passe..." {...field} id="password" />
+              <Input className="text-black"  type="password" placeholder="Votre mot de passe..." {...field} id="password" />
             </FormControl>
             <FormMessage />
           </FormItem>

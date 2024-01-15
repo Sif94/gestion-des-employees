@@ -394,7 +394,7 @@ const EmployeeEdit = () => {
         )}
       />
       </div>
-      <Button type="submit">Submit</Button>
+      <Button className="bg-fuchsia-500" type="submit">Submit</Button>
     </form>
   </Form>
   </Card>
