@@ -59,7 +59,7 @@ const Employees = () => {
 
 
   return (
-<div className='w-4/5 my-16 mx-auto'>
+<div className=' text-white w-4/5 my-16 mx-auto'>
 <div style={{ overflow: "auto" }} id="scrollableDiv" >
 <Button className='mb-4' onClick={() => navigate('/dashboard/employees/create')} >Ajouter un employé</Button>
   <InfiniteScroll

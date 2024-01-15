@@ -19,7 +19,7 @@ const Departements = () => {
         }
     },[])
   return (
-    <div className='w-4/5 my-16 mx-auto'>
+    <div className=' text-white w-4/5 my-16 mx-auto'>
       <Button className='mb-4' onClick={() => navigate('/dashboard/departements/create')} >Ajouter un départements</Button>
     <Table>
   <TableCaption>La liste des Départements</TableCaption>

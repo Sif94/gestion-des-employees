@@ -17,10 +17,10 @@ const CongeDelete = () => {
       }
   return (
     <div className='p-4'>
-    <h1 className='text-3xl my-4'>Supprimer Le Congé</h1>
+    <h1 className='text-3xl my-4 text-white'>Supprimer Le Congé</h1>
 
     <div className='flex flex-col items-center border-2 border-sky-400 rounded-xl w-[600px] p-8 mx-auto'>
-      <h3 className='text-2xl'>Etes vous sur de vouloir supprimer ce congé?</h3>
+      <h3 className='text-2xl text-white'>Etes vous sur de vouloir supprimer ce congé?</h3>
 
       <button
         className='p-4 bg-red-600 text-white m-8 w-full'
