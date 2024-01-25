@@ -20,7 +20,7 @@ const Departements = () => {
     },[])
   return (
     <div className=' text-white w-4/5 my-16 mx-auto'>
-      <Button className='mb-4' onClick={() => navigate('/dashboard/departements/create')} >Ajouter un départements</Button>
+      <Button className='bg-fuchsia-500 mb-4' onClick={() => navigate('/dashboard/departements/create')} >Ajouter un départements</Button>
     <Table>
   <TableCaption>La liste des Départements</TableCaption>
   <TableHeader>
