@@ -33,7 +33,7 @@ const Dashboard = () => {
       
       <div className="flex flex-col">
         <div>
-          <h1 className="text-4xl text-white" ><span className="text-fuchsia-400">Heureux de vous revoir</span>, {user.prenom} !</h1>
+          <h1 className="text-4xl text-white" ><span className="text-fuchsia-500">Heureux de vous revoir</span>, {user.prenom} !</h1>
         </div>
         <Avatar className="w-60 mr-14 mt-16 h-60">
             <Link to={`/dashboard/employees/details/${user._id}`}>

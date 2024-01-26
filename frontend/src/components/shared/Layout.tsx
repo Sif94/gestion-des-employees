@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
         <header className="bg-indigo-950 flex justify-between p-2 items-center">
             <div>
                 <h1 className="font-bold text-2xl">
-                    <Link to="/" className="flex gap-2 items-center text-fuchsia-300">
+                    <Link to="/" className="flex gap-2 items-center text-fuchsia-500">
                         <FaUsers size={45} /> <span className="text-white" > Gestion </span>Des Employés
                     </Link>
                 </h1>
@@ -187,7 +187,7 @@ const Layout = ({ children }) => {
                 <Link className="flex gap-2 font-serif text-black font-bold" to={`/dashboard/employees/${user._id}/contrats`}><FaFileContract size={30}/>Mes Contrats</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                <Link className="flex gap-2 font-serif text-black font-bold" to={`/dashboard/employees/${user._id}/heuressupp`}><FaClock size={30}/>Mes Heures Supplimentaires</Link>
+                <Link className="flex gap-2 font-serif text-black font-bold" to={`/dashboard/employees/${user._id}/heuressupps`}><FaClock size={30}/>Mes Heures Supplimentaires</Link>
                 </DropdownMenuItem>
                 </div>
                 <div>

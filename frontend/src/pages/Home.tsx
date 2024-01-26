@@ -22,7 +22,7 @@ const Home = () => {
       <div className='flex justify-between gap-4 p-4'>
     <div className="flex flex-col gap-5 justify-between">
       <div>
-        <h1 className="text-5xl font-bold text-white" ><span className="text-fuchsia-400">Gestion</span> des employés!</h1>
+        <h1 className="text-5xl font-bold text-white" ><span className="text-fuchsia-500">Gestion</span> des employés!</h1>
       </div>
       <h3 className='font-bold text-3xl text-white'>
         La gestion des employés devient plus facile
