@@ -1,0 +1,312 @@
+Salary,MaritalDesc,PerformanceScore,EngagementSurvey,EmpSatisfaction,SpecialProjectsCount,DaysLateLast30,Absences,Age,YearsOfWork
+62506,Single,Exceeds,4.6,5,0,0,1,41,12
+104437,Married,Fully Meets,4.96,3,6,0,17,49,8
+64955,Married,Fully Meets,3.02,3,0,0,3,36,12
+64991,Married,Fully Meets,4.84,5,0,0,15,36,16
+50825,Divorced,Fully Meets,5.0,4,0,0,2,35,12
+57568,Single,Exceeds,5.0,5,0,0,15,47,12
+95660,Single,Fully Meets,3.04,3,4,0,19,45,9
+59365,Widowed,Fully Meets,5.0,4,0,0,19,41,10
+47837,Single,Fully Meets,4.46,3,0,0,4,54,14
+50178,Divorced,Fully Meets,5.0,5,6,0,16,36,9
+54670,Married,Fully Meets,4.2,4,0,0,12,50,13
+47211,Married,Fully Meets,4.2,3,0,0,15,50,11
+92328,Divorced,Exceeds,4.28,4,5,0,9,36,9
+58709,Single,Fully Meets,4.6,4,0,0,7,41,11
+52505,Divorced,Fully Meets,5.0,5,0,0,1,47,11
+57834,Single,Fully Meets,5.0,4,0,0,20,43,12
+70131,Married,Exceeds,4.4,3,0,0,16,58,7
+59026,Single,Fully Meets,5.0,5,0,0,12,54,12
+110000,Single,Fully Meets,4.5,4,5,0,8,38,9
+53250,Single,Fully Meets,4.2,4,0,0,13,45,10
+51044,Single,Fully Meets,5.0,3,0,0,13,54,11
+64919,Divorced,Fully Meets,4.2,3,0,0,2,66,10
+62910,Married,Exceeds,5.0,3,0,0,19,35,9
+66441,Single,Needs Improvement,2.0,3,0,2,3,34,12
+57815,Single,Fully Meets,4.8,5,0,0,5,57,13
+103613,Single,Fully Meets,3.5,5,7,0,2,60,9
+106367,Married,Fully Meets,5.0,4,3,0,4,37,8
+74312,Single,Fully Meets,3.39,3,0,0,14,54,10
+53492,Married,Fully Meets,3.35,4,0,0,6,34,11
+63000,Married,Fully Meets,4.5,2,6,0,14,37,15
+65288,Single,Fully Meets,3.19,3,0,0,9,41,9
+64375,Separated,Fully Meets,3.5,5,0,0,17,55,10
+74326,Married,Fully Meets,3.14,5,0,1,19,60,12
+63763,Single,Fully Meets,4.51,4,0,0,3,44,11
+62162,Married,Fully Meets,3.25,5,0,0,15,47,12
+77692,Single,Fully Meets,3.84,3,5,0,4,58,12
+72640,Single,Exceeds,5.0,3,0,0,14,41,8
+93396,Single,Fully Meets,4.96,4,6,0,3,37,10
+52846,Single,Fully Meets,4.43,3,0,0,14,41,9
+100031,Single,Fully Meets,5.0,5,6,0,7,38,7
+71860,Single,Fully Meets,5.0,5,0,0,7,61,9
+61656,Single,Fully Meets,5.0,4,0,0,11,73,9
+110929,Married,Fully Meets,4.5,5,7,0,8,52,7
+54237,Single,Fully Meets,3.3,4,0,0,11,45,9
+60380,Single,Fully Meets,3.8,5,0,0,4,41,10
+66808,Single,Fully Meets,3.0,5,0,0,17,54,11
+64786,Single,Fully Meets,4.3,4,0,0,3,41,12
+64816,Single,Fully Meets,3.58,5,0,0,3,36,12
+68678,Single,Fully Meets,4.7,3,6,0,2,39,11
+64066,Married,Fully Meets,4.2,5,0,0,9,43,12
+59369,Married,Fully Meets,4.2,4,0,0,6,46,13
+50373,Married,Exceeds,4.1,4,0,0,5,44,7
+63108,Single,Fully Meets,4.4,5,0,0,3,47,10
+59144,Single,Needs Improvement,2.0,3,0,5,16,45,12
+68051,Divorced,Needs Improvement,4.13,2,0,3,3,49,13
+170500,Single,Exceeds,3.7,5,0,0,15,41,15
+63381,Married,Fully Meets,4.73,5,0,0,6,47,9
+83552,Married,Fully Meets,3.04,3,6,0,2,38,8
+56149,Single,Fully Meets,4.12,5,0,0,15,37,7
+92329,Single,Fully Meets,5.0,3,4,0,5,59,9
+65729,Single,Fully Meets,4.62,4,0,0,8,34,9
+85028,Married,Fully Meets,3.1,5,8,0,19,72,9
+57583,Married,Fully Meets,5.0,3,0,0,1,46,11
+56294,Single,Fully Meets,3.96,4,0,0,6,45,12
+56991,Married,Fully Meets,4.3,4,3,2,2,36,5
+55722,Married,Fully Meets,5.0,4,0,0,14,47,12
+101199,Single,Fully Meets,3.79,5,5,0,8,45,12
+61568,Single,PIP,1.93,3,0,6,5,49,9
+58275,Separated,Fully Meets,4.62,5,0,0,1,73,12
+53189,Married,PIP,1.12,2,0,4,9,57,9
+96820,Single,Fully Meets,3.01,5,7,0,15,41,6
+51259,Single,Fully Meets,4.3,4,0,0,1,42,9
+59231,Single,PIP,2.3,1,0,2,17,37,11
+61584,Married,Needs Improvement,3.88,4,0,0,6,46,11
+46335,Single,Fully Meets,3.4,5,0,0,15,38,11
+70621,Married,Fully Meets,4.11,4,6,0,16,36,9
+138888,Single,Exceeds,4.3,5,5,0,4,54,10
+74241,Single,Exceeds,4.77,5,0,0,14,36,13
+75188,Single,Fully Meets,4.52,4,0,0,4,51,9
+62514,Married,Fully Meets,2.9,3,0,0,6,51,13
+60070,Married,Fully Meets,5.0,3,0,0,7,33,12
+48888,Single,Fully Meets,4.7,5,0,0,8,50,9
+54285,Married,Fully Meets,4.2,3,0,0,3,46,9
+56847,Separated,PIP,3.0,1,0,2,5,35,9
+60340,Single,Needs Improvement,5.0,4,0,5,16,41,11
+59124,Single,Needs Improvement,2.3,3,0,5,19,35,9
+99280,Married,Needs Improvement,2.1,5,4,4,19,37,12
+71776,Married,Fully Meets,4.4,5,0,0,17,46,9
+65902,Single,Fully Meets,4.0,4,0,0,7,37,9
+57748,Married,Fully Meets,3.13,3,0,0,16,69,12
+64057,Married,PIP,1.56,5,0,6,15,35,8
+53366,Single,PIP,1.2,3,6,3,2,37,8
+58530,Married,Fully Meets,5.0,5,0,0,19,43,12
+72609,Single,Fully Meets,4.76,5,0,0,20,43,12
+55965,Married,Fully Meets,3.66,3,0,0,6,41,12
+70187,Married,PIP,2.0,5,0,4,7,49,9
+178000,Single,Exceeds,5.0,5,5,0,15,44,12
+99351,Married,Fully Meets,5.0,3,2,0,3,45,15
+67251,Single,Fully Meets,4.3,3,0,2,7,61,12
+65707,Single,Fully Meets,4.7,4,5,0,1,56,13
+52249,Single,Fully Meets,4.5,3,0,0,5,39,8
+53171,Single,Fully Meets,4.2,4,0,0,12,41,12
+51337,Married,Fully Meets,3.73,3,0,0,19,34,8
+51505,Divorced,Fully Meets,4.24,4,0,0,2,54,12
+59370,Widowed,Fully Meets,3.97,4,0,0,7,53,9
+54933,Married,Needs Improvement,3.97,4,0,3,15,50,11
+57815,Single,Exceeds,3.9,4,0,0,3,44,9
+61555,Single,Fully Meets,4.5,5,0,0,20,35,8
+114800,Single,Fully Meets,4.6,4,4,0,10,53,8
+74679,Married,Fully Meets,4.3,5,7,0,20,35,8
+53018,Single,Fully Meets,4.3,5,0,0,7,32,10
+59892,Divorced,Exceeds,4.5,4,0,0,1,55,12
+68898,Married,PIP,3.0,3,0,3,10,60,13
+61242,Separated,Fully Meets,4.61,4,5,0,11,43,9
+66825,Married,Fully Meets,4.6,3,0,0,20,38,9
+48285,Married,Fully Meets,5.0,3,0,0,2,45,11
+66149,Separated,Fully Meets,4.4,5,0,0,1,41,10
+49256,Married,Fully Meets,4.1,5,0,0,3,50,10
+62957,Divorced,Fully Meets,4.63,3,0,0,2,43,8
+63813,Divorced,Fully Meets,5.0,5,0,0,17,41,12
+99020,Married,Fully Meets,4.2,5,5,0,8,35,6
+71707,Single,Fully Meets,4.5,5,0,0,20,55,11
+54828,Married,Fully Meets,4.2,4,0,0,13,47,12
+64246,Single,Fully Meets,5.0,3,0,0,20,36,10
+52177,Single,Fully Meets,4.64,4,0,0,8,72,12
+62065,Married,Exceeds,4.76,4,0,0,5,50,9
+46998,Single,Fully Meets,4.17,4,0,0,1,40,11
+68099,Single,Fully Meets,5.0,3,0,0,15,52,13
+70545,Married,Fully Meets,3.6,5,0,0,9,36,9
+63478,Married,Fully Meets,3.03,5,0,0,16,40,12
+97999,Single,Fully Meets,4.48,5,6,0,4,40,8
+180000,Married,Fully Meets,4.5,4,0,0,19,58,9
+49920,Married,Fully Meets,3.24,3,4,0,6,39,8
+55425,Single,Fully Meets,4.8,4,0,0,4,38,11
+69340,Single,Fully Meets,3.0,5,0,0,4,40,7
+64995,Separated,Fully Meets,4.5,3,0,0,6,32,8
+68182,Divorced,Fully Meets,3.72,3,0,0,18,48,12
+83082,Married,Needs Improvement,2.34,2,0,3,4,48,12
+51908,Single,Fully Meets,3.99,3,0,0,14,33,10
+61242,Single,Fully Meets,4.1,3,0,0,7,52,11
+45069,Divorced,Fully Meets,4.3,5,0,0,7,58,10
+60724,Divorced,Exceeds,4.6,4,0,0,11,38,12
+60436,Separated,Fully Meets,5.0,5,0,0,9,60,10
+46837,Married,Exceeds,4.7,4,0,0,9,65,12
+105700,Married,Fully Meets,3.75,3,5,0,2,38,9
+63322,Single,Exceeds,4.3,3,0,0,1,55,9
+61154,Married,Fully Meets,4.0,4,0,0,4,38,13
+68999,Single,Fully Meets,4.5,5,0,0,2,35,12
+50482,Single,Fully Meets,3.07,4,0,0,10,48,10
+65310,Single,Fully Meets,4.3,5,0,0,13,45,10
+250000,Married,Fully Meets,4.83,3,0,0,10,70,11
+54005,Married,Fully Meets,3.6,5,0,0,16,51,12
+45433,Married,Fully Meets,3.49,4,0,0,6,54,12
+46654,Single,Fully Meets,3.1,3,0,0,3,47,9
+63973,Married,Fully Meets,3.38,3,0,0,17,44,13
+71339,Single,Fully Meets,3.65,5,0,0,20,55,12
+93206,Married,Fully Meets,4.46,5,6,0,7,38,9
+82758,Married,Fully Meets,4.78,4,0,0,9,52,13
+66074,Divorced,Fully Meets,4.52,3,0,0,20,45,11
+46120,Married,Fully Meets,5.0,5,0,0,13,38,11
+64520,Divorced,Fully Meets,5.0,4,4,0,3,40,10
+61962,Married,Fully Meets,4.9,3,0,0,20,40,11
+81584,Single,Fully Meets,4.1,5,7,0,2,37,7
+63676,Single,Fully Meets,4.88,3,0,0,17,45,12
+93046,Married,Fully Meets,4.1,4,0,0,20,40,8
+64738,Married,Fully Meets,4.1,3,0,0,10,42,11
+70468,Separated,Fully Meets,4.53,3,0,0,16,36,11
+77915,Married,Exceeds,4.1,3,0,0,11,43,10
+52624,Married,Fully Meets,3.18,4,0,0,16,43,12
+63450,Married,Fully Meets,4.0,3,0,0,7,45,10
+51777,Single,Exceeds,4.64,4,5,0,14,36,13
+67237,Widowed,Fully Meets,4.65,4,0,0,15,48,10
+73330,Single,Exceeds,4.2,4,0,0,19,42,10
+52057,Married,Fully Meets,5.0,3,0,0,6,49,8
+47434,Single,Exceeds,5.0,4,0,0,17,51,12
+52788,Widowed,Fully Meets,3.08,4,0,0,18,52,11
+45395,Single,Fully Meets,4.6,4,0,0,14,38,10
+62385,Married,Fully Meets,5.0,3,0,0,4,48,7
+68407,Married,Fully Meets,5.0,4,0,0,16,38,12
+61349,Married,Fully Meets,4.1,3,0,0,11,50,10
+105688,Single,Fully Meets,4.5,5,4,0,14,37,10
+54132,Married,Fully Meets,5.0,4,0,0,8,47,12
+55315,Single,Fully Meets,5.0,5,0,0,16,37,8
+62810,Married,Fully Meets,3.93,3,0,0,20,37,11
+63291,Married,Fully Meets,3.4,4,0,0,7,40,7
+62659,Single,Fully Meets,4.18,4,0,0,17,56,11
+55688,Single,Fully Meets,5.0,4,0,0,10,48,8
+83667,Single,Fully Meets,4.37,3,0,0,2,43,11
+55800,Single,PIP,3.0,2,0,6,6,39,12
+58207,Married,Fully Meets,3.7,3,0,0,14,32,12
+157000,Married,Needs Improvement,2.39,3,6,4,13,38,11
+72460,Single,Exceeds,4.7,3,0,0,1,54,10
+72106,Single,Fully Meets,4.1,4,0,0,12,48,12
+52599,Married,Fully Meets,3.81,3,6,0,6,45,8
+63430,Divorced,Fully Meets,4.4,4,0,0,18,40,10
+74417,Separated,Fully Meets,4.29,5,0,0,11,50,10
+57575,Single,Fully Meets,4.1,4,0,0,13,44,10
+87921,Single,Fully Meets,5.0,3,6,0,17,54,6
+50470,Single,Fully Meets,4.3,3,0,0,19,35,12
+46664,Married,Fully Meets,3.18,3,0,0,10,41,10
+48495,Married,Fully Meets,5.0,5,0,0,11,47,9
+52984,Separated,Exceeds,4.0,3,0,0,12,57,10
+63695,Single,Fully Meets,5.0,5,0,0,2,35,10
+62061,Single,Fully Meets,3.6,5,0,0,4,40,10
+66738,Single,Fully Meets,4.53,5,0,0,5,39,9
+52674,Single,PIP,2.33,2,0,6,3,44,9
+71966,Married,Fully Meets,5.0,3,0,0,17,72,11
+63051,Single,Fully Meets,4.28,3,0,0,1,34,10
+47414,Married,Exceeds,5.0,3,0,0,13,48,10
+53060,Single,Needs Improvement,4.25,3,0,4,6,45,9
+68829,Single,Fully Meets,5.0,5,0,0,18,42,9
+63515,Married,Fully Meets,3.89,4,0,0,7,45,13
+108987,Single,Exceeds,5.0,5,3,0,13,45,12
+93093,Married,Fully Meets,4.7,4,5,0,19,40,9
+53564,Single,Needs Improvement,3.54,5,0,4,15,36,13
+60270,Married,Needs Improvement,2.4,5,0,5,2,35,12
+45998,Single,Fully Meets,3.45,4,0,0,5,38,12
+57954,Married,Exceeds,4.2,5,0,0,12,38,12
+74669,Married,Fully Meets,4.16,5,0,0,6,47,13
+74226,Married,Fully Meets,4.3,3,0,0,14,45,11
+93554,Married,Exceeds,4.6,5,7,0,16,40,9
+64724,Married,Fully Meets,5.0,3,0,0,13,36,12
+47001,Single,Fully Meets,3.66,3,0,0,15,43,16
+61844,Married,Fully Meets,4.2,5,0,0,9,36,12
+46799,Divorced,Fully Meets,3.17,4,0,0,14,40,12
+59472,Single,Fully Meets,4.8,3,0,0,14,63,10
+46430,Divorced,Fully Meets,4.5,5,0,0,16,54,11
+83363,Married,Fully Meets,4.15,4,0,0,4,40,12
+95920,Married,Fully Meets,4.4,4,6,0,10,44,7
+61729,Divorced,Fully Meets,3.8,5,0,0,19,40,12
+61809,Married,Fully Meets,3.98,3,0,0,4,70,9
+45115,Divorced,Fully Meets,5.0,4,0,0,11,42,12
+46738,Married,Exceeds,4.36,5,0,0,16,51,12
+64971,Divorced,Fully Meets,4.5,4,0,0,10,43,12
+55578,Married,Fully Meets,4.2,5,0,0,13,52,12
+50428,Married,Fully Meets,5.0,3,0,0,11,50,13
+61422,Married,Needs Improvement,3.6,3,0,4,16,39,13
+63353,Widowed,Exceeds,3.6,5,0,0,4,39,10
+89883,Married,Fully Meets,3.69,5,6,0,15,43,8
+120000,Single,Fully Meets,3.88,3,7,0,12,51,9
+150290,Single,Fully Meets,4.94,3,5,0,17,52,7
+60627,Separated,Fully Meets,5.0,4,0,0,8,50,10
+53180,Single,Fully Meets,5.0,5,0,0,4,37,12
+140920,Single,Fully Meets,3.6,5,7,0,13,51,11
+148999,Divorced,Fully Meets,4.3,4,6,0,8,60,12
+86214,Married,Fully Meets,4.2,3,6,0,2,38,11
+47750,Single,Needs Improvement,2.6,4,0,5,4,56,7
+46428,Single,Fully Meets,4.6,5,0,0,7,50,15
+57975,Married,Fully Meets,4.1,3,0,0,13,38,13
+88527,Divorced,Fully Meets,4.2,3,5,0,2,37,9
+56147,Married,Fully Meets,3.51,3,0,0,2,36,9
+50923,Single,Fully Meets,5.0,5,0,0,14,49,10
+50750,Married,Fully Meets,3.31,3,6,0,7,43,9
+52087,Married,Fully Meets,4.81,4,0,0,15,39,10
+87826,Married,Fully Meets,3.32,3,7,0,16,54,9
+51920,Single,Fully Meets,5.0,3,5,0,2,36,8
+63878,Single,Fully Meets,4.68,4,0,0,20,37,14
+60656,Single,Exceeds,4.3,3,0,0,4,61,9
+72992,Divorced,Needs Improvement,2.4,4,0,2,16,40,9
+55000,Married,Fully Meets,3.8,4,4,0,17,37,12
+58939,Single,Fully Meets,3.73,3,0,0,16,59,10
+66593,Married,Fully Meets,4.3,3,5,0,19,51,12
+87565,Married,Fully Meets,3.27,4,5,0,13,41,7
+64021,Married,PIP,2.4,2,1,6,20,56,11
+65714,Married,Fully Meets,4.83,5,0,0,15,49,11
+62425,Divorced,Exceeds,4.1,4,0,0,16,51,10
+47961,Divorced,Fully Meets,4.1,4,0,0,9,42,13
+58273,Married,PIP,1.81,2,0,3,5,50,9
+63003,Single,Fully Meets,3.9,5,5,0,9,38,9
+61355,Married,Fully Meets,4.7,3,0,0,4,39,9
+60120,Married,Fully Meets,4.1,4,0,0,18,35,13
+63682,Married,Fully Meets,3.73,4,0,0,12,46,15
+63025,Married,Fully Meets,4.36,5,0,0,10,42,9
+59238,Single,Fully Meets,3.4,5,0,0,13,56,11
+92989,Single,Exceeds,4.5,5,5,0,1,41,9
+90100,Married,Fully Meets,3.4,3,6,0,14,37,6
+60754,Married,Fully Meets,4.5,5,0,0,11,49,14
+72202,Married,Fully Meets,3.93,3,0,0,3,71,12
+58370,Single,Fully Meets,3.69,3,0,0,18,59,9
+48413,Single,Fully Meets,3.98,4,0,0,1,59,12
+67176,Widowed,Fully Meets,4.1,4,0,0,15,49,16
+56339,Divorced,Fully Meets,4.21,5,0,0,4,57,10
+64397,Separated,Exceeds,4.1,3,0,0,6,56,18
+63025,Single,Needs Improvement,2.44,5,0,4,18,41,9
+75281,Married,Fully Meets,5.0,3,5,0,11,36,9
+100416,Single,Fully Meets,4.6,3,4,0,9,41,10
+74813,Single,Fully Meets,4.4,3,0,0,5,39,13
+76029,Married,Fully Meets,5.0,4,7,0,8,55,8
+57859,Married,Fully Meets,2.81,3,0,0,16,33,12
+58523,Divorced,Exceeds,4.5,5,0,0,15,37,11
+88976,Divorced,Fully Meets,3.93,3,0,0,19,56,12
+55875,Single,Fully Meets,4.5,4,0,0,11,35,11
+113999,Married,Fully Meets,4.33,3,7,0,9,38,8
+49773,Married,Exceeds,4.3,5,0,0,18,38,12
+62068,Single,Fully Meets,3.21,3,0,0,7,39,8
+66541,Single,Fully Meets,3.11,5,0,0,4,48,9
+80512,Married,Fully Meets,4.5,3,0,0,5,69,12
+50274,Single,Needs Improvement,2.5,3,0,6,13,44,11
+84903,Single,Fully Meets,3.42,4,7,0,17,43,6
+107226,Widowed,Fully Meets,4.2,4,8,0,7,46,8
+58371,Single,Fully Meets,5.0,5,0,0,11,37,13
+55140,Married,Fully Meets,5.0,3,0,0,7,59,12
+58062,Divorced,Fully Meets,3.6,5,0,0,9,41,13
+59728,Single,Fully Meets,4.3,4,0,0,16,55,12
+70507,Single,Exceeds,5.0,3,0,0,7,66,11
+60446,Single,Fully Meets,3.4,4,0,0,14,39,9
+65893,Single,Fully Meets,4.07,4,0,0,13,39,9
+48513,Single,PIP,3.2,2,0,5,4,42,15
+220450,Single,Exceeds,4.6,5,6,0,16,45,13
+89292,Single,Fully Meets,5.0,3,5,0,11,45,8
+45046,Widowed,Fully Meets,4.5,5,0,0,2,46,9
