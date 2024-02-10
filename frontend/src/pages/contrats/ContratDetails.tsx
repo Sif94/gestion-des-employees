@@ -1,11 +1,13 @@
+import AuthContext from '@/components/shared/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 
 const ContratDetails = () => {
     const { id } = useParams();
+    const {user} = useContext(AuthContext)
     const [contrat, setContrat] = useState({})
     useEffect(() => {
         axios
@@ -33,6 +35,7 @@ const ContratDetails = () => {
       <CardContent>
         <div className='text-xl'>
         <h1>Type contrat: {contrat.type_contrat}</h1>
+        <h1>Concerné: {user.nom} {user.prenom}</h1>
           <h1>Date du début du contrat : {new Date(contrat.date_debut).toLocaleDateString("fr")}</h1>
           <h1>Date de la fin du contrat : {new Date(contrat.date_fin).toLocaleDateString("fr")}</h1>
           <h1>Salaire convenu: {contrat.salaire_convenu}</h1>
